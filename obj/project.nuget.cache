@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cw3ysz55twjIzRkI9AhufJTLdp5uKUVzMwOjM4iaUjjM68CRVgCLMzCdi6INOprc0ryv5BqnvqrUFGbaguI0lQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\Argus.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hadia\\.nuget\\packages\\materialskin.2\\2.3.1\\materialskin.2.2.3.1.nupkg.sha512"
+  ],
+  "logs": []
+}
