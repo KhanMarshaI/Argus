@@ -16,3 +16,13 @@ C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\obj\Debug\Argus.pdb
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Data.SqlClient.dll
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Data.SqlClient.xml
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\obj\Debug\Argus.csproj.Up2Date
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Buffers.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Memory.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Buffers.xml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Memory.xml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

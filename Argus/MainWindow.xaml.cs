@@ -13,6 +13,53 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using BCrypt.Net;
+using identityValidator;
+using System.Linq.Expressions;
+
+namespace identityValidator
+{
+    public class identityHelper
+    {
+        public static bool passwordVerify(string password, string hashedPass) 
+        //static are shared across all instances. class-level method. Could be called without creating an object first.
+        {
+            if (hashedPass == null) return false;
+            return BCrypt.Net.BCrypt.Verify(password, hashedPass);
+        }
+
+        private static string connectionString = "Server=MARSHAL;Database=argus;Trusted_Connection=yes;";
+
+        public static async Task<string> retrieveDBPass(string username)
+        {
+            string hashedPassword = null;
+            string query = "SELECT password FROM authorized_users WHERE username = @username";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+                        var result = await cmd.ExecuteScalarAsync(); //compiler infers the data type
+                        if (result != null)
+                        {
+                            hashedPassword = result.ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occured.", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                con.Close();
+            }
+            return hashedPassword;
+        }
+    }
+}
 
 namespace Argus
 {
@@ -26,44 +73,19 @@ namespace Argus
             InitializeComponent();
         }
 
-        private bool ValidLogin(string username, string password)
-        {
-            string connection = "Server=MARSHAL;Database=argus;Trusted_Connection=yes";
-            string query = "SELECT COUNT(1) FROM authorized_users WHERE username = @Username " +
-                "AND password = @Password";
-
-            using (SqlConnection con = new SqlConnection(connection))
-            {
-                try
-                {
-                    con.Open();
-                    using(SqlCommand command = new SqlCommand(query, con))
-                    {
-                        command.Parameters.AddWithValue("@Username", username);
-                        command.Parameters.AddWithValue("@Password", password);
-
-                        int result = (int)command.ExecuteScalar();
-                        return result == 1;
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    MessageBox.Show($"An error occured: {Ex.Message}", "Error",MessageBoxButton.OK,MessageBoxImage.Error);
-                    return false;
-                }
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string username = usernameBox.Text.ToString();
             string password = passwordBox.Password;
 
-            if (ValidLogin(username, password))
+            string dbPassword = await identityHelper.retrieveDBPass(username);
+            bool isPassValid = await Task.Run(() => identityHelper.passwordVerify(password, dbPassword));
+
+            if (isPassValid)
             {
                 MessageBox.Show("Login Successful.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else MessageBox.Show("Login failed.", "Fail", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else MessageBox.Show("Incorrect Credentials.", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
