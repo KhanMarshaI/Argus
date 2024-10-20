@@ -52,7 +52,7 @@ namespace identityValidator
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occured.", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"An error occured. {ex.Message}", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 con.Close();
             }
