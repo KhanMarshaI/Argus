@@ -28,7 +28,10 @@ namespace identityValidator
             return BCrypt.Net.BCrypt.Verify(password, hashedPass);
         }
 
-        private static string connectionString = "Server=MARSHAL;Database=argus;Trusted_Connection=yes;";
+        private static string envPass = Environment.GetEnvironmentVariable("DB_PASSWORD");
+        private static string connectionString = "Server=tcp:marshal.database.windows.net,1433;Initial Catalog=argus;" +
+            $"Persist Security Info=False;User ID=marshal;Password={envPass};MultipleActiveResultSets=False;Encrypt=True;" +
+            "TrustServerCertificate=False;Connection Timeout=30;";
 
         public static async Task<string> retrieveDBPass(string username)
         {
