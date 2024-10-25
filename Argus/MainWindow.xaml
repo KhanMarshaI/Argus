@@ -3,17 +3,116 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Argus"
         mc:Ignorable="d"
-        Title="Argus" Height="450" Width="800">
+        Style="{StaticResource MaterialDesignWindow}"
+        Title="Argus" Height="400" Width="400" Background="#1E1E1E" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    
+    <Window.Resources>
+        <!-- Modern Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#3A6EA5"/>
+            <!-- Dark teal button -->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+            <!-- Added top margin for spacing -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover effect with shadow and color transition -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2B4A75"/>
+                                <!-- Darker hover color -->
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <TextBox x:Name="usernameBox" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,205,0,0"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Width="120" Password=""/>
-        <Button Content="Login" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="120" Cursor="Hand" Click="Button_Click" AutomationProperties.Name="loginBtn"/>
-        <Label Content="Username" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Top" Width="120" FontWeight="Bold"/>
-        <Label Content="Password" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" Width="120" FontWeight="Bold"/>
-        <Rectangle HorizontalAlignment="Center" Height="56" Margin="0,10,0,0"  VerticalAlignment="Top" Width="780"/>
-        <Label Content="Login" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <!-- Title -->
+        <TextBlock Text="Argus" Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" 
+                   Margin="0,30,0,0" Foreground="White"/>
+
+        <!-- Username label and text box -->
+        <TextBlock Text="Username" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                   Margin="50,90,0,0" Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+        <TextBox x:Name="usernameBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300"
+                 Margin="50,120,0,0" Height="30" FontSize="14" Foreground="White" Background="#2D2D2D" 
+                 BorderBrush="#3A3A3A" BorderThickness="1" Padding="5"/>
+
+        <!-- Password label and password box -->
+        <TextBlock Text="Password" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                   Margin="50,170,0,0" Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+        <PasswordBox x:Name="passwordBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300"
+                     Margin="50,200,0,0" Height="30" FontSize="14" Foreground="White" Background="#2D2D2D"
+                     BorderBrush="#3A3A3A" BorderThickness="1" Padding="5"/>
+
+        <!-- Login button -->
+        <Button 
+        Margin="0,250,0,0" Click="Button_Click_1"
+        materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsSaving}"
+        materialDesign:ButtonProgressAssist.Value="{Binding SaveProgress}"
+        Command="{Binding SaveCommand}"
+        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+        Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+        >
+        <materialDesign:PackIcon
+        Width="24"
+        Height="24">
+                <materialDesign:PackIcon.Style>
+                    <Style
+        TargetType="materialDesign:PackIcon"
+        BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
+                        <Setter
+          Property="Kind"
+          Value="LoginVariant" />
+                        <Style.Triggers>
+                            <DataTrigger
+            Binding="{Binding IsSaveComplete}"
+            Value="True">
+                                <Setter
+              Property="Kind"
+              Value="Check" />
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.8" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </materialDesign:PackIcon.Style>
+            </materialDesign:PackIcon>
+        </Button>
 
     </Grid>
 </Window>

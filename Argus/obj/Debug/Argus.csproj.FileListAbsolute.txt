@@ -54,3 +54,12 @@ C:\Users\USER\Desktop\argus\Argus\obj\Debug\Argus.csproj.CoreCompileInputs.cache
 C:\Users\USER\Desktop\argus\Argus\obj\Debug\Argus.csproj.CopyComplete
 C:\Users\USER\Desktop\argus\Argus\obj\Debug\Argus.exe
 C:\Users\USER\Desktop\argus\Argus\obj\Debug\Argus.pdb
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\MaterialDesignColors.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\MaterialDesignColors.pdb
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\obj\Debug\App.baml

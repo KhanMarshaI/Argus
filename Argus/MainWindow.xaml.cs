@@ -33,8 +33,16 @@ namespace identityValidator
             $"Persist Security Info=False;User ID=marshal;Password={envPass};MultipleActiveResultSets=False;Encrypt=True;" +
             "TrustServerCertificate=False;Connection Timeout=30;";
 
+        private static Dictionary<string, string> passCache = new Dictionary<string, string>();
+
         public static async Task<string> retrieveDBPass(string username)
         {
+
+            if(passCache.TryGetValue(username, out string cachedHashPass))
+            {
+                return cachedHashPass;
+            }
+
             string hashedPassword = null;
             string query = "SELECT password FROM authorized_users WHERE username = @username";
 
@@ -50,6 +58,7 @@ namespace identityValidator
                         if (result != null)
                         {
                             hashedPassword = result.ToString();
+                            passCache[username] = hashedPassword;
                         }
                     }
                 }
@@ -76,17 +85,34 @@ namespace Argus
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private static Dictionary<string, DateTime> loginAttempts = new Dictionary<string, DateTime>();
+        private static TimeSpan cooldown = TimeSpan.FromSeconds(30);
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
             string username = usernameBox.Text.ToString();
             string password = passwordBox.Password;
 
+            if (string.IsNullOrEmpty(username)|| string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Enter credentials", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(loginAttempts.TryGetValue(username, out DateTime lastAttempt) && DateTime.Now - lastAttempt < cooldown)
+            {
+                MessageBox.Show("Too many incorrect login attempts were made.", "Wait", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            loginAttempts[username] = DateTime.Now;
             string dbPassword = await identityHelper.retrieveDBPass(username);
             bool isPassValid = await Task.Run(() => identityHelper.passwordVerify(password, dbPassword));
 
             if (isPassValid)
             {
                 MessageBox.Show("Login Successful.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                loginAttempts.Remove(username);
             }
             else MessageBox.Show("Incorrect Credentials.", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
         }

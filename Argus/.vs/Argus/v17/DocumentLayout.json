@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\Argus\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E9067325-6AAF-4298-B1EB-B50C7E324FD7}|Argus.csproj|C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\Argus\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E9067325-6AAF-4298-B1EB-B50C7E324FD7}|Argus.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argus\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E9067325-6AAF-4298-B1EB-B50C7E324FD7}|Argus.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9067325-6AAF-4298-B1EB-B50C7E324FD7}|Argus.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argus\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{E9067325-6AAF-4298-B1EB-B50C7E324FD7}|Argus.csproj|C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\Argus\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{E9067325-6AAF-4298-B1EB-B50C7E324FD7}|Argus.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\Argus\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACEAAABCAAAA",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAAAFgAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-10T20:25:19.286Z",
               "EditorCaption": ""
