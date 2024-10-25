@@ -63,3 +63,4 @@ C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\MaterialDesignThemes
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\obj\Debug\App.baml
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\Argus\obj\Debug\GeneratedInternalTypeHelper.g.cs
