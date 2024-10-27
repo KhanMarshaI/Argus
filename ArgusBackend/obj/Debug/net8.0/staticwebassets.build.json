@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "PCJVfwZbJ86qjf9rtyIMm1sAYKo/eJQN2N96oFwCORg=",
+  "Source": "ArgusBackend",
+  "BasePath": "_content/ArgusBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
