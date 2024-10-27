@@ -19,31 +19,39 @@ namespace ArgusBackend.Controllers
         }
 
         [HttpGet("file/{hash}")]
-        public async Task<JsonResult> GetFileReport(string hash)
+        public async Task<IActionResult> GetFileReport(string hash)
         {
             var report = await _virusTotalService.GetFileReportAsync(hash);
-            return new JsonResult(report, new JsonSerializerOptions () { WriteIndented = true });
+            var jsonReport = JsonConvert.DeserializeObject(report);
+            var formatJson = JsonConvert.SerializeObject(jsonReport, Newtonsoft.Json.Formatting.Indented);
+            return Content(formatJson, "application/json");
         }
 
         [HttpGet("url")]
-        public async Task<JsonResult> GetUrlReport([FromQuery] string url)
+        public async Task<IActionResult> GetUrlReport([FromQuery] string url)
         {
             var report = await _virusTotalService.GetUrlReportAsync(url);
-            return new JsonResult(report, new JsonSerializerOptions () { WriteIndented = true });
+            var jsonReport = JsonConvert.DeserializeObject(report);
+            var formatJson = JsonConvert.SerializeObject(jsonReport, Newtonsoft.Json.Formatting.Indented);
+            return Content(formatJson, "application/json");
         }
 
         [HttpGet("analysis")]
-        public async Task<JsonResult> GetAnalysisResultAsync(string analysisID)
+        public async Task<IActionResult> GetAnalysisResultAsync(string analysisID)
         {
             var report = await _virusTotalService.GetAnalysisResultAsync(analysisID);
-            return new JsonResult(report, new JsonSerializerOptions() { WriteIndented = true });
+            var jsonReport = JsonConvert.DeserializeObject(report);
+            var formatJson = JsonConvert.SerializeObject(jsonReport, Newtonsoft.Json.Formatting.Indented);
+            return Content(formatJson, "application/json");
         }
 
         [HttpGet("ip_addresses/{ipAddress}")]
-        public async Task<JsonResult> GetIPAddressReportAsync(string ipAddress)
+        public async Task<IActionResult> GetIPAddressReportAsync(string ipAddress)
         {
             var report = await _virusTotalService.GetIPAddressReportAsync(ipAddress);
-            return new JsonResult(report, new JsonSerializerOptions () { WriteIndented = true });
+            var jsonReport = JsonConvert.DeserializeObject(report);
+            var formatJson = JsonConvert.SerializeObject(jsonReport, Newtonsoft.Json.Formatting.Indented);
+            return Content(formatJson, "application/json");
         }
     }
 }

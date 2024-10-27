@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ArgusFrontend.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ArgusFrontend.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ArgusFrontend.props",
+      "PackagePath": "build\\ArgusFrontend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ArgusFrontend.props",
+      "PackagePath": "buildMultiTargeting\\ArgusFrontend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ArgusFrontend.props",
+      "PackagePath": "buildTransitive\\ArgusFrontend.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
