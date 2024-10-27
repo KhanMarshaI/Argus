@@ -28,3 +28,6 @@ C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\obj\Debug\net8.0\refin
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\obj\Debug\net8.0\ArgusFrontend.pdb
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\obj\Debug\net8.0\ArgusFrontend.genruntimeconfig.cache
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\obj\Debug\net8.0\ref\ArgusFrontend.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\obj\Debug\net8.0\ArgusFrontend.csproj.AssemblyReference.cache
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\obj\Debug\net8.0\ArgusFro.73B92A94.Up2Date

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UPcY0TE7DH49DEa/JfCJDJeM2nPL/rS6C/M09ZXLHANZddR9t1nIJQtLAjEKM8fv8FuNNFfPjUgn4vkVnqJ9GA==",
+  "dgSpecHash": "LgMbvH1NwyXBEHlsbVfeJGGh6P6R5sP8IjNJPBmYEPGXd/zFpWFr1pCpblHoAKMpgTNe6RKB2PlePc3YuAOtug==",
   "success": true,
   "projectFilePath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\ArgusFrontend.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\hadia\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -11,7 +11,20 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient<IVirusTotalService, VirusTotalService>();
 
+//CORS
+builder.Services.AddCors(options =>
+{
+options.AddPolicy("AllowBlazorApp",
+    policy =>
+    {
+        policy.WithOrigins("https://localhost:7041")
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+app.UseCors("AllowBlazorApp");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
