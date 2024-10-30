@@ -1,0 +1,52 @@
+﻿@page "/filehash"
+@using fileHash
+@using ArgusFrontend.Services
+@rendermode InteractiveServer
+@inject VirusTotalService VirusTotalService
+
+<PageTitle>File Hash Scan</PageTitle>
+
+<h3>File Hash Scan</h3>
+
+<input placeholder="Hash" @bind="hash"/>
+<button @onclick="GetReport">Scan</button>
+
+@if (report != null)
+{
+    <div>
+        <h4>Report:</h4>
+        <h5>Information:</h5>
+        <p>ID: @(report?.Data?.Id ?? "N/A")</p>
+        <p>Type: @(report?.Data?.Type ?? "N/A") Extension: @(report?.Data?.Attributes?.TypeExtension ?? "N/A")</p>
+        <h5>Detection: </h5>
+        <p>Reputation: @(report?.Data?.Attributes?.Reputation ?? 0)</p>
+        <p>Malicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Malicious ?? 0)</p>
+        <p>Suspicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Suspicious ?? 0)</p>
+        <p>Harmless: @(report?.Data?.Attributes?.LastAnalysisStats?.Harmless ?? 0)</p>
+        <p>Undetected: @(report?.Data?.Attributes?.LastAnalysisStats?.Undetected ?? 0)</p>
+        <h5>Signatures: </h5>
+        <p>MD5 Hash: @(report?.Data?.Attributes?.Md5 ?? "N/A")</p>
+        <p>Sha1 Hash: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</p>
+        <p>Sha256 Hash: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</p>
+        <h5>Analyzed file names: </h5>
+        <p>Names: @(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
+    </div>
+}
+else
+{
+    <p>No report available for the given hash. Please check the input or try again later.</p>
+}
+
+@code {
+	private string? hash;
+	private Hash? report;
+
+	private async Task GetReport()
+	{
+		if (!string.IsNullOrWhiteSpace(hash))
+		{
+			report = await VirusTotalService.GetFileHashReportAsync(hash); 
+			StateHasChanged(); 
+		}
+	}
+}

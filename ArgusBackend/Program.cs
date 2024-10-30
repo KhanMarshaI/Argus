@@ -14,17 +14,18 @@ builder.Services.AddHttpClient<IVirusTotalService, VirusTotalService>();
 //CORS
 builder.Services.AddCors(options =>
 {
-options.AddPolicy("AllowBlazorApp",
+options.AddPolicy("AllowAll",
     policy =>
     {
-        policy.WithOrigins("https://localhost:7041")
+        policy.AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
-app.UseCors("AllowBlazorApp");
+app.UseCors("AllowAll");
+app.UseRouting();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

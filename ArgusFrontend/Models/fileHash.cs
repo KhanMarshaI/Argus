@@ -6,588 +6,692 @@
 //
 //    var hash = Hash.FromJson(jsonString);
 
-namespace fileHash
+
+
+#nullable enable
+#pragma warning disable CS8618
+#pragma warning disable CS8601
+#pragma warning disable CS8603
+
+using System;
+using System.Collections.Generic;
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Globalization;
+
+namespace fileHash;
+
+public partial class Hash
 {
-    using System;
-    using System.Collections.Generic;
+    [JsonPropertyName("data")]
+    public Data Data { get; set; }
+}
 
-    using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+public partial class Data
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; }
 
-    public partial class Hash
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+
+    [JsonPropertyName("links")]
+    public Links Links { get; set; }
+
+    [JsonPropertyName("attributes")]
+    public Attributes Attributes { get; set; }
+}
+
+public partial class Attributes
+{
+    [JsonPropertyName("last_submission_date")]
+    public long LastSubmissionDate { get; set; }
+
+    [JsonPropertyName("pe_info")]
+    public PeInfo PeInfo { get; set; }
+
+    [JsonPropertyName("trid")]
+    public Trid[] Trid { get; set; }
+
+    [JsonPropertyName("detectiteasy")]
+    public Detectiteasy Detectiteasy { get; set; }
+
+    [JsonPropertyName("popular_threat_classification")]
+    public PopularThreatClassification PopularThreatClassification { get; set; }
+
+    [JsonPropertyName("vhash")]
+    public string Vhash { get; set; }
+
+    [JsonPropertyName("meaningful_name")]
+    public string MeaningfulName { get; set; }
+
+    [JsonPropertyName("signature_info")]
+    public SignatureInfo SignatureInfo { get; set; }
+
+    [JsonPropertyName("md5")]
+    public string Md5 { get; set; }
+
+    [JsonPropertyName("tlsh")]
+    public string Tlsh { get; set; }
+
+    [JsonPropertyName("ssdeep")]
+    public string Ssdeep { get; set; }
+
+    [JsonPropertyName("unique_sources")]
+    public long UniqueSources { get; set; }
+
+    [JsonPropertyName("magic")]
+    public string Magic { get; set; }
+
+    [JsonPropertyName("times_submitted")]
+    public long TimesSubmitted { get; set; }
+
+    [JsonPropertyName("last_analysis_date")]
+    public long LastAnalysisDate { get; set; }
+
+    [JsonPropertyName("type_tags")]
+    public string[] TypeTags { get; set; }
+
+    [JsonPropertyName("names")]
+    public string[] Names { get; set; }
+
+    [JsonPropertyName("sandbox_verdicts")]
+    public SandboxVerdicts SandboxVerdicts { get; set; }
+
+    [JsonPropertyName("last_analysis_stats")]
+    public LastAnalysisStats LastAnalysisStats { get; set; }
+
+    [JsonPropertyName("first_seen_itw_date")]
+    public long FirstSeenItwDate { get; set; }
+
+    [JsonPropertyName("reputation")]
+    public long Reputation { get; set; }
+
+    [JsonPropertyName("creation_date")]
+    public long CreationDate { get; set; }
+
+    [JsonPropertyName("first_submission_date")]
+    public long FirstSubmissionDate { get; set; }
+
+    [JsonPropertyName("type_extension")]
+    public string TypeExtension { get; set; }
+
+    [JsonPropertyName("total_votes")]
+    public TotalVotes TotalVotes { get; set; }
+
+    [JsonPropertyName("type_description")]
+    public string TypeDescription { get; set; }
+
+    [JsonPropertyName("tags")]
+    public string[] Tags { get; set; }
+
+    [JsonPropertyName("authentihash")]
+    public string Authentihash { get; set; }
+
+    [JsonPropertyName("last_modification_date")]
+    public long LastModificationDate { get; set; }
+
+    [JsonPropertyName("sha1")]
+    public string Sha1 { get; set; }
+
+    [JsonPropertyName("last_analysis_results")]
+    public Dictionary<string, LastAnalysisResult> LastAnalysisResults { get; set; }
+
+    [JsonPropertyName("size")]
+    public long Size { get; set; }
+
+    [JsonPropertyName("sha256")]
+    public string Sha256 { get; set; }
+
+    [JsonPropertyName("type_tag")]
+    public string TypeTag { get; set; }
+
+    [JsonPropertyName("crowdsourced_yara_results")]
+    public CrowdsourcedYaraResult[] CrowdsourcedYaraResults { get; set; }
+
+    [JsonPropertyName("magika")]
+    public string Magika { get; set; }
+}
+
+public partial class CrowdsourcedYaraResult
+{
+    [JsonPropertyName("ruleset_id")]
+    public string RulesetId { get; set; }
+
+    [JsonPropertyName("rule_name")]
+    public string RuleName { get; set; }
+
+    [JsonPropertyName("ruleset_name")]
+    public string RulesetName { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
+
+    [JsonPropertyName("author")]
+    public string Author { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("match_date")]
+    public long? MatchDate { get; set; }
+
+    [JsonPropertyName("source")]
+    public Uri Source { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("match_in_subfile")]
+    public bool? MatchInSubfile { get; set; }
+}
+
+public partial class Detectiteasy
+{
+    [JsonPropertyName("filetype")]
+    public string Filetype { get; set; }
+
+    [JsonPropertyName("values")]
+    public Value[] Values { get; set; }
+}
+
+public partial class Value
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("info")]
+    public string Info { get; set; }
+
+    [JsonPropertyName("version")]
+    public string Version { get; set; }
+
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+}
+
+public partial class LastAnalysisResult
+{
+    [JsonPropertyName("method")]
+    public string Method { get; set; }
+
+    [JsonPropertyName("engine_name")]
+    public string EngineName { get; set; }
+
+    [JsonPropertyName("engine_version")]
+    public string EngineVersion { get; set; }
+
+    [JsonPropertyName("engine_update")]
+    [JsonConverter(typeof(ParseStringConverter))]
+    public long EngineUpdate { get; set; }
+
+    [JsonPropertyName("category")]
+    public string Category { get; set; }
+
+    [JsonPropertyName("result")]
+    public string Result { get; set; }
+}
+
+public partial class LastAnalysisStats
+{
+    [JsonPropertyName("malicious")]
+    public long Malicious { get; set; }
+
+    [JsonPropertyName("suspicious")]
+    public long Suspicious { get; set; }
+
+    [JsonPropertyName("undetected")]
+    public long Undetected { get; set; }
+
+    [JsonPropertyName("harmless")]
+    public long Harmless { get; set; }
+
+    [JsonPropertyName("timeout")]
+    public long Timeout { get; set; }
+
+    [JsonPropertyName("confirmed-timeout")]
+    public long ConfirmedTimeout { get; set; }
+
+    [JsonPropertyName("failure")]
+    public long Failure { get; set; }
+
+    [JsonPropertyName("type-unsupported")]
+    public long TypeUnsupported { get; set; }
+}
+
+public partial class PeInfo
+{
+    [JsonPropertyName("timestamp")]
+    public long Timestamp { get; set; }
+
+    [JsonPropertyName("imphash")]
+    public string Imphash { get; set; }
+
+    [JsonPropertyName("machine_type")]
+    public long MachineType { get; set; }
+
+    [JsonPropertyName("entry_point")]
+    public long EntryPoint { get; set; }
+
+    [JsonPropertyName("resource_details")]
+    public ResourceDetail[] ResourceDetails { get; set; }
+
+    [JsonPropertyName("resource_langs")]
+    public ResourceLangs ResourceLangs { get; set; }
+
+    [JsonPropertyName("resource_types")]
+    public ResourceTypes ResourceTypes { get; set; }
+
+    [JsonPropertyName("sections")]
+    public Section[] Sections { get; set; }
+
+    [JsonPropertyName("compiler_product_versions")]
+    public string[] CompilerProductVersions { get; set; }
+
+    [JsonPropertyName("rich_pe_header_hash")]
+    public string RichPeHeaderHash { get; set; }
+
+    [JsonPropertyName("import_list")]
+    public ImportList[] ImportList { get; set; }
+}
+
+public partial class ImportList
+{
+    [JsonPropertyName("library_name")]
+    public string LibraryName { get; set; }
+
+    [JsonPropertyName("imported_functions")]
+    public string[] ImportedFunctions { get; set; }
+}
+
+public partial class ResourceDetail
+{
+    [JsonPropertyName("lang")]
+    public string Lang { get; set; }
+
+    [JsonPropertyName("chi2")]
+    public double Chi2 { get; set; }
+
+    [JsonPropertyName("filetype")]
+    public string Filetype { get; set; }
+
+    [JsonPropertyName("entropy")]
+    public double Entropy { get; set; }
+
+    [JsonPropertyName("sha256")]
+    public string Sha256 { get; set; }
+
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+}
+
+public partial class ResourceLangs
+{
+    [JsonPropertyName("ENGLISH US")]
+    public long EnglishUs { get; set; }
+}
+
+public partial class ResourceTypes
+{
+    [JsonPropertyName("RT_ICON")]
+    public long RtIcon { get; set; }
+
+    [JsonPropertyName("RT_VERSION")]
+    public long RtVersion { get; set; }
+
+    [JsonPropertyName("RT_GROUP_ICON")]
+    public long RtGroupIcon { get; set; }
+}
+
+public partial class Section
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+
+    [JsonPropertyName("chi2")]
+    public double Chi2 { get; set; }
+
+    [JsonPropertyName("virtual_address")]
+    public long VirtualAddress { get; set; }
+
+    [JsonPropertyName("entropy")]
+    public double Entropy { get; set; }
+
+    [JsonPropertyName("raw_size")]
+    public long RawSize { get; set; }
+
+    [JsonPropertyName("flags")]
+    public string Flags { get; set; }
+
+    [JsonPropertyName("virtual_size")]
+    public long VirtualSize { get; set; }
+
+    [JsonPropertyName("md5")]
+    public string Md5 { get; set; }
+}
+
+public partial class PopularThreatClassification
+{
+    [JsonPropertyName("suggested_threat_label")]
+    public string SuggestedThreatLabel { get; set; }
+
+    [JsonPropertyName("popular_threat_name")]
+    public PopularThreat[] PopularThreatName { get; set; }
+
+    [JsonPropertyName("popular_threat_category")]
+    public PopularThreat[] PopularThreatCategory { get; set; }
+}
+
+public partial class PopularThreat
+{
+    [JsonPropertyName("value")]
+    public string Value { get; set; }
+
+    [JsonPropertyName("count")]
+    public long Count { get; set; }
+}
+
+public partial class SandboxVerdicts
+{
+    [JsonPropertyName("Zenbox")]
+    public Box Zenbox { get; set; }
+
+    [JsonPropertyName("CAPE Sandbox")]
+    public Box CapeSandbox { get; set; }
+}
+
+public partial class Box
+{
+    [JsonPropertyName("category")]
+    public string Category { get; set; }
+
+    [JsonPropertyName("malware_classification")]
+    public string[] MalwareClassification { get; set; }
+
+    [JsonPropertyName("sandbox_name")]
+    public string SandboxName { get; set; }
+
+    [JsonPropertyName("malware_names")]
+    public string[] MalwareNames { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("confidence")]
+    public long? Confidence { get; set; }
+}
+
+public partial class SignatureInfo
+{
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
+
+    [JsonPropertyName("file version")]
+    public string FileVersion { get; set; }
+
+    [JsonPropertyName("original name")]
+    public string OriginalName { get; set; }
+
+    [JsonPropertyName("product")]
+    public string Product { get; set; }
+
+    [JsonPropertyName("internal name")]
+    public string InternalName { get; set; }
+
+    [JsonPropertyName("copyright")]
+    public string Copyright { get; set; }
+}
+
+public partial class TotalVotes
+{
+    [JsonPropertyName("harmless")]
+    public long Harmless { get; set; }
+
+    [JsonPropertyName("malicious")]
+    public long Malicious { get; set; }
+}
+
+public partial class Trid
+{
+    [JsonPropertyName("file_type")]
+    public string FileType { get; set; }
+
+    [JsonPropertyName("probability")]
+    public double Probability { get; set; }
+}
+
+public partial class Links
+{
+    [JsonPropertyName("self")]
+    public Uri Self { get; set; }
+}
+
+public enum Category { Malicious, TypeUnsupported, Undetected };
+
+public enum Method { Blacklist };
+
+public partial class Hash
+{
+    public static Hash FromJson(string json) => JsonSerializer.Deserialize<Hash>(json, fileHash.Converter.Settings);
+}
+
+public static class Serialize
+{
+    public static string ToJson(this Hash self) => JsonSerializer.Serialize(self, fileHash.Converter.Settings);
+}
+
+internal static class Converter
+{
+    public static readonly JsonSerializerOptions Settings = new(JsonSerializerDefaults.General)
     {
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("links")]
-        public Links Links { get; set; }
-
-        [JsonProperty("attributes")]
-        public Attributes Attributes { get; set; }
-    }
-
-    public partial class Attributes
-    {
-        [JsonProperty("sha1")]
-        public string Sha1 { get; set; }
-
-        [JsonProperty("crowdsourced_yara_results")]
-        public CrowdsourcedYaraResult[] CrowdsourcedYaraResults { get; set; }
-
-        [JsonProperty("last_modification_date")]
-        public long LastModificationDate { get; set; }
-
-        [JsonProperty("trid")]
-        public Trid[] Trid { get; set; }
-
-        [JsonProperty("first_seen_itw_date")]
-        public long FirstSeenItwDate { get; set; }
-
-        [JsonProperty("sha256")]
-        public string Sha256 { get; set; }
-
-        [JsonProperty("unique_sources")]
-        public long UniqueSources { get; set; }
-
-        [JsonProperty("last_analysis_results")]
-        public Dictionary<string, LastAnalysisResult> LastAnalysisResults { get; set; }
-
-        [JsonProperty("magic")]
-        public string Magic { get; set; }
-
-        [JsonProperty("type_description")]
-        public string TypeDescription { get; set; }
-
-        [JsonProperty("magika")]
-        public string Magika { get; set; }
-
-        [JsonProperty("times_submitted")]
-        public long TimesSubmitted { get; set; }
-
-        [JsonProperty("meaningful_name")]
-        public string MeaningfulName { get; set; }
-
-        [JsonProperty("first_submission_date")]
-        public long FirstSubmissionDate { get; set; }
-
-        [JsonProperty("last_analysis_date")]
-        public long LastAnalysisDate { get; set; }
-
-        [JsonProperty("popular_threat_classification")]
-        public PopularThreatClassification PopularThreatClassification { get; set; }
-
-        [JsonProperty("creation_date")]
-        public long CreationDate { get; set; }
-
-        [JsonProperty("total_votes")]
-        public TotalVotes TotalVotes { get; set; }
-
-        [JsonProperty("last_submission_date")]
-        public long LastSubmissionDate { get; set; }
-
-        [JsonProperty("last_analysis_stats")]
-        public LastAnalysisStats LastAnalysisStats { get; set; }
-
-        [JsonProperty("type_extension")]
-        public string TypeExtension { get; set; }
-
-        [JsonProperty("names")]
-        public string[] Names { get; set; }
-
-        [JsonProperty("vhash")]
-        public string Vhash { get; set; }
-
-        [JsonProperty("authentihash")]
-        public string Authentihash { get; set; }
-
-        [JsonProperty("ssdeep")]
-        public string Ssdeep { get; set; }
-
-        [JsonProperty("detectiteasy")]
-        public Detectiteasy Detectiteasy { get; set; }
-
-        [JsonProperty("type_tag")]
-        public string TypeTag { get; set; }
-
-        [JsonProperty("tlsh")]
-        public string Tlsh { get; set; }
-
-        [JsonProperty("signature_info")]
-        public SignatureInfo SignatureInfo { get; set; }
-
-        [JsonProperty("sandbox_verdicts")]
-        public SandboxVerdicts SandboxVerdicts { get; set; }
-
-        [JsonProperty("reputation")]
-        public long Reputation { get; set; }
-
-        [JsonProperty("size")]
-        public long Size { get; set; }
-
-        [JsonProperty("md5")]
-        public string Md5 { get; set; }
-
-        [JsonProperty("tags")]
-        public string[] Tags { get; set; }
-
-        [JsonProperty("type_tags")]
-        public string[] TypeTags { get; set; }
-
-        [JsonProperty("pe_info")]
-        public PeInfo PeInfo { get; set; }
-    }
-
-    public partial class CrowdsourcedYaraResult
-    {
-        [JsonProperty("ruleset_id")]
-        public string RulesetId { get; set; }
-
-        [JsonProperty("rule_name")]
-        public string RuleName { get; set; }
-
-        [JsonProperty("ruleset_name")]
-        public string RulesetName { get; set; }
-
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
-        public string Description { get; set; }
-
-        [JsonProperty("author")]
-        public string Author { get; set; }
-
-        [JsonProperty("match_date", NullValueHandling = NullValueHandling.Ignore)]
-        public long? MatchDate { get; set; }
-
-        [JsonProperty("source")]
-        public Uri Source { get; set; }
-
-        [JsonProperty("match_in_subfile", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? MatchInSubfile { get; set; }
-    }
-
-    public partial class Detectiteasy
-    {
-        [JsonProperty("filetype")]
-        public string Filetype { get; set; }
-
-        [JsonProperty("values")]
-        public Value[] Values { get; set; }
-    }
-
-    public partial class Value
-    {
-        [JsonProperty("info", NullValueHandling = NullValueHandling.Ignore)]
-        public string Info { get; set; }
-
-        [JsonProperty("version")]
-        public string Version { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public partial class LastAnalysisResult
-    {
-        [JsonProperty("method")]
-        public Method Method { get; set; }
-
-        [JsonProperty("engine_name")]
-        public string EngineName { get; set; }
-
-        [JsonProperty("engine_version")]
-        public string EngineVersion { get; set; }
-
-        [JsonProperty("engine_update")]
-        [JsonConverter(typeof(ParseStringConverter))]
-        public long EngineUpdate { get; set; }
-
-        [JsonProperty("category")]
-        public Category Category { get; set; }
-
-        [JsonProperty("result")]
-        public string Result { get; set; }
-    }
-
-    public partial class LastAnalysisStats
-    {
-        [JsonProperty("malicious")]
-        public long Malicious { get; set; }
-
-        [JsonProperty("suspicious")]
-        public long Suspicious { get; set; }
-
-        [JsonProperty("undetected")]
-        public long Undetected { get; set; }
-
-        [JsonProperty("harmless")]
-        public long Harmless { get; set; }
-
-        [JsonProperty("timeout")]
-        public long Timeout { get; set; }
-
-        [JsonProperty("confirmed-timeout")]
-        public long ConfirmedTimeout { get; set; }
-
-        [JsonProperty("failure")]
-        public long Failure { get; set; }
-
-        [JsonProperty("type-unsupported")]
-        public long TypeUnsupported { get; set; }
-    }
-
-    public partial class PeInfo
-    {
-        [JsonProperty("timestamp")]
-        public long Timestamp { get; set; }
-
-        [JsonProperty("imphash")]
-        public string Imphash { get; set; }
-
-        [JsonProperty("machine_type")]
-        public long MachineType { get; set; }
-
-        [JsonProperty("entry_point")]
-        public long EntryPoint { get; set; }
-
-        [JsonProperty("resource_details")]
-        public ResourceDetail[] ResourceDetails { get; set; }
-
-        [JsonProperty("resource_langs")]
-        public ResourceLangs ResourceLangs { get; set; }
-
-        [JsonProperty("resource_types")]
-        public ResourceTypes ResourceTypes { get; set; }
-
-        [JsonProperty("sections")]
-        public Section[] Sections { get; set; }
-
-        [JsonProperty("compiler_product_versions")]
-        public string[] CompilerProductVersions { get; set; }
-
-        [JsonProperty("rich_pe_header_hash")]
-        public string RichPeHeaderHash { get; set; }
-
-        [JsonProperty("import_list")]
-        public ImportList[] ImportList { get; set; }
-    }
-
-    public partial class ImportList
-    {
-        [JsonProperty("library_name")]
-        public string LibraryName { get; set; }
-
-        [JsonProperty("imported_functions")]
-        public string[] ImportedFunctions { get; set; }
-    }
-
-    public partial class ResourceDetail
-    {
-        [JsonProperty("lang")]
-        public string Lang { get; set; }
-
-        [JsonProperty("chi2")]
-        public double Chi2 { get; set; }
-
-        [JsonProperty("filetype")]
-        public string Filetype { get; set; }
-
-        [JsonProperty("entropy")]
-        public double Entropy { get; set; }
-
-        [JsonProperty("sha256")]
-        public string Sha256 { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class ResourceLangs
-    {
-        [JsonProperty("ENGLISH US")]
-        public long EnglishUs { get; set; }
-    }
-
-    public partial class ResourceTypes
-    {
-        [JsonProperty("RT_ICON")]
-        public long RtIcon { get; set; }
-
-        [JsonProperty("RT_VERSION")]
-        public long RtVersion { get; set; }
-
-        [JsonProperty("RT_GROUP_ICON")]
-        public long RtGroupIcon { get; set; }
-    }
-
-    public partial class Section
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("chi2")]
-        public double Chi2 { get; set; }
-
-        [JsonProperty("virtual_address")]
-        public long VirtualAddress { get; set; }
-
-        [JsonProperty("entropy")]
-        public double Entropy { get; set; }
-
-        [JsonProperty("raw_size")]
-        public long RawSize { get; set; }
-
-        [JsonProperty("flags")]
-        public string Flags { get; set; }
-
-        [JsonProperty("virtual_size")]
-        public long VirtualSize { get; set; }
-
-        [JsonProperty("md5")]
-        public string Md5 { get; set; }
-    }
-
-    public partial class PopularThreatClassification
-    {
-        [JsonProperty("popular_threat_category")]
-        public PopularThreat[] PopularThreatCategory { get; set; }
-
-        [JsonProperty("suggested_threat_label")]
-        public string SuggestedThreatLabel { get; set; }
-
-        [JsonProperty("popular_threat_name")]
-        public PopularThreat[] PopularThreatName { get; set; }
-    }
-
-    public partial class PopularThreat
-    {
-        [JsonProperty("count")]
-        public long Count { get; set; }
-
-        [JsonProperty("value")]
-        public string Value { get; set; }
-    }
-
-    public partial class SandboxVerdicts
-    {
-        [JsonProperty("Zenbox")]
-        public Box Zenbox { get; set; }
-
-        [JsonProperty("CAPE Sandbox")]
-        public Box CapeSandbox { get; set; }
-    }
-
-    public partial class Box
-    {
-        [JsonProperty("category")]
-        public Category Category { get; set; }
-
-        [JsonProperty("malware_classification")]
-        public string[] MalwareClassification { get; set; }
-
-        [JsonProperty("sandbox_name")]
-        public string SandboxName { get; set; }
-
-        [JsonProperty("malware_names")]
-        public string[] MalwareNames { get; set; }
-
-        [JsonProperty("confidence", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Confidence { get; set; }
-    }
-
-    public partial class SignatureInfo
-    {
-        [JsonProperty("description")]
-        public string Description { get; set; }
-
-        [JsonProperty("file version")]
-        public string FileVersion { get; set; }
-
-        [JsonProperty("original name")]
-        public string OriginalName { get; set; }
-
-        [JsonProperty("product")]
-        public string Product { get; set; }
-
-        [JsonProperty("internal name")]
-        public string InternalName { get; set; }
-
-        [JsonProperty("copyright")]
-        public string Copyright { get; set; }
-    }
-
-    public partial class TotalVotes
-    {
-        [JsonProperty("harmless")]
-        public long Harmless { get; set; }
-
-        [JsonProperty("malicious")]
-        public long Malicious { get; set; }
-    }
-
-    public partial class Trid
-    {
-        [JsonProperty("file_type")]
-        public string FileType { get; set; }
-
-        [JsonProperty("probability")]
-        public double Probability { get; set; }
-    }
-
-    public partial class Links
-    {
-        [JsonProperty("self")]
-        public Uri Self { get; set; }
-    }
-
-    public enum Category { Malicious, TypeUnsupported, Undetected };
-
-    public enum Method { Blacklist };
-
-    public partial class Hash
-    {
-        public static Hash FromJson(string json) => JsonConvert.DeserializeObject<Hash>(json, fileHash.Converter.Settings);
-    }
-
-    public static class Serialize
-    {
-        public static string ToJson(this Hash self) => JsonConvert.SerializeObject(self, fileHash.Converter.Settings);
-    }
-
-    internal static class Converter
-    {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
+        Converters =
             {
                 CategoryConverter.Singleton,
                 MethodConverter.Singleton,
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+                new DateOnlyConverter(),
+                new TimeOnlyConverter(),
+                IsoDateTimeOffsetConverter.Singleton
             },
-        };
+    };
+}
+
+internal class CategoryConverter : JsonConverter<Category>
+{
+    public override bool CanConvert(Type t) => t == typeof(Category);
+
+    public override Category Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString();
+        switch (value)
+        {
+            case "malicious":
+                return Category.Malicious;
+            case "type-unsupported":
+                return Category.TypeUnsupported;
+            case "undetected":
+                return Category.Undetected;
+        }
+        throw new Exception("Cannot unmarshal type Category");
     }
 
-    internal class CategoryConverter : JsonConverter
+    public override void Write(Utf8JsonWriter writer, Category value, JsonSerializerOptions options)
     {
-        public override bool CanConvert(Type t) => t == typeof(Category) || t == typeof(Category?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+        switch (value)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "malicious":
-                    return Category.Malicious;
-                case "type-unsupported":
-                    return Category.TypeUnsupported;
-                case "undetected":
-                    return Category.Undetected;
-            }
-            throw new Exception("Cannot unmarshal type Category");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
+            case Category.Malicious:
+                JsonSerializer.Serialize(writer, "malicious", options);
                 return;
-            }
-            var value = (Category)untypedValue;
-            switch (value)
-            {
-                case Category.Malicious:
-                    serializer.Serialize(writer, "malicious");
-                    return;
-                case Category.TypeUnsupported:
-                    serializer.Serialize(writer, "type-unsupported");
-                    return;
-                case Category.Undetected:
-                    serializer.Serialize(writer, "undetected");
-                    return;
-            }
-            throw new Exception("Cannot marshal type Category");
+            case Category.TypeUnsupported:
+                JsonSerializer.Serialize(writer, "type-unsupported", options);
+                return;
+            case Category.Undetected:
+                JsonSerializer.Serialize(writer, "undetected", options);
+                return;
         }
-
-        public static readonly CategoryConverter Singleton = new CategoryConverter();
+        throw new Exception("Cannot marshal type Category");
     }
 
-    internal class ParseStringConverter : JsonConverter
+    public static readonly CategoryConverter Singleton = new CategoryConverter();
+}
+
+internal class ParseStringConverter : JsonConverter<long>
+{
+    public override bool CanConvert(Type t) => t == typeof(long);
+
+    public override long Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+        var value = reader.GetString();
+        long l;
+        if (Int64.TryParse(value, out l))
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            long l;
-            if (Int64.TryParse(value, out l))
-            {
-                return l;
-            }
-            throw new Exception("Cannot unmarshal type long");
+            return l;
         }
+        throw new Exception("Cannot unmarshal type long");
+    }
 
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+    public override void Write(Utf8JsonWriter writer, long value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(writer, value.ToString(), options);
+        return;
+    }
+
+    public static readonly ParseStringConverter Singleton = new ParseStringConverter();
+}
+
+internal class MethodConverter : JsonConverter<Method>
+{
+    public override bool CanConvert(Type t) => t == typeof(Method);
+
+    public override Method Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString();
+        if (value == "blacklist")
         {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (long)untypedValue;
-            serializer.Serialize(writer, value.ToString());
+            return Method.Blacklist;
+        }
+        throw new Exception("Cannot unmarshal type Method");
+    }
+
+    public override void Write(Utf8JsonWriter writer, Method value, JsonSerializerOptions options)
+    {
+        if (value == Method.Blacklist)
+        {
+            JsonSerializer.Serialize(writer, "blacklist", options);
             return;
         }
-
-        public static readonly ParseStringConverter Singleton = new ParseStringConverter();
+        throw new Exception("Cannot marshal type Method");
     }
 
-    internal class MethodConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(Method) || t == typeof(Method?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            if (value == "blacklist")
-            {
-                return Method.Blacklist;
-            }
-            throw new Exception("Cannot unmarshal type Method");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (Method)untypedValue;
-            if (value == Method.Blacklist)
-            {
-                serializer.Serialize(writer, "blacklist");
-                return;
-            }
-            throw new Exception("Cannot marshal type Method");
-        }
-
-        public static readonly MethodConverter Singleton = new MethodConverter();
-    }
+    public static readonly MethodConverter Singleton = new MethodConverter();
 }
+
+public class DateOnlyConverter : JsonConverter<DateOnly>
+{
+    private readonly string serializationFormat;
+    public DateOnlyConverter() : this(null) { }
+
+    public DateOnlyConverter(string? serializationFormat)
+    {
+        this.serializationFormat = serializationFormat ?? "yyyy-MM-dd";
+    }
+
+    public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString();
+        return DateOnly.Parse(value!);
+    }
+
+    public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
+            => writer.WriteStringValue(value.ToString(serializationFormat));
+}
+
+public class TimeOnlyConverter : JsonConverter<TimeOnly>
+{
+    private readonly string serializationFormat;
+
+    public TimeOnlyConverter() : this(null) { }
+
+    public TimeOnlyConverter(string? serializationFormat)
+    {
+        this.serializationFormat = serializationFormat ?? "HH:mm:ss.fff";
+    }
+
+    public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString();
+        return TimeOnly.Parse(value!);
+    }
+
+    public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
+            => writer.WriteStringValue(value.ToString(serializationFormat));
+}
+
+internal class IsoDateTimeOffsetConverter : JsonConverter<DateTimeOffset>
+{
+    public override bool CanConvert(Type t) => t == typeof(DateTimeOffset);
+
+    private const string DefaultDateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+
+    private DateTimeStyles _dateTimeStyles = DateTimeStyles.RoundtripKind;
+    private string? _dateTimeFormat;
+    private CultureInfo? _culture;
+
+    public DateTimeStyles DateTimeStyles
+    {
+        get => _dateTimeStyles;
+        set => _dateTimeStyles = value;
+    }
+
+    public string? DateTimeFormat
+    {
+        get => _dateTimeFormat ?? string.Empty;
+        set => _dateTimeFormat = (string.IsNullOrEmpty(value)) ? null : value;
+    }
+
+    public CultureInfo Culture
+    {
+        get => _culture ?? CultureInfo.CurrentCulture;
+        set => _culture = value;
+    }
+
+    public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
+    {
+        string text;
+
+
+        if ((_dateTimeStyles & DateTimeStyles.AdjustToUniversal) == DateTimeStyles.AdjustToUniversal
+                || (_dateTimeStyles & DateTimeStyles.AssumeUniversal) == DateTimeStyles.AssumeUniversal)
+        {
+            value = value.ToUniversalTime();
+        }
+
+        text = value.ToString(_dateTimeFormat ?? DefaultDateTimeFormat, Culture);
+
+        writer.WriteStringValue(text);
+    }
+
+    public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        string? dateText = reader.GetString();
+
+        if (string.IsNullOrEmpty(dateText) == false)
+        {
+            if (!string.IsNullOrEmpty(_dateTimeFormat))
+            {
+                return DateTimeOffset.ParseExact(dateText, _dateTimeFormat, Culture, _dateTimeStyles);
+            }
+            else
+            {
+                return DateTimeOffset.Parse(dateText, Culture, _dateTimeStyles);
+            }
+        }
+        else
+        {
+            return default(DateTimeOffset);
+        }
+    }
+
+
+    public static readonly IsoDateTimeOffsetConverter Singleton = new IsoDateTimeOffsetConverter();
+}
+
+#pragma warning restore CS8618
+#pragma warning restore CS8601
+#pragma warning restore CS8603
