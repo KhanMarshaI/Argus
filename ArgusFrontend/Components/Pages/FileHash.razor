@@ -6,36 +6,65 @@
 
 <PageTitle>File Hash Scan</PageTitle>
 
-<h3>File Hash Scan</h3>
+<div class="container">
+  <h1 class="display-5 text-center">File Hash Scan</h1>
 
-<input placeholder="Hash" @bind="hash"/>
-<button @onclick="GetReport">Scan</button>
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="Hash" @bind="hash" />
+  </div>
+  <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
 
 @if (report != null)
 {
-    <div>
-        <h4>Report:</h4>
-        <h5>Information:</h5>
-        <p>ID: @(report?.Data?.Id ?? "N/A")</p>
-        <p>Type: @(report?.Data?.Type ?? "N/A") Extension: @(report?.Data?.Attributes?.TypeExtension ?? "N/A")</p>
-        <h5>Detection: </h5>
-        <p>Reputation: @(report?.Data?.Attributes?.Reputation ?? 0)</p>
-        <p>Malicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Malicious ?? 0)</p>
-        <p>Suspicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Suspicious ?? 0)</p>
-        <p>Harmless: @(report?.Data?.Attributes?.LastAnalysisStats?.Harmless ?? 0)</p>
-        <p>Undetected: @(report?.Data?.Attributes?.LastAnalysisStats?.Undetected ?? 0)</p>
-        <h5>Signatures: </h5>
-        <p>MD5 Hash: @(report?.Data?.Attributes?.Md5 ?? "N/A")</p>
-        <p>Sha1 Hash: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</p>
-        <p>Sha256 Hash: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</p>
-        <h5>Analyzed file names: </h5>
-        <p>Names: @(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
-    </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <h4 class="card-title">Report</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Information</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        ID:  
+                        @(report?.Data?.Id ?? "N/A")
+                    </li>
+                    <li class="list-group-item">Type: @(report?.Data?.Type ?? "N/A") Extension: 
+                        @(report?.Data?.Attributes?.TypeExtension ?? "N/A")</li>
+                </ul>
+
+                <hr class="mb-3">
+
+                <h5 class="card-title">Detection</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Reputation: @(report?.Data?.Attributes?.Reputation ?? 0)</li>
+                    <li class="list-group-item">Malicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Malicious ?? 0)</li>
+                    <li class="list-group-item">Suspicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Suspicious ?? 0)</li>
+                    <li class="list-group-item">Harmless: @(report?.Data?.Attributes?.LastAnalysisStats?.Harmless ?? 0)</li>
+                    <li class="list-group-item">Undetected: @(report?.Data?.Attributes?.LastAnalysisStats?.Undetected ?? 0)</li>
+                </ul>
+
+                <hr class="mb-3">
+
+                <h5 class="card-title">Signatures</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">MD5 Hash: @(report?.Data?.Attributes?.Md5 ?? "N/A")</li>
+                    <li class="list-group-item">Sha1 Hash: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</li>
+                    <li class="list-group-item">Sha256 Hash: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</li>
+                </ul>
+
+                <hr class="mb-3">
+
+                <h5 class="card-title">Analyzed file names</h5>
+                <p>Names: @(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
+            </div>
+        </div>
 }
 else
 {
-    <p>No report available for the given hash. Please check the input or try again later.</p>
+        <div class="alert alert-warning mt-3">
+            <p>No report available for the given hash. Please check the input or try again later.</p>
+        </div>
 }
+</div>
 
 @code {
 	private string? hash;
