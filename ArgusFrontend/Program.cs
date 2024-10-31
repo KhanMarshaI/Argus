@@ -9,6 +9,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7220/") });
 builder.Services.AddScoped<VirusTotalService>();
+builder.Services.AddScoped<DatabaseService>();
 
 var app = builder.Build();
 

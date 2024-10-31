@@ -51,7 +51,7 @@
     "ContainingType": "ArgusBackend.Controllers.VirusTotalController",
     "Method": "GetUrlReport",
     "RelativePath": "api/VirusTotal/url",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

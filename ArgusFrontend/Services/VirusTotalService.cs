@@ -33,7 +33,6 @@ namespace ArgusFrontend.Services
 
                 // Deserialize the JSON response
                 var report = await response.Content.ReadFromJsonAsync<Hash>(_jsonOptions);
-                Console.WriteLine(report.Data.Attributes.LastAnalysisStats);
                 return report;
             }
             catch (Exception ex)

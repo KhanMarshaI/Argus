@@ -1,19 +1,39 @@
 ﻿@page "/filehash"
 @using fileHash
 @using ArgusFrontend.Services
+@using System.Text.Json
+@using System.Text.Json.Serialization
 @rendermode InteractiveServer
 @inject VirusTotalService VirusTotalService
+@inject DatabaseService DatabaseService
 
-<PageTitle>File Hash Scan</PageTitle>
+<PageTitle>File Hash Intelligence</PageTitle>
 
 <div class="container">
-  <h1 class="display-5 text-center">File Hash Scan</h1>
+  <h1 class="display-5 text-center">File Hash Intelligence</h1>
 
-  <div class="mb-3">
+  <div class="input-group mb-3">
+    <span class="input-group-text">#</span>
     <input type="text" class="form-control" placeholder="Hash" @bind="hash" />
   </div>
-  <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
 
+  <div class="btn-group" role="group">
+      <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
+      <button type="submit" class="btn btn-dark btn-block" @onclick="ToggleJson">View JSON</button>
+      <button type="submit" class="btn btn-secondary" @onclick="GetReportDB">Scan Locally</button>
+  </div>
+
+@if (showJson && jsonOutput != null)
+{
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5 class="card-title">JSON Result:</h5>
+        </div>
+        <div class="card-body">
+            <pre>@jsonOutput</pre>
+        </div>
+    </div>
+}
 @if (report != null)
 {
         <div class="card mt-3">
@@ -24,11 +44,17 @@
                 <h5 class="card-title">Information</h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        ID:  
-                        @(report?.Data?.Id ?? "N/A")
+                        ID:  @(report?.Data?.Id ?? "N/A")
                     </li>
-                    <li class="list-group-item">Type: @(report?.Data?.Type ?? "N/A") Extension: 
-                        @(report?.Data?.Attributes?.TypeExtension ?? "N/A")</li>
+                    <li class="list-group-item">
+                        Type: @(report?.Data?.Type ?? "N/A") 
+                    </li>
+                    <li class="list-group-item">
+                        Extension @(report?.Data?.Attributes?.TypeExtension ?? "N/A")
+                    </li>
+                    <li class="list-group-item">
+                        Magic: @(report?.Data?.Attributes.Magic ?? "N/A")
+                    </li>
                 </ul>
 
                 <hr class="mb-3">
@@ -46,15 +72,17 @@
 
                 <h5 class="card-title">Signatures</h5>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">MD5 Hash: @(report?.Data?.Attributes?.Md5 ?? "N/A")</li>
-                    <li class="list-group-item">Sha1 Hash: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</li>
-                    <li class="list-group-item">Sha256 Hash: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</li>
+                    <li class="list-group-item">MD5: @(report?.Data?.Attributes?.Md5 ?? "N/A")</li>
+                    <li class="list-group-item">SHA1: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</li>
+                    <li class="list-group-item">SHA256: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</li>
+                    <li class="list-group-item">tlsh: @(report?.Data?.Attributes?.Tlsh ?? "N/A")</li>
+                    <li class="list-group-item">vhash: @(report?.Data?.Attributes?.Vhash ?? "N/A")</li>
                 </ul>
 
                 <hr class="mb-3">
 
                 <h5 class="card-title">Analyzed file names</h5>
-                <p>Names: @(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
+                <p>@(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
             </div>
         </div>
 }
@@ -67,15 +95,52 @@ else
 </div>
 
 @code {
-	private string? hash;
-	private Hash? report;
+    private string? hash;
+    private Hash? report;
+    private bool showJson = false;
+    private string? jsonOutput;
 
-	private async Task GetReport()
-	{
-		if (!string.IsNullOrWhiteSpace(hash))
-		{
-			report = await VirusTotalService.GetFileHashReportAsync(hash); 
-			StateHasChanged(); 
-		}
-	}
+    private async Task GetReport()
+    {
+        if (!string.IsNullOrWhiteSpace(hash))
+        {
+            report = await VirusTotalService.GetFileHashReportAsync(hash);
+            jsonOutput = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
+            StateHasChanged();
+
+            try
+            {
+                await DatabaseService.StoreHashReportAsync(report);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error storing data: {ex.Message}");
+            }
+
+        }
+    }
+
+    private async Task GetReportDB()
+    {
+        if (!string.IsNullOrWhiteSpace(hash))
+        {
+            try
+            {
+                report = await DatabaseService.GetHashReportAsync(hash);
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving data: {ex.Message}");
+            }
+        }
+    }
+
+    private void ToggleJson()
+    {
+        if (report != null)
+        {
+            showJson = !showJson;
+        }
+    }
 }

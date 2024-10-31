@@ -27,7 +27,7 @@ namespace ArgusBackend.Controllers
             return Content(formatJson, "application/json");
         }
 
-        [HttpGet("url")]
+        [HttpPost("url")]
         public async Task<IActionResult> GetUrlReport([FromQuery] string url)
         {
             var report = await _virusTotalService.GetUrlReportAsync(url);
