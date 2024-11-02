@@ -1,6 +1,8 @@
 ﻿using System.Data.SqlClient;
 using System.Text.Json;
 using fileHash;
+using BCrypt.Net;
+using Dapper;
 
 namespace ArgusFrontend.Services
 {
@@ -164,5 +166,22 @@ namespace ArgusFrontend.Services
             return await command.ExecuteScalarAsync() != null;
         }
 
+
+        //Authorization
+        public async Task<bool> AuthorizeUserAsync(string username, string password)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT password FROM authorized_users WHERE username = @Username";
+                var storedHash = await connection.QuerySingleOrDefaultAsync<string>(query, new { @Username = username });
+
+                if(storedHash == null)
+                {
+                    return false;
+                }
+
+                return BCrypt.Net.BCrypt.Verify(password, storedHash);
+            }
+        }
     }
 }

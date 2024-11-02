@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using System.Security.Claims
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Argus</a>
     </div>
@@ -8,18 +10,30 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="filehash">
+                        <i class="bi bi-hash"></i>
+                        <span></span> File Hash
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="filehash">
-                <i class="bi bi-hash"></i>
-                <span></span> File Hash
-            </NavLink>
-        </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="customintel">
+                        <i class="bi bi-hash"></i>
+                        <span></span> Local Intel
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
 
         @* <div class="nav-item px-3">
             <NavLink class="nav-link" href="counter">
@@ -35,3 +49,10 @@
     </nav>
 </div>
 
+@* @code {
+    private async Task Logout()
+    {
+        await AuthStateProvider.SetUnauthenticatedAsync();
+        Navigation.NavigateTo("/login");
+    }
+} *@

@@ -9,90 +9,99 @@
 
 <PageTitle>File Hash Intelligence</PageTitle>
 
-<div class="container">
-  <h1 class="display-5 text-center">File Hash Intelligence</h1>
+<Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+    <Authorized>
 
-  <div class="input-group mb-3">
-    <span class="input-group-text">#</span>
-    <input type="text" class="form-control" placeholder="Hash" @bind="hash" />
-  </div>
+        <div class="container">
+            <h1 class="display-5 text-center">File Hash Intelligence</h1>
 
-  <div class="btn-group" role="group">
-      <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
-      <button type="submit" class="btn btn-dark btn-block" @onclick="ToggleJson">View JSON</button>
-      <button type="submit" class="btn btn-secondary" @onclick="GetReportDB">Scan Locally</button>
-  </div>
-
-@if (showJson && jsonOutput != null)
-{
-    <div class="card mt-3">
-        <div class="card-header">
-            <h5 class="card-title">JSON Result:</h5>
-        </div>
-        <div class="card-body">
-            <pre>@jsonOutput</pre>
-        </div>
-    </div>
-}
-@if (report != null)
-{
-        <div class="card mt-3">
-            <div class="card-header">
-                <h4 class="card-title">Report</h4>
+            <div class="input-group mb-3">
+                <span class="input-group-text">#</span>
+                <input type="text" class="form-control" placeholder="Hash" @bind="hash" />
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Information</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        ID:  @(report?.Data?.Id ?? "N/A")
-                    </li>
-                    <li class="list-group-item">
-                        Type: @(report?.Data?.Type ?? "N/A") 
-                    </li>
-                    <li class="list-group-item">
-                        Extension @(report?.Data?.Attributes?.TypeExtension ?? "N/A")
-                    </li>
-                    <li class="list-group-item">
-                        Magic: @(report?.Data?.Attributes.Magic ?? "N/A")
-                    </li>
-                </ul>
 
-                <hr class="mb-3">
-
-                <h5 class="card-title">Detection</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Reputation: @(report?.Data?.Attributes?.Reputation ?? 0)</li>
-                    <li class="list-group-item">Malicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Malicious ?? 0)</li>
-                    <li class="list-group-item">Suspicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Suspicious ?? 0)</li>
-                    <li class="list-group-item">Harmless: @(report?.Data?.Attributes?.LastAnalysisStats?.Harmless ?? 0)</li>
-                    <li class="list-group-item">Undetected: @(report?.Data?.Attributes?.LastAnalysisStats?.Undetected ?? 0)</li>
-                </ul>
-
-                <hr class="mb-3">
-
-                <h5 class="card-title">Signatures</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">MD5: @(report?.Data?.Attributes?.Md5 ?? "N/A")</li>
-                    <li class="list-group-item">SHA1: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</li>
-                    <li class="list-group-item">SHA256: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</li>
-                    <li class="list-group-item">tlsh: @(report?.Data?.Attributes?.Tlsh ?? "N/A")</li>
-                    <li class="list-group-item">vhash: @(report?.Data?.Attributes?.Vhash ?? "N/A")</li>
-                </ul>
-
-                <hr class="mb-3">
-
-                <h5 class="card-title">Analyzed file names</h5>
-                <p>@(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
+            <div class="btn-group" role="group">
+                <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
+                <button type="submit" class="btn btn-dark btn-block" @onclick="ToggleJson">View JSON</button>
+                <button type="submit" class="btn btn-secondary" @onclick="GetReportDB">Scan Locally</button>
             </div>
+
+            @if (showJson && jsonOutput != null)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="card-title">JSON Result:</h5>
+                    </div>
+                    <div class="card-body">
+                        <pre>@jsonOutput</pre>
+                    </div>
+                </div>
+            }
+            @if (report != null)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h4 class="card-title">Report</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Information</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                ID:  @(report?.Data?.Id ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                Type: @(report?.Data?.Type ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                Extension @(report?.Data?.Attributes?.TypeExtension ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                Magic: @(report?.Data?.Attributes.Magic ?? "N/A")
+                            </li>
+                        </ul>
+
+                        <hr class="mb-3">
+
+                        <h5 class="card-title">Detection</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Reputation: @(report?.Data?.Attributes?.Reputation ?? 0)</li>
+                            <li class="list-group-item">Malicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Malicious ?? 0)</li>
+                            <li class="list-group-item">Suspicious: @(report?.Data?.Attributes?.LastAnalysisStats?.Suspicious ?? 0)</li>
+                            <li class="list-group-item">Harmless: @(report?.Data?.Attributes?.LastAnalysisStats?.Harmless ?? 0)</li>
+                            <li class="list-group-item">Undetected: @(report?.Data?.Attributes?.LastAnalysisStats?.Undetected ?? 0)</li>
+                        </ul>
+
+                        <hr class="mb-3">
+
+                        <h5 class="card-title">Signatures</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">MD5: @(report?.Data?.Attributes?.Md5 ?? "N/A")</li>
+                            <li class="list-group-item">SHA1: @(report?.Data?.Attributes?.Sha1 ?? "N/A")</li>
+                            <li class="list-group-item">SHA256: @(report?.Data?.Attributes?.Sha256 ?? "N/A")</li>
+                            <li class="list-group-item">tlsh: @(report?.Data?.Attributes?.Tlsh ?? "N/A")</li>
+                            <li class="list-group-item">vhash: @(report?.Data?.Attributes?.Vhash ?? "N/A")</li>
+                        </ul>
+
+                        <hr class="mb-3">
+
+                        <h5 class="card-title">Analyzed file names</h5>
+                        <p>@(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning mt-3">
+                    <p>No report available for the given hash. Please check the input or try again later.</p>
+                </div>
+            }
         </div>
-}
-else
-{
-        <div class="alert alert-warning mt-3">
-            <p>No report available for the given hash. Please check the input or try again later.</p>
-        </div>
-}
-</div>
+    </Authorized>
+    <NotAuthorized>
+        <p>You aren't logged in. <a href="/login">Login now?</a></p>
+    </NotAuthorized>
+</Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+
 
 @code {
     private string? hash;

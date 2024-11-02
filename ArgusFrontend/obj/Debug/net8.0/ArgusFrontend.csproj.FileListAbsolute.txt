@@ -37,3 +37,5 @@ C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\runti
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\hadia\OneDrive\Desktop\argus\Argus\ArgusFrontend\bin\Debug\net8.0\Dapper.dll
