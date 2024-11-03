@@ -27,4 +27,10 @@ VHASH NVARCHAR(55),
 FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE
 );
 
-SELECT * FROM FileReports, FileSignatures;
+SELECT * FROM FileReports;
+
+SELECT * FROM FileReports fr
+JOIN FileSignatures fs ON fr.ID = fs.FileReportID ;
+
+SELECT * FROM authorized_users;
+DELETE FROM authorized_users WHERE authUserID = 5;

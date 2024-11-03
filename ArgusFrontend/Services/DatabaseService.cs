@@ -3,6 +3,7 @@ using System.Text.Json;
 using fileHash;
 using BCrypt.Net;
 using Dapper;
+using ArgusFrontend.Models;
 
 namespace ArgusFrontend.Services
 {
@@ -149,6 +150,81 @@ namespace ArgusFrontend.Services
             }
         }
 
+        public async Task StoreHashReportAsync(CustomFileHash report)
+        {
+            // Validate the file hash (this validation could also happen at the UI level or before calling this method)
+            if (string.IsNullOrEmpty(report.SHA256) && string.IsNullOrEmpty(report.SHA1) && string.IsNullOrEmpty(report.MD5))
+            {
+                throw new ArgumentException("No valid hash provided in the report.");
+            }
+
+            // Determine the primary hash type to use
+            string fileHash = report.SHA256 ?? report.SHA1 ?? report.MD5;
+            string hashType = DetermineHashType(fileHash);
+
+            // Check if the hash already exists to prevent duplicates
+            if (await HashExistsAsync(fileHash, hashType))
+            {
+                Console.WriteLine("Hash already exists in the database.");
+                return;
+            }
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Insert into FileReports table
+                        string query = "INSERT INTO FileReports " +
+                                       "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
+                                       "Harmless, Undetected, AnalyzedNames) " +
+                                       "OUTPUT INSERTED.ID " +
+                                       "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
+                                       "@Suspicious, @Harmless, @Undetected, @AnalyzedNames)";
+
+                        using var command = new SqlCommand(query, connection, transaction);
+                        command.Parameters.AddWithValue("@FileHash", fileHash);
+                        command.Parameters.AddWithValue("@FileID", report.Id);
+                        command.Parameters.AddWithValue("@FileType", report.Type);
+                        command.Parameters.AddWithValue("@FileExtension", report.Extension);
+                        command.Parameters.AddWithValue("@Magic", report.Magic);
+                        command.Parameters.AddWithValue("@Reputation", report.Reputation);
+                        command.Parameters.AddWithValue("@Malicious", report.Malicious);
+                        command.Parameters.AddWithValue("@Suspicious", report.Suspicious);
+                        command.Parameters.AddWithValue("@Harmless", report.Harmless);
+                        command.Parameters.AddWithValue("@Undetected", report.Undetected);
+                        command.Parameters.AddWithValue("@AnalyzedNames", report.Names);
+
+                        int reportID = (int)await command.ExecuteScalarAsync();
+
+                        // Insert into FileSignatures table
+                        string signatureQuery = "INSERT INTO FileSignatures " +
+                                                "(FileReportID, MD5, SHA1, SHA256, TLSH, VHASH) " +
+                                                "VALUES (@FileReportID, @MD5, @SHA1, @SHA256, @TLSH, @VHASH)";
+
+                        using var sigCommand = new SqlCommand(signatureQuery, connection, transaction);
+                        sigCommand.Parameters.AddWithValue("@FileReportID", reportID);
+                        sigCommand.Parameters.AddWithValue("@MD5", report.MD5);
+                        sigCommand.Parameters.AddWithValue("@SHA1", report.SHA1);
+                        sigCommand.Parameters.AddWithValue("@SHA256", report.SHA256);
+                        sigCommand.Parameters.AddWithValue("@TLSH", report.TLSH);
+                        sigCommand.Parameters.AddWithValue("@VHASH", report.VHASH);
+
+                        await sigCommand.ExecuteNonQueryAsync();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"Error storing data: {ex.Message}");
+                        throw;
+                    }
+                }
+            }
+        }
+
         public async Task<bool> HashExistsAsync(string fileHash, string hashType)
         {
             string query = hashType switch
@@ -208,5 +284,60 @@ namespace ArgusFrontend.Services
                 return false;
             }
         }
+
+        public async Task<bool> ValidateUserExists(string username)
+        {
+            using(var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT 1 FROM authorized_users WHERE username = @username";
+                using(var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    return await command.ExecuteScalarAsync() != null;
+                }
+            }
+        }
+
+        public async Task<bool> RegisterUser(RegisterModel registerModel)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+
+                // Check if the user already exists
+                if (await ValidateUserExists(registerModel.username))
+                {
+                    Console.WriteLine("User already exists.");
+                    return false;
+                }
+
+                string query = "INSERT INTO authorized_users (username, password, created_by, comments) " +
+                               "VALUES (@username, @password, @created_by, @comments)";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    // Add parameters with values from registerModel
+                    string hashPassword = BCrypt.Net.BCrypt.HashPassword(registerModel.password);
+                    command.Parameters.AddWithValue("@username", registerModel.username);
+                    command.Parameters.AddWithValue("@password", hashPassword);
+                    command.Parameters.AddWithValue("@created_by", registerModel.created_by);
+                    command.Parameters.AddWithValue("@comments", (object)registerModel.comments ?? DBNull.Value);
+
+                    try
+                    {
+                        await command.ExecuteNonQueryAsync();
+                        return true; 
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error registering user: {ex.Message}");
+                        return false;
+                    }
+                }
+            }
+        }
+
+
     }
 }

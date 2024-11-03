@@ -1,0 +1,96 @@
+﻿@page "/customintel/registeruser"
+@using ArgusFrontend.Services
+@using ArgusFrontend.Models
+
+
+<PageTitle>Register User</PageTitle>
+<AuthorizeView>
+	<Authorized>
+		<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="card p-4 shadow-lg rounded" style="max-width: 400px; width: 100%;">
+                <div class="card-body">
+                <h3 class="card-title text-center mb-4">Register User</h3>
+                <EditForm Model="registerModel" OnValidSubmit="OnUserRegister" formName="UserRegisterPost" Context="UserRegister">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="text-danger" />
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
+                        <InputText type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                   aria-describedby="basic-addon1" @bind-Value="registerModel.username" />
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                        <InputText type="password" class="form-control" placeholder="Password" aria-label="Password"
+                                   aria-describedby="basic-addon1" @bind-Value="registerModel.password" />
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-right-text"></i></span>
+                        <InputText type="text" class="form-control" placeholder="Comments" aria-label="Comments"
+                                   aria-describedby="basic-addon1" @bind-Value="registerModel.comments" />
+                    </div>
+
+                    <div class="col-12 d-grid">
+                        <button type="submit" class="btn btn-primary rounded-pill">Register</button>
+                    </div>
+                </EditForm>
+                @if (userErrorMessage != null)
+                {
+                    <br />
+                    <div class="alert alert-danger" role="alert">
+                        @userErrorMessage
+                    </div>
+                }
+                @if (userSuccessMessage != null)
+                {
+                    <br />
+                    <div class="alert alert-success" role="alert">
+                        @userSuccessMessage
+                    </div>
+                }
+                </div>
+            </div>
+        </div>
+	</Authorized>
+</AuthorizeView>
+
+@code {
+    [SupplyParameterFromForm]
+    private RegisterModel registerModel { get; set; } = new();
+
+    private DatabaseService dbService = new DatabaseService();
+
+    private string? userErrorMessage;
+    private string? userSuccessMessage;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private async Task OnUserRegister()
+    {
+        var authenticationState = await authenticationStateTask;
+        registerModel.created_by = authenticationState.User.Identity.Name;
+
+        if (string.IsNullOrWhiteSpace(registerModel.username))
+        {
+            userErrorMessage = "Inavlid username.";
+            return;
+        }
+
+
+        bool status = await dbService.RegisterUser(registerModel);
+
+        if (status)
+        {
+            userSuccessMessage = "User Registered Successfully!.";
+            return;
+        }
+        else
+        {
+            userErrorMessage = "User already exists or something went wrong.";
+            return;
+        }
+    }
+}

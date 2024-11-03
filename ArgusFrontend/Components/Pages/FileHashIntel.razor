@@ -1,0 +1,160 @@
+﻿@page "/customintel/fileintel"
+@using ArgusFrontend.Services
+@using ArgusFrontend.Models
+
+<PageTitle>Store File Intel</PageTitle>
+<AuthorizeView>
+	<Authorized>
+       <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="card p-4 shadow-lg rounded" style="max-width: 900px; width: 100%;">
+                <div class="card-body">
+                <h3 class="card-title text-center mb-4">File Intel</h3>
+		
+            <EditForm Model="filehash" OnValidSubmit="FileHashSubmit" formName="CustomFileHashPost" class="row g-3" Context="FileHashContext">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" />
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">#</span>
+                    <InputText type="text" class="form-control" placeholder="Hash" aria-label="FileID"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.Id" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-binary"></i></span>
+                    <InputText type="text" class="form-control" placeholder="Type" aria-label="FileType"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.Type" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-text"></i></span>
+                    <InputText type="text" class="form-control" placeholder="Extension" aria-label="FileExtension"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.Extension" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-magic"></i></span>
+                    <InputText type="text" class="form-control" placeholder="Magic" aria-label="FileMagic"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.Magic" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Reputation</span>
+                    <InputNumber class="form-control" placeholder="Reputation" aria-label="Reputation"
+                                 aria-describedby="basic-addon1" @bind-Value="filehash.Reputation" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Malicious</span>
+                    <InputNumber class="form-control" placeholder="Malicious" aria-label="MaliciousCount"
+                                 aria-describedby="basic-addon1" @bind-Value="filehash.Malicious" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Suspicious</span>
+                    <InputNumber class="form-control" placeholder="Suspicious" aria-label="SuspiciousCount"
+                                 aria-describedby="basic-addon1" @bind-Value="filehash.Suspicious" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Harmless</span>
+                    <InputNumber class="form-control" placeholder="Harmless" aria-label="HarmlessCount"
+                                 aria-describedby="basic-addon1" @bind-Value="filehash.Harmless" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Undetected</span>
+                    <InputNumber class="form-control" placeholder="Undetected" aria-label="UndetectedCount"
+                                 aria-describedby="basic-addon1" @bind-Value="filehash.Undetected" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-patch-question"></i></span>
+                    <InputTextArea type="text" class="form-control" placeholder="Names" aria-label="FileNames"
+                                   aria-describedby="basic-addon1" @bind-Value="filehash.Names" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-code"></i></span>
+                    <InputText type="text" class="form-control" placeholder="MD5" aria-label="MD5Hash"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.MD5" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-code"></i></span>
+                    <InputText type="text" class="form-control" placeholder="SHA1" aria-label="SHA1Hash"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.SHA1" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-code"></i></span>
+                    <InputText type="text" class="form-control" placeholder="SHA256" aria-label="SHA256Hash"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.SHA256" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-code"></i></span>
+                    <InputText type="text" class="form-control" placeholder="TLSH" aria-label="TLSHHash"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.TLSH" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-code"></i></span>
+                    <InputText type="text" class="form-control" placeholder="VHash" aria-label="VHASH"
+                               aria-describedby="basic-addon1" @bind-Value="filehash.VHASH" />
+                </div>
+
+                <div class="col-12 d-grid">
+                    <button type="submit" class="btn btn-primary rounded-pill">Save</button>
+                </div>
+            </EditForm>
+                @if (fileErrorMessage != null)
+                {
+                    <br />
+                    <div class="alert alert-danger" role="alert">
+                        @fileErrorMessage
+                    </div>
+                }
+                @if (fileSuccessMessage != null)
+                {
+                    <br />
+                    <div class="alert alert-success" role="alert">
+                        @fileSuccessMessage
+                    </div>
+                }
+                    </div>
+                </div>
+            </div>
+	</Authorized>
+</AuthorizeView>
+
+@code {
+    [SupplyParameterFromForm]
+    private CustomFileHash? filehash { get; set; } = new();
+
+    private DatabaseService dbService = new DatabaseService();
+    private string? fileErrorMessage;
+    private string? fileSuccessMessage;
+
+    private async Task FileHashSubmit()
+    {
+        fileErrorMessage = null;
+        fileSuccessMessage = null;
+
+        if (filehash.Id != filehash.SHA1 && filehash.Id != filehash.SHA256 && filehash.Id != filehash.MD5)
+        {
+            fileErrorMessage = "There's incosistency within your FileID and File Hashes.";
+            return;
+        }
+        try
+        {
+            await dbService.StoreHashReportAsync(filehash);
+            fileSuccessMessage = "File report created!";
+            return;
+        }
+        catch (Exception ex)
+        {
+            fileErrorMessage = ex.Message;
+            return;
+        }
+    }
+}
