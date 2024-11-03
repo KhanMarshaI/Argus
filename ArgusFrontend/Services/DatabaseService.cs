@@ -183,5 +183,30 @@ namespace ArgusFrontend.Services
                 return BCrypt.Net.BCrypt.Verify(password, storedHash);
             }
         }
+
+        public async Task<bool> UpdatePassword(string username, string password)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                try
+                {
+                    string query = "UPDATE authorized_users SET password = @password WHERE username = @username";
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        string hashedPass = BCrypt.Net.BCrypt.HashPassword(password);
+                        command.Parameters.AddWithValue("@password", hashedPass);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                    return true;
+                }
+                catch (Exception ex) { 
+                    Console.WriteLine($"Updating profile didn't work: {ex.Message}");
+                }
+                return false;
+            }
+        }
     }
 }

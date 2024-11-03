@@ -7,13 +7,15 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            @* <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a> *@
             <AuthorizeView>
                 <NotAuthorized>
                     <a href="/login">Login</a>
                 </NotAuthorized>
                 <Authorized>
-                    <a href="/logout">Logout</a>
+                    <button type="button" class="btn btn-light">@context.User.Identity.Name</button>
+                    <a class="btn btn-link" href="/profile" role="button">Settings</a>
+                    <a class="btn btn-link" href="/logout" role="button">Logout</a>
                 </Authorized>
             </AuthorizeView>
         </div>
