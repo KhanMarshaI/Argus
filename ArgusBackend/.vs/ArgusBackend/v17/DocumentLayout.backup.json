@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "Controllers\\VirusTotalController.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\Controllers\\VirusTotalController.cs",
               "RelativeToolTip": "Controllers\\VirusTotalController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB4AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T08:11:08.122Z",
               "EditorCaption": ""
@@ -51,11 +51,12 @@
               "Title": "VirusTotalService.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\Services\\VirusTotalService.cs",
               "RelativeDocumentMoniker": "Services\\VirusTotalService.cs",
-              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\Services\\VirusTotalService.cs",
-              "RelativeToolTip": "Services\\VirusTotalService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAADsAAAAJAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\Services\\VirusTotalService.cs*",
+              "RelativeToolTip": "Services\\VirusTotalService.cs*",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAACEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T07:57:51.116Z"
+              "WhenOpened": "2024-10-27T07:57:51.116Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -67,7 +68,8 @@
               "RelativeToolTip": "Services\\IVirusTotalService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T07:56:33.98Z"
+              "WhenOpened": "2024-10-27T07:56:33.98Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

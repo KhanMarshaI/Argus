@@ -34,3 +34,21 @@ JOIN FileSignatures fs ON fr.ID = fs.FileReportID ;
 
 SELECT * FROM authorized_users;
 DELETE FROM authorized_users WHERE authUserID = 5;
+
+CREATE Table Analysis(
+AnalysisID VARCHAR(100) Primary Key,
+Type Varchar(12),
+Status Varchar(20),
+Malicious INT,
+Suspicious INT,
+Undetected INT,
+Harmless INT,
+);
+
+CREATE TABLE URLAnalysis(
+URLID int primary key identity(2000, 1),
+URL VARCHAR(255) NOT NULL,
+AnalysisID VARCHAR(100) FOREIGN KEY References Analysis(AnalysisID),
+CreatedAT DATE DEFAULT GETDATE()
+);
+

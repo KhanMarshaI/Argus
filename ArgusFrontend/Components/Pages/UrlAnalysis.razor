@@ -1,5 +1,73 @@
-﻿<h3>UrlAnalysis</h3>
+﻿@page "/urlanalysis"
+@using URLAnalysis
+@using ArgusFrontend.Services
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@rendermode InteractiveServer
+@inject VirusTotalService VirusTotalService
+@inject DatabaseService DatabaseService
+
+<PageTitle>URL Analysis</PageTitle>
+
+<AuthorizeView>
+	<Authorized>
+
+		<div class="container">
+            <h1 class="display-5 text-center">URL Analysis</h1>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">#</span>
+                 <input type="text" class="form-control" placeholder="URL" @bind="url" /> 
+            </div>
+
+            <div class="btn-group" role="group">
+                 <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
+                @* <button type="submit" class="btn btn-secondary" @onclick="">Scan Locally</button> *@
+            </div>
+
+        @if (report != null)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h4 class="card-title">Report</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Information</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Type: @(report?.Data?.Type ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                AnalysisID: @(report?.Data?.Id ?? "N/A")
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning mt-3">
+                    <p>No report available for the given hash. Please check the input or try again later.</p>
+                </div>
+            }
+        </div>
+
+	</Authorized>
+</AuthorizeView>
 
 @code {
+    private URLRep? report;
+    private string? url;
 
+    private async Task GetReport()
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            report = null;
+            return;
+        }
+        report = await VirusTotalService.GetURLReport(url);
+        StateHasChanged();
+    }
 }
