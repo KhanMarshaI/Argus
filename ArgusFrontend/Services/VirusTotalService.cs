@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using fileHash;
 using URLAnalysis;
+using _Analysis;
 
 namespace ArgusFrontend.Services
 {
@@ -74,6 +75,34 @@ namespace ArgusFrontend.Services
             }
         }
 
+        public async Task<Analysis> GetAnalysisAsync(string analysisID)
+        {
+            try
+            {
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri($"https://localhost:7220/api/VirusTotal/analysis?analysisID={Uri.EscapeDataString(analysisID)}"),
+                    Headers =
+                   {
+                       { "accept" ,"*/*" }
+                   }
+                };
+
+                using (var response = await _httpClient.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadFromJsonAsync<Analysis>(_jsonOptions);
+                    return body;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                Console.WriteLine($"Error fetching report: {ex.Message}");
+                return null;
+            }
+        }
 
     }
 }

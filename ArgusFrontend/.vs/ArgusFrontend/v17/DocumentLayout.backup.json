@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\urlanalysis.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\urlanalysis.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\analysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\analysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\services\\virustotalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\virustotalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\urlanalysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\urlanalysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\filehash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\filehash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\urlanalysis.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\urlanalysis.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\urlanalysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\urlanalysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\services\\url_db_srvc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\url_db_srvc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +42,110 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "fileHash.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\fileHash.cs",
               "RelativeDocumentMoniker": "Models\\fileHash.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\fileHash.cs",
               "RelativeToolTip": "Models\\fileHash.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T17:22:55.28Z",
+              "WhenOpened": "2024-11-08T20:11:37.586Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
+              "Title": "URL_DB_SRVC.cs",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\URL_DB_SRVC.cs",
+              "RelativeDocumentMoniker": "Services\\URL_DB_SRVC.cs",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\URL_DB_SRVC.cs",
+              "RelativeToolTip": "Services\\URL_DB_SRVC.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T20:07:32.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\DatabaseService.cs",
+              "RelativeToolTip": "Services\\DatabaseService.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAADAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T18:15:12.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "URLAnalysisModel.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\URLAnalysisModel.cs",
               "RelativeDocumentMoniker": "Models\\URLAnalysisModel.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\URLAnalysisModel.cs",
               "RelativeToolTip": "Models\\URLAnalysisModel.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAADQAAABXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-04T20:14:17.082Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "VirusTotalService.cs",
-              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs",
-              "RelativeDocumentMoniker": "Services\\VirusTotalService.cs",
-              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs*",
-              "RelativeToolTip": "Services\\VirusTotalService.cs*",
-              "ViewState": "AgIAACoAAAAAAAAAAAAkwDkAAAAVAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AnalysisModel.cs",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\AnalysisModel.cs",
+              "RelativeDocumentMoniker": "Models\\AnalysisModel.cs",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\AnalysisModel.cs",
+              "RelativeToolTip": "Models\\AnalysisModel.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAEgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T19:05:50.097Z",
+              "WhenOpened": "2024-11-06T18:21:59.584Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "UrlAnalysis.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\UrlAnalysis.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\UrlAnalysis.razor",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\UrlAnalysis.razor",
               "RelativeToolTip": "Components\\Pages\\UrlAnalysis.razor",
-              "ViewState": "AgIAADAAAAAAAAAAAAAQwEUAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-03T18:03:41.925Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "FileHash.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\FileHash.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\FileHash.razor",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\FileHash.razor",
               "RelativeToolTip": "Components\\Pages\\FileHash.razor",
-              "ViewState": "AgIAAGgAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAADwv0cAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-04T20:36:04.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VirusTotalService.cs",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs",
+              "RelativeDocumentMoniker": "Services\\VirusTotalService.cs",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs",
+              "RelativeToolTip": "Services\\VirusTotalService.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAADwv14AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T19:05:50.097Z",
               "EditorCaption": ""
             }
           ]

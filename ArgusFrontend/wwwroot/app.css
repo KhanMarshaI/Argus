@@ -51,3 +51,11 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.border-danger {
+    border: 2px solid red;
+}
+
+.border-warning {
+    border: 2px solid orange;
+}

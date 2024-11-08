@@ -61,16 +61,16 @@ using System.Globalization;
     public partial class ResultValue
     {
         [JsonPropertyName("method")]
-        public Method Method { get; set; }
+        public string Method { get; set; }
 
         [JsonPropertyName("engine_name")]
         public string EngineName { get; set; }
 
         [JsonPropertyName("category")]
-        public Category Category { get; set; }
+        public string Category { get; set; }
 
         [JsonPropertyName("result")]
-        public ResultEnum Result { get; set; }
+        public string Result { get; set; }
     }
 
     public partial class Stats

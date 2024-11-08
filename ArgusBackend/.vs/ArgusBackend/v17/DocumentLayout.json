@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "Controllers\\VirusTotalController.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\Controllers\\VirusTotalController.cs",
               "RelativeToolTip": "Controllers\\VirusTotalController.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAB4AAABAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB4AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T08:11:08.122Z",
               "EditorCaption": ""
@@ -55,8 +55,7 @@
               "RelativeToolTip": "Services\\VirusTotalService.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAAACEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T07:57:51.116Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-27T07:57:51.116Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "Services\\IVirusTotalService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T07:56:33.98Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-27T07:56:33.98Z"
             },
             {
               "$type": "Document",

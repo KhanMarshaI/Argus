@@ -1,5 +1,6 @@
 ﻿@page "/urlanalysis"
 @using URLAnalysis
+@using _Analysis
 @using ArgusFrontend.Services
 @using System.Text.Json
 @using System.Text.Json.Serialization
@@ -25,11 +26,11 @@
                 @* <button type="submit" class="btn btn-secondary" @onclick="">Scan Locally</button> *@
             </div>
 
-        @if (report != null)
+            @if (report != null)
             {
                 <div class="card mt-3">
                     <div class="card-header">
-                        <h4 class="card-title">Report</h4>
+                        <h4 class="card-title">URL Analysis</h4>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Information</h5>
@@ -45,10 +46,43 @@
                     </div>
                 </div>
             }
+            @if ( analysis != null)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h4 class="card-title">Analysis</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Information</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                AnalysisID: @(analysis?.Data?.Id ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                Type: @(analysis?.Data?.Type ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                Status: @(analysis?.Data?.Attributes?.Status ?? "N/A")
+                            </li>
+                        </ul>
+
+                        <hr class="mb-3">
+
+                        <h5 class="card-title">Statistics</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Malicious: @(analysis?.Data?.Attributes?.Stats?.Malicious ?? 0)</li>
+                            <li class="list-group-item">Suspicious: @(analysis?.Data?.Attributes?.Stats?.Suspicious ?? 0)</li>
+                            <li class="list-group-item">Harmless: @(analysis?.Data?.Attributes?.Stats?.Harmless ?? 0)</li>
+                            <li class="list-group-item">Undetected: @(analysis?.Data?.Attributes?.Stats?.Undetected ?? 0)</li>
+                        </ul>
+
+                    </div>
+                </div>
+            }
             else
             {
                 <div class="alert alert-warning mt-3">
-                    <p>No report available for the given hash. Please check the input or try again later.</p>
+                    <p>No analysis available for the given URL. Please check the input or try again later.</p>
                 </div>
             }
         </div>
@@ -58,7 +92,9 @@
 
 @code {
     private URLRep? report;
+    private Analysis? analysis;
     private string? url;
+    private string? analysisID;
 
     private async Task GetReport()
     {
@@ -68,6 +104,16 @@
             return;
         }
         report = await VirusTotalService.GetURLReport(url);
+        if (report != null)
+        {
+            analysisID = report.Data.Id;
+            analysis = await VirusTotalService.GetAnalysisAsync(analysisID);
+        }
         StateHasChanged();
+    }
+
+    private string GetToastClass(long maliciousCount)
+    {
+        return maliciousCount > 10 ? "alert-danger" : maliciousCount > 0 ? "alert-warning" : "alert-secondary";
     }
 }
