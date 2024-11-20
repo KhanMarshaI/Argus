@@ -38,5 +38,29 @@ namespace ArgusFrontend.Services
             return null;
         }
 
+        public async Task<URLRep?> StoreURLReportAsync(string URL)
+        {
+            using var con = new SqlConnection(connectionString);
+            con.OpenAsync();
+
+            string query = "SELECT * FROM URLAnalysis u JOIN Analysis a ON u.AnalysisID = a.AnalysisID WHERE u.URL = @URL";
+
+            using var command = new SqlCommand(query, con);
+            command.Parameters.AddWithValue("@URL", URL);
+            using var reader = await command.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                return new URLRep
+                {
+                    Data = new Data
+                    {
+                        Id = reader["AnalysisID"].ToString(),
+                        Type = reader["Type"].ToString()
+                    }
+                };
+            }
+            return null;
+        }
+
     }
 }

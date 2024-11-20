@@ -6,15 +6,17 @@
 
 main[b-pmhmisjd8a] {
     flex: 1;
+    background-color: #1e1e1e; /* Slightly lighter dark for main area */
 }
 
 .sidebar[b-pmhmisjd8a] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, #0d47a1 0%, #4a148c 70%); /* Darker gradient */
+    color: #e0e0e0;
 }
 
 .top-row[b-pmhmisjd8a] {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
+    background-color: #1e1e1e; /* Darker top row */
+    border-bottom: 1px solid #424242;
     justify-content: flex-end;
     height: 3.5rem;
     display: flex;
@@ -27,23 +29,24 @@ main[b-pmhmisjd8a] {
         text-decoration: none;
     }
 
-    .top-row[b-pmhmisjd8a]  a:hover, .top-row[b-pmhmisjd8a]  .btn-link:hover {
-        text-decoration: underline;
-    }
+        .top-row[b-pmhmisjd8a]  a:hover, .top-row[b-pmhmisjd8a]  .btn-link:hover {
+            text-decoration: underline;
+            color: #90caf9; /* Lighter blue for hover */
+        }
 
-    .top-row[b-pmhmisjd8a]  a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        .top-row[b-pmhmisjd8a]  a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 @media (max-width: 640.98px) {
     .top-row[b-pmhmisjd8a] {
         justify-content: space-between;
     }
 
-    .top-row[b-pmhmisjd8a]  a, .top-row[b-pmhmisjd8a]  .btn-link {
-        margin-left: 0;
-    }
+        .top-row[b-pmhmisjd8a]  a, .top-row[b-pmhmisjd8a]  .btn-link {
+            margin-left: 0;
+        }
 }
 
 @media (min-width: 641px) {
@@ -64,11 +67,11 @@ main[b-pmhmisjd8a] {
         z-index: 1;
     }
 
-    .top-row.auth[b-pmhmisjd8a]  a:first-child {
-        flex: 1;
-        text-align: right;
-        width: 0;
-    }
+        .top-row.auth[b-pmhmisjd8a]  a:first-child {
+            flex: 1;
+            text-align: right;
+            width: 0;
+        }
 
     .top-row[b-pmhmisjd8a], article[b-pmhmisjd8a] {
         padding-left: 2rem !important;
@@ -77,7 +80,7 @@ main[b-pmhmisjd8a] {
 }
 
 #blazor-error-ui[b-pmhmisjd8a] {
-    background: lightyellow;
+    background: #1e1e1e; /* Dark background for error UI */
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
     display: none;
@@ -86,6 +89,7 @@ main[b-pmhmisjd8a] {
     position: fixed;
     width: 100%;
     z-index: 1000;
+    color: #ffab91; /* Light orange text for errors */
 }
 
     #blazor-error-ui .dismiss[b-pmhmisjd8a] {
