@@ -22,13 +22,13 @@ using System.Globalization;
     public partial class Analysis
     {
         [JsonPropertyName("data")]
-        public Data Data { get; set; }
+        public AnalysisData Data { get; set; }
 
         [JsonPropertyName("meta")]
         public Meta Meta { get; set; }
     }
 
-    public partial class Data
+    public partial class AnalysisData
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

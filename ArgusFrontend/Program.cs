@@ -11,12 +11,13 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7220/") });
 builder.Services.AddScoped<VirusTotalService>();
 builder.Services.AddScoped<DatabaseService>();
+builder.Services.AddScoped<URL_DB_SRVC>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.Cookie.Name = "auth_token";
         options.LoginPath = "/login";
-        options.Cookie.MaxAge = TimeSpan.FromMinutes(10);
+        options.Cookie.MaxAge = TimeSpan.FromMinutes(30);
         options.AccessDeniedPath = "/access-denied";
     });
 

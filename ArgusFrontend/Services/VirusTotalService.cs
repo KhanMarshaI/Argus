@@ -42,7 +42,7 @@ namespace ArgusFrontend.Services
             catch (Exception ex)
             {
                 // Log or handle the exception as needed
-                Console.WriteLine($"Error fetching report: {ex.Message}");
+                Console.WriteLine($"Error fetching hash report API: {ex.Message}");
                 return null;
             }
         }
@@ -70,7 +70,7 @@ namespace ArgusFrontend.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching report: {ex.Message}");
+                Console.WriteLine($"Error fetching url report API: {ex.Message}");
                 return null;
             }
         }
@@ -99,7 +99,7 @@ namespace ArgusFrontend.Services
             catch (Exception ex)
             {
                 // Log or handle the exception as needed
-                Console.WriteLine($"Error fetching report: {ex.Message}");
+                Console.WriteLine($"Error fetching analysis report API: {ex.Message}");
                 return null;
             }
         }

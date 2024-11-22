@@ -52,3 +52,4 @@ AnalysisID VARCHAR(100) FOREIGN KEY References Analysis(AnalysisID),
 CreatedAT DATE DEFAULT GETDATE()
 );
 
+SELECT * FROM URLAnalysis u JOIN Analysis a ON u.AnalysisID = a.AnalysisID;

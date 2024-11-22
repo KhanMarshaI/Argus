@@ -22,52 +22,56 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/AccessDenied.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBY2Nlc3NEZW5pZWQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Custom.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDdXN0b20ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/FileHash.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGaWxlSGFzaC5yYXpvcg==
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Essential/Custom.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3NlbnRpYWxcQ3VzdG9tLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/FileHashIntel.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGaWxlSGFzaEludGVsLnJhem9y
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Essential/CustomURL.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3NlbnRpYWxcQ3VzdG9tVVJMLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Essential/FileHash.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3NlbnRpYWxcRmlsZUhhc2gucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Essential/FileHashIntel.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3NlbnRpYWxcRmlsZUhhc2hJbnRlbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Essential/UrlAnalysis.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3NlbnRpYWxcVXJsQW5hbHlzaXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Login.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/User/AccessDenied.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyXEFjY2Vzc0RlbmllZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Logout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dvdXQucmF6b3I=
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/User/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyXExvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Profile.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9maWxlLnJhem9y
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/User/Logout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyXExvZ291dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/RegisterUser.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWdpc3RlclVzZXIucmF6b3I=
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/User/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyXFByb2ZpbGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/UrlAnalysis.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVcmxBbmFseXNpcy5yYXpvcg==
+[C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/User/RegisterUser.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyXFJlZ2lzdGVyVXNlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hadia/OneDrive/Desktop/argus/Argus/ArgusFrontend/Components/Pages/Weather.razor]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArgusFrontend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40f78e986ae18321a5e0d627a92916f13a16785c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb23d9465d227544e2fcf1d9a763a36d1adb47a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArgusFrontend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArgusFrontend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

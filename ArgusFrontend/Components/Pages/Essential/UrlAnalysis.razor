@@ -6,7 +6,7 @@
 @using System.Text.Json.Serialization
 @rendermode InteractiveServer
 @inject VirusTotalService VirusTotalService
-@inject DatabaseService DatabaseService
+@inject URL_DB_SRVC DBSrvc
 
 <PageTitle>URL Analysis</PageTitle>
 
@@ -23,7 +23,7 @@
 
             <div class="btn-group" role="group">
                  <button type="submit" class="btn btn-dark btn-block" @onclick="GetReport">Scan</button>
-                @* <button type="submit" class="btn btn-secondary" @onclick="">Scan Locally</button> *@
+                 <button type="submit" class="btn btn-secondary" @onclick="GetReportDB">Scan Locally</button> 
             </div>
 
             @if (report != null)
@@ -108,12 +108,42 @@
         {
             analysisID = report.Data.Id;
             analysis = await VirusTotalService.GetAnalysisAsync(analysisID);
+            StateHasChanged();
+
+            try
+            {
+                await DBSrvc.StoreURLReportAsync(report, analysis);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error storing form URL data: {ex.Message}");
+            }
         }
-        StateHasChanged();
     }
 
-    private string GetToastClass(long maliciousCount)
+    private async Task GetReportDB()
     {
-        return maliciousCount > 10 ? "alert-danger" : maliciousCount > 0 ? "alert-warning" : "alert-secondary";
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            report = null;
+            return;
+        }
+        try
+        {
+            report = await DBSrvc.GetURLReportAsync(url);
+            if (report != null)
+            {
+                analysisID = report.Data.Id;
+                analysis = await DBSrvc.GetAnalysisAsync(analysisID);
+                StateHasChanged();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching URL locally: {ex.Message}");
+            report = null;
+        }
     }
+
 }

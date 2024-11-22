@@ -1,0 +1,164 @@
+﻿@page "/customintel/urlintel"
+@using ArgusFrontend.Services
+@using ArgusFrontend.Models
+
+<PageTitle>Custom URL Intel</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="card p-4 shadow-lg rounded" style="max-width: 900px; width: 100%;">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">URL Intel Analysis</h3
+
+                    <EditForm Model="URLAnalysis" OnValidSubmit="URLAnalysisSubmit" formName="CustomURLPost" class="row g-3" Context="URLContext">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="text-danger" />
+
+                        <div class="input-group mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="newIntel" name="intelType" 
+                                       value="@IntelType"/>
+                                <label class="form-check-label" for="newIntel">New Intel</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="updateIntel" name="intelType" 
+                                       value="@IntelType" />
+                                <label class="form-check-label" for="updateIntel">Update Intel</label>
+                            </div>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                            <InputText 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Generated or Existing ID" 
+                                aria-label="GeneratedID" 
+                                aria-describedby="basic-addon1" 
+                                @bind-Value="URLAnalysis.Id" 
+                                readonly="@IsIdReadOnly" />
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-binary"></i></span>
+                            <InputText type="text" class="form-control" placeholder="Type"
+                                       aria-label="FileType" aria-describedby="basic-addon1"
+                                       @bind-Value="URLAnalysis.Type" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-text"></i></span>
+                            <InputText type="text" class="form-control" placeholder="URL"
+                                       aria-label="FileURL" aria-describedby="basic-addon1"
+                                       @bind-Value="URLAnalysis.URL" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-text"></i></span>
+                            <InputText type="text" class="form-control" placeholder="Status"
+                                       aria-label="FileURL" aria-describedby="basic-addon1"
+                                       @bind-Value="URLAnalysis.Status" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Malicious</span>
+                            <InputNumber class="form-control" placeholder="Malicious"
+                                         aria-label="MaliciousCount" aria-describedby="basic-addon1"
+                                         @bind-Value="URLAnalysis.Malicious" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Suspicious</span>
+                            <InputNumber class="form-control" placeholder="Suspicious" aria-label="SuspiciousCount"
+                                         aria-describedby="basic-addon1" @bind-Value="URLAnalysis.Suspicious" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Harmless</span>
+                            <InputNumber class="form-control" placeholder="Harmless" aria-label="HarmlessCount"
+                                         aria-describedby="basic-addon1" @bind-Value="URLAnalysis.Harmless" />
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Undetected</span>
+                            <InputNumber class="form-control" placeholder="Undetected" aria-label="UndetectedCount"
+                                         aria-describedby="basic-addon1" @bind-Value="URLAnalysis.Undetected" />
+                        </div>
+
+                        <div class="col-12 d-grid">
+                            <button type="submit" class="btn btn-primary rounded-pill">Save</button>
+                        </div>
+                    </EditForm>
+
+                    @if (urlErrorMessage != null)
+                    {
+                        <br />
+                        <div class="alert alert-danger" role="alert">
+                            @urlErrorMessage
+                        </div>
+                    }
+                    @if (urlSuccessMessage != null)
+                    {
+                        <br />
+                        <div class="alert alert-success" role="alert">
+                            @urlSuccessMessage
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private string IntelType { get; set; } = "new";
+    private bool IsIdReadOnly => IntelType == "new";
+
+    [SupplyParameterFromForm]
+    private CustomURLAnalysis? URLAnalysis { get; set; } = new();
+
+    private URL_DB_SRVC dbService = new URL_DB_SRVC();
+    private string? urlErrorMessage;
+    private string? urlSuccessMessage;
+
+    protected override void OnInitialized()
+    {
+        if (IntelType == "new")
+        {
+            URLAnalysis.Id = GenerateRandomID();
+        }
+    }
+
+    private async Task URLAnalysisSubmit()
+    {
+        urlErrorMessage = null;
+        urlSuccessMessage = null;
+
+        try
+        {
+            if (IntelType == "new" && string.IsNullOrWhiteSpace(URLAnalysis.Id))
+            {
+                URLAnalysis.Id = GenerateRandomID();
+            }
+
+            await dbService.StoreURLReportAsync(URLAnalysis);
+            urlSuccessMessage = $"URL report {IntelType}ed successfully! ID: {URLAnalysis.Id}";
+        }
+        catch (Exception ex)
+        {
+            urlErrorMessage = ex.Message;
+        }
+    }
+
+    private string GenerateRandomID()
+    {
+        string guidPart = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");
+        long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000;
+        string rawID = $"l-{guidPart}-{timestamp}";
+        return rawID.Length > 77 ? rawID.Substring(0, 77) : rawID.PadRight(77, '0');
+    }
+}
+

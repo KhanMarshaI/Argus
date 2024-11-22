@@ -143,7 +143,7 @@ namespace ArgusFrontend.Services
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error storing data: {ex.Message}");
+                        Console.WriteLine($"Error storing HASH: {ex.Message}");
                     }
                     
                 }
@@ -218,7 +218,7 @@ namespace ArgusFrontend.Services
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error storing data: {ex.Message}");
+                        Console.WriteLine($"Error storing Custom hash: {ex.Message}");
                         throw;
                     }
                 }

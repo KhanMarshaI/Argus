@@ -10,7 +10,6 @@
 #pragma warning disable CS8601
 #pragma warning disable CS8603
 
-namespace URLAnalysis;
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
+
+namespace URLAnalysis;
 
 public partial class URLRep
 {
