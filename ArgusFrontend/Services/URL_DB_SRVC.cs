@@ -155,7 +155,7 @@ namespace ArgusFrontend.Services
             }
         }
 
-        public async Task StoreURLReportAsync(CustomURLAnalysis analysis)
+        public async Task<string> StoreURLReportAsync(CustomURLAnalysis analysis)
         {
             using var conn = new SqlConnection(connectionString);
             await conn.OpenAsync();
@@ -175,13 +175,13 @@ namespace ArgusFrontend.Services
                             analysis.Status.Equals("completed", StringComparison.OrdinalIgnoreCase))
                         {
                             string updateQuery = @"
-                        UPDATE Analysis 
-                        SET Status = @Status, 
-                            Malicious = @Malicious, 
-                            Suspicious = @Suspicious, 
-                            Undetected = @Undetected, 
-                            Harmless = @Harmless 
-                        WHERE AnalysisID = @AnID";
+                UPDATE Analysis 
+                SET Status = @Status, 
+                    Malicious = @Malicious, 
+                    Suspicious = @Suspicious, 
+                    Undetected = @Undetected, 
+                    Harmless = @Harmless 
+                WHERE AnalysisID = @AnID";
 
                             using var updateCmd = new SqlCommand(updateQuery, conn, transaction);
                             updateCmd.Parameters.AddWithValue("@Status", analysis.Status ?? (object)DBNull.Value);
@@ -192,11 +192,13 @@ namespace ArgusFrontend.Services
                             updateCmd.Parameters.AddWithValue("@AnID", analysis.Id);
 
                             await updateCmd.ExecuteNonQueryAsync();
-                            Console.WriteLine("Updated existing 'queued' entry to 'completed'.");
+                            transaction.Commit();
+                            return "Updated";
                         }
                         else
                         {
-                            Console.WriteLine("URL already exists with no updates required.");
+                            transaction.Rollback();
+                            return "NoUpdateRequired";
                         }
                     }
                     else
@@ -219,19 +221,19 @@ namespace ArgusFrontend.Services
                         cmdURL.Parameters.AddWithValue("@AnalysisID", analysis.Id);
 
                         await cmdURL.ExecuteNonQueryAsync();
-
-                        Console.WriteLine("Inserted new URL and analysis data successfully.");
+                        transaction.Commit();
+                        return "Inserted"; 
                     }
-
-                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
                     Console.WriteLine($"Exception on storing URL: {ex.Message}");
+                    return "Error";
                 }
             }
         }
+
 
         public async Task<bool> UrlExistsAsync(string anID)
         {

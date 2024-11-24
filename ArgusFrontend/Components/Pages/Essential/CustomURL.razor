@@ -1,6 +1,7 @@
 ﻿@page "/customintel/urlintel"
 @using ArgusFrontend.Services
 @using ArgusFrontend.Models
+@rendermode InteractiveServer
 
 <PageTitle>Custom URL Intel</PageTitle>
 
@@ -18,12 +19,12 @@
                         <div class="input-group mb-3">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="newIntel" name="intelType" 
-                                       value="@IntelType"/>
+                                       @onchange="@(() => UpdateType("new"))"/>
                                 <label class="form-check-label" for="newIntel">New Intel</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="updateIntel" name="intelType" 
-                                       value="@IntelType" />
+                                        @onchange="@(() => UpdateType("update"))" />
                                 <label class="form-check-label" for="updateIntel">Update Intel</label>
                             </div>
                         </div>
@@ -124,12 +125,19 @@
     private string? urlErrorMessage;
     private string? urlSuccessMessage;
 
-    protected override void OnInitialized()
+    public void UpdateType(string type)
     {
+        IntelType = type;
+
         if (IntelType == "new")
         {
             URLAnalysis.Id = GenerateRandomID();
         }
+        else
+        {
+            URLAnalysis.Id = null;
+        }
+        StateHasChanged();
     }
 
     private async Task URLAnalysisSubmit()
@@ -144,8 +152,35 @@
                 URLAnalysis.Id = GenerateRandomID();
             }
 
-            await dbService.StoreURLReportAsync(URLAnalysis);
-            urlSuccessMessage = $"URL report {IntelType}ed successfully! ID: {URLAnalysis.Id}";
+            string result = await dbService.StoreURLReportAsync(URLAnalysis);
+
+            switch (result)
+            {
+                case "Updated":
+                    urlSuccessMessage = $"URL report updated successfully! ID: {URLAnalysis.Id}";
+                    break;
+                case "Inserted":
+                    urlSuccessMessage = $"New URL report created successfully! ID: {URLAnalysis.Id}";
+                    break;
+                case "NoUpdateRequired":
+                    urlErrorMessage = $"No update required. The entry with ID {URLAnalysis.Id} is already completed.";
+                    break;
+                case "Error":
+                default:
+                    urlErrorMessage = "An error occurred while storing the URL report.";
+                    break;
+            }
+
+            if (IntelType == "new")
+            {
+                URLAnalysis = new CustomURLAnalysis { Id = GenerateRandomID() };
+            }
+            else
+            {
+                URLAnalysis = new CustomURLAnalysis();
+            }
+
+            StateHasChanged();
         }
         catch (Exception ex)
         {
@@ -161,4 +196,3 @@
         return rawID.Length > 77 ? rawID.Substring(0, 77) : rawID.PadRight(77, '0');
     }
 }
-

@@ -52,4 +52,13 @@ AnalysisID VARCHAR(100) FOREIGN KEY References Analysis(AnalysisID),
 CreatedAT DATE DEFAULT GETDATE()
 );
 
-SELECT * FROM URLAnalysis u JOIN Analysis a ON u.AnalysisID = a.AnalysisID;
+ALTER TABLE URLAnalysis
+DROP CONSTRAINT DF__URLAnalys__Creat__75A278F5;
+
+ALTER table URLAnalysis Alter Column CreatedAT DATETIME;
+
+ALTER TABLE URLAnalysis
+ADD CONSTRAINT DF__URLAnalysis__CreatedAT
+DEFAULT GETDATE() FOR CreatedAT;
+
+SELECT * FROM URLAnalysis u JOIN Analysis a ON u.AnalysisID = a.AnalysisID ORDER BY u.CreatedAT DESC;

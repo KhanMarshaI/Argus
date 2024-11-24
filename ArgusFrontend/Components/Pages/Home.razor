@@ -1,14 +1,132 @@
 ﻿@page "/"
+@using ArgusFrontend.Services
+@inject Dash_DB_SRVC DashDbService
 
 <PageTitle>Home</PageTitle>
 
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
-	<Authorized>
-		<h1>Hello, world!</h1>
+    <Authorized>
+        <div class="container">
+            <!-- Header -->
+            <header class="d-flex justify-content-between align-items-center py-3">
+                <h1 class="text-primary">Argus</h1>
+            </header>
 
-		Welcome to your new app.
-	</Authorized>
-	<NotAuthorized>
+            <!-- Stats Section -->
+            <div class="row mt-4">
+                <!-- URL Analysis Stats -->
+                <div class="col-md-6">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">URL Analysis Stats</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Total URLs Analyzed: <span>@TotalUrls</span></h4>
+                            <p class="card-text">
+                                <ul>
+                                    <li>Queued: <span>@QueuedUrls</span></li>
+                                    <li>Completed: <span>@CompletedUrls</span></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Analysis Stats -->
+                <div class="col-md-6">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-header">File Analysis Stats</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Total Files Analyzed: <span>@TotalFiles</span></h4>
+                            <p class="card-text">
+                                <ul>
+                                    <li>Malicious Files: <span>@MaliciousFiles</span></li>
+                                    <li>Reputation: <span>@ReputableFiles</span></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="row mt-4">
+                <!-- Recent URLs -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Recent URLs Analyzed</div>
+                        <div class="card-body">
+                            <ul>
+                                @if (RecentUrls.Count == 0)
+                                {
+                                    <li>No recent URLs</li>
+                                }
+                                else
+                                {
+                                    @foreach (var url in RecentUrls)
+                                    {
+                                        <li>@url.URL - @url.Status (Analyzed at: @url.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Files -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Recent Files Analyzed</div>
+                        <div class="card-body">
+                            <ul>
+                                @if (RecentFiles.Count == 0)
+                                {
+                                    <li>No recent files</li>
+                                }
+                                else
+                                {
+                                    @foreach (var file in RecentFiles)
+                                    {
+                                        <li>@file.FileHashSHA - @file.FileType (Analyzed at: @file.CreatedAt.ToString("yyyy-MM-dd HH:mm"))</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
         <p>You aren't logged in. <a href="/login">Login now?</a></p>
     </NotAuthorized>
 </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+
+@code {
+
+    // Stats
+    private int TotalUrls;
+    private int QueuedUrls;
+    private int CompletedUrls;
+    private int TotalFiles;
+    private int MaliciousFiles;
+    private int ReputableFiles;
+
+    // Recent Activity
+    private List<(string URL, string Status, DateTime CreatedAt)> RecentUrls = new();
+    private List<(string FileHashSHA, string FileType, DateTime CreatedAt)> RecentFiles = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Fetch stats
+        var (totalUrls, totalFiles, maliciousUrls, maliciousFiles) = await DashDbService.GetDashboardStatsAsync();
+        TotalUrls = totalUrls;
+        TotalFiles = totalFiles;
+        QueuedUrls = totalUrls - maliciousUrls; // Assuming queued = total - malicious
+        CompletedUrls = maliciousUrls;
+        MaliciousFiles = maliciousFiles;
+        ReputableFiles = totalFiles - maliciousFiles; // Assuming reputable = total - malicious
+
+        // Fetch recent activity
+        RecentUrls = await DashDbService.GetRecentURLActivityAsync();
+        RecentFiles = await DashDbService.GetRecentFileActivityAsync();
+    }
+}
