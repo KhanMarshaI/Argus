@@ -14,7 +14,7 @@ namespace ArgusFrontend.Services
 
         public DatabaseService()
         {
-            connectionString = "Server=MARSHAL;Database=argus;Trusted_Connection=True;";
+            connectionString = "Server=DESKTOP-440RGDT;Database=argus;Trusted_Connection=True;";
         }
 
         private string DetermineHashType(string fileHash)
@@ -78,22 +78,30 @@ namespace ArgusFrontend.Services
 
         public async Task StoreHashReportAsync(Hash report)
         {
-            // Determine the appropriate hash type based on the available hash value
-            string? fileHash = report.Data.Attributes.Sha256 ?? report.Data.Attributes.Sha1 ?? report.Data.Attributes.Md5;
-            if (fileHash == null)
+            string? fileHash;
+            try
             {
-                throw new ArgumentException("No valid hash provided in the report.");
+                fileHash = report.Data.Attributes.Sha256 ?? report.Data.Attributes.Sha1 ?? report.Data.Attributes.Md5;
+
+                if (fileHash == null)
+                {
+                    throw new ArgumentException("No valid hash provided in the report.");
+                }
+
+                string hashType = DetermineHashType(fileHash);
+
+                // Check if the hash already exists to prevent duplicates
+                if (await HashExistsAsync(fileHash, hashType))
+                {
+                    Console.WriteLine("Hash already exists in the database.");
+                    return;
+                }
             }
-
-            string hashType = DetermineHashType(fileHash);
-
-            // Check if the hash already exists to prevent duplicates
-            if (await HashExistsAsync(fileHash, hashType))
+            catch (Exception ex)
             {
-                Console.WriteLine("Hash already exists in the database.");
+                Console.WriteLine($"Error storing file hash report: {ex.Message}");
                 return;
             }
-
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();

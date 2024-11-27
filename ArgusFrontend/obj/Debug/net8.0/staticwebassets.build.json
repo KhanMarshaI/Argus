@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HIKNeaH6t30etjQDFj2+bLFyxRNpiytUxHZK1kYPa8g=",
+  "Hash": "TVSN/iJ/ANtgafLpqi6313lSVzEq36ivXcbyGxzwfOE=",
   "Source": "ArgusFrontend",
   "BasePath": "_content/ArgusFrontend",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "ArgusFrontend\\wwwroot",
       "Source": "ArgusFrontend",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\",
       "BasePath": "_content/ArgusFrontend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArgusFrontend.styles.css",
+      "Identity": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArgusFrontend.styles.css",
       "SourceId": "ArgusFrontend",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/ArgusFrontend",
       "RelativePath": "ArgusFrontend.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArgusFrontend.styles.css"
+      "OriginalItemSpec": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArgusFrontend.styles.css"
     },
     {
-      "Identity": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css",
+      "Identity": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css",
       "SourceId": "ArgusFrontend",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/ArgusFrontend",
       "RelativePath": "ArgusFrontend.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
       "SourceId": "ArgusFrontend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\",
       "BasePath": "_content/ArgusFrontend",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "ArgusFrontend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\",
       "BasePath": "_content/ArgusFrontend",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "ArgusFrontend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\",
       "BasePath": "_content/ArgusFrontend",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\favicon.png",
       "SourceId": "ArgusFrontend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\",
       "BasePath": "_content/ArgusFrontend",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

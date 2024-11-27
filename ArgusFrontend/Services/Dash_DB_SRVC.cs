@@ -9,7 +9,7 @@ namespace ArgusFrontend.Services
 
         public Dash_DB_SRVC()
         {
-            _connectionString = "Server=MARSHAL;Database=argus;Trusted_Connection=True;";
+            _connectionString = "Server=DESKTOP-440RGDT;Database=argus;Trusted_Connection=True;";
         }
 
         public async Task<(int TotalURLs, int TotalFiles, int MaliciousURLs, int MaliciousFiles)> GetDashboardStatsAsync()

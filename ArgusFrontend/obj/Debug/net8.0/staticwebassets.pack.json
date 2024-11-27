@@ -1,23 +1,23 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css",
+      "Id": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArgusFrontend.bundle.scp.css",
       "PackagePath": "staticwebassets\\ArgusFrontend.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
+      "Id": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {

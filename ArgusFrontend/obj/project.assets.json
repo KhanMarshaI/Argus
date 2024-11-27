@@ -594,19 +594,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hadia\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\ArgusFrontend.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\ArgusFrontend.csproj",
       "projectName": "ArgusFrontend",
-      "projectPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\ArgusFrontend.csproj",
-      "packagesPath": "C:\\Users\\hadia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\obj\\",
+      "projectPath": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\ArgusFrontend.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusFrontend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\hadia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
