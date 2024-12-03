@@ -4,9 +4,6 @@ namespace ArgusFrontend.Models
 {
     public class ProfileModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Provide username.")]
-        public string? Username { get; set; }
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "Provide current password.")]
         public string? CurrentPassword { get; set; }
 

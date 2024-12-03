@@ -14,7 +14,7 @@ namespace ArgusFrontend.Services
 
         public DatabaseService()
         {
-            connectionString = "Server=DESKTOP-440RGDT;Database=argus;Trusted_Connection=True;";
+            connectionString = "Server=MARSHAL;Database=argus;Trusted_Connection=True;";
         }
 
         private string DetermineHashType(string fileHash)
@@ -268,6 +268,25 @@ namespace ArgusFrontend.Services
             }
         }
 
+        public async Task<string> GetUserAuthLevel(string username)
+        {
+            using (var con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT authLevel FROM authorized_users WHERE username = @Username";
+
+                await con.OpenAsync();
+
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    var result = await cmd.ExecuteScalarAsync();
+
+                    // Return the result if found, otherwise return null or a default value
+                    return result != null ? result.ToString() : null;
+                }
+            }
+        }
+
         public async Task<bool> UpdatePassword(string username, string password)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -320,8 +339,8 @@ namespace ArgusFrontend.Services
                     return false;
                 }
 
-                string query = "INSERT INTO authorized_users (username, password, created_by, comments) " +
-                               "VALUES (@username, @password, @created_by, @comments)";
+                string query = "INSERT INTO authorized_users (username, password, created_by, comments, authLevel) " +
+                               "VALUES (@username, @password, @created_by, @comments, @authLevel)";
 
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -331,6 +350,7 @@ namespace ArgusFrontend.Services
                     command.Parameters.AddWithValue("@password", hashPassword);
                     command.Parameters.AddWithValue("@created_by", registerModel.created_by);
                     command.Parameters.AddWithValue("@comments", (object)registerModel.comments ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@authLevel", registerModel.authLevel);
 
                     try
                     {

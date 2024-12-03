@@ -9,5 +9,7 @@ namespace ArgusFrontend.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Provide password.")]
         public string? Password { get; set; }
+
+        public string? authLevel { get; set; }
     }
 }

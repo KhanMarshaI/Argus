@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusBackend\\ArgusBackend.csproj": {}
+    "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\ArgusBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusBackend\\ArgusBackend.csproj": {
+    "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\ArgusBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusBackend\\ArgusBackend.csproj",
+        "projectUniqueName": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\ArgusBackend.csproj",
         "projectName": "ArgusBackend",
-        "projectPath": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusBackend\\ArgusBackend.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\Argus\\Argus\\ArgusBackend\\obj\\",
+        "projectPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\ArgusBackend.csproj",
+        "packagesPath": "C:\\Users\\hadia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hadia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

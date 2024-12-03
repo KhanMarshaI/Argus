@@ -13,7 +13,7 @@ namespace ArgusFrontend.Services
 
         public URL_DB_SRVC()
         {
-            connectionString = "Server=DESKTOP-440RGDT;Database=argus;Trusted_Connection=True;"; 
+            connectionString = "Server=MARSHAL;Database=argus;Trusted_Connection=True;"; 
         }
 
         public async Task<URLRep> GetURLReportAsync(string URL)

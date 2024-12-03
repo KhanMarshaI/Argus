@@ -1,6 +1,7 @@
 using ArgusFrontend.Components;
 using ArgusFrontend.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.MaxAge = TimeSpan.FromMinutes(30);
         options.AccessDeniedPath = "/access-denied";
     });
+
 
 builder.Services.AddAuthorization();
 builder.Services.AddCascadingAuthenticationState();

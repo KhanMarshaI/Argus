@@ -7,10 +7,18 @@
 @inject NavigationManager Navigation
 
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card p-4 shadow-lg rounded" style="max-width: 400px; width: 100%;">
         <div class="card-body">
             <h3 class="card-title text-center mb-4">Login</h3>
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger text-center" role="alert">
+                    @errorMessage
+                </div>
+            }
+
             <EditForm Model="loginModel" OnValidSubmit="OnSubmit" formName="LoginForm" class="row g-3">
                 <DataAnnotationsValidator />
                 <ValidationSummary class="text-danger" />
@@ -33,10 +41,6 @@
     </div>
 </div>
 
-@if (errorMessage != null)
-{
-    <p>@errorMessage</p>
-}
 
 @code {
     [CascadingParameter]
@@ -58,9 +62,12 @@
             return;
         }
 
+        string authLevel = await dbService.GetUserAuthLevel(loginModel.Username);
+
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, loginModel.Username)
+            new Claim(ClaimTypes.Name, loginModel.Username),
+            new Claim(ClaimTypes.Role, authLevel)
             //we can also add a Role here to differentiate between users and admins
         };
         var identity = new ClaimsIdentity(claims, "CustomAuth");

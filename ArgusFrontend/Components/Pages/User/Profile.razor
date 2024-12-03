@@ -1,75 +1,94 @@
 ﻿@page "/profile"
 @using ArgusFrontend.Models
 @using ArgusFrontend.Services
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>User Profile Settings</h4>
-                </div>
-                <div class="card-body">
-                    <EditForm Model="profileModel" OnValidSubmit="Submit" formName="ProfileUpdate" class="row g-3">
-                        <DataAnnotationsValidator />
-                        <ValidationSummary class="text-danger" />
+<AuthorizeView Context="Auth">
+    <Authorized>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>User Profile Settings</h4>
+                        </div>
+                        <div class="card-body">
+                            <EditForm Model="profileModel" OnValidSubmit="Submit" formName="ProfileUpdate" class="row g-3">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary class="text-danger" />
 
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <InputText type="text" id="username" class="form-control" @bind-Value="profileModel.Username" />
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                    <InputText type="password" id="currentPassword" class="form-control" @bind-Value="profileModel.CurrentPassword" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                    <InputText type="password" id="newPassword" class="form-control" @bind-Value="profileModel.NewPassword" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <InputText type="password" id="confirmPassword" class="form-control" @bind-Value="profileModel.ConfirmPassword" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </EditForm>
                         </div>
-                        <div class="mb-3">
-                            <label for="currentPassword" class="form-label">Current Password</label>
-                            <InputText type="password" id="currentPassword" class="form-control" @bind-Value="profileModel.CurrentPassword" />
+                    </div>
+
+                    @if (successMessage != null)
+                    {
+                        <br />
+                        <div class="alert alert-success" role="alert">
+                            @successMessage
                         </div>
-                        <div class="mb-3">
-                            <label for="newPassword" class="form-label">New Password</label>
-                            <InputText type="password" id="newPassword" class="form-control" @bind-Value="profileModel.NewPassword" />
+                    }
+
+                    @if (errorMessage != null)
+                    {
+                        <br />
+                        <div class="alert alert-danger" role="alert">
+                            @errorMessage
                         </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <InputText type="password" id="confirmPassword" class="form-control" @bind-Value="profileModel.ConfirmPassword" />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </EditForm>
+                    }
                 </div>
             </div>
-
-            @if (successMessage != null)
-            {
-                <br />
-                <div class="alert alert-success" role="alert">
-                    @successMessage
-                </div>
-            }
-
-            <!-- Error Toast -->
-            @if (errorMessage != null)
-            {
-                <br />
-                <div class="alert alert-danger" role="alert">
-                    @errorMessage
-                </div>
-            }
         </div>
-    </div>
-</div>
+    </Authorized>
+</AuthorizeView>
 
 @code {
     [SupplyParameterFromForm]
     private ProfileModel profileModel { get; set; } = new();
 
     private string? errorMessage;
-    private DatabaseService dbService = new DatabaseService();
     private string? successMessage;
+
+    private DatabaseService dbService = new DatabaseService();
+    private string? username;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is { IsAuthenticated: true })
+        {
+            username = user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;
+        }
+        else
+        {
+            errorMessage = "User is not authenticated.";
+        }
+    }
 
     private async Task Submit()
     {
         successMessage = null;
         errorMessage = null;
 
-        if (string.IsNullOrWhiteSpace(profileModel.Username) || string.IsNullOrWhiteSpace(profileModel.CurrentPassword) ||
-            string.IsNullOrWhiteSpace(profileModel.NewPassword) || string.IsNullOrWhiteSpace(profileModel.ConfirmPassword))
+        if (string.IsNullOrWhiteSpace(profileModel.CurrentPassword) ||
+            string.IsNullOrWhiteSpace(profileModel.NewPassword) ||
+            string.IsNullOrWhiteSpace(profileModel.ConfirmPassword))
         {
             errorMessage = "Can't submit an empty form.";
             return;
@@ -81,7 +100,13 @@
             return;
         }
 
-        bool loginStatus = await dbService.AuthorizeUserAsync(profileModel.Username, profileModel.CurrentPassword);
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            errorMessage = "Unable to retrieve username.";
+            return;
+        }
+
+        bool loginStatus = await dbService.AuthorizeUserAsync(username, profileModel.CurrentPassword);
 
         if (!loginStatus)
         {
@@ -89,7 +114,7 @@
             return;
         }
 
-        bool updateStatus = await dbService.UpdatePassword(profileModel.Username, profileModel.ConfirmPassword);
+        bool updateStatus = await dbService.UpdatePassword(username, profileModel.ConfirmPassword);
 
         if (updateStatus)
         {

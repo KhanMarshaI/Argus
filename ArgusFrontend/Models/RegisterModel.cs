@@ -15,5 +15,8 @@ namespace ArgusFrontend.Models
         public string created_by { get; set; }
 
         public string? comments { get; set; }
+
+        [Required]
+        public string? authLevel { get; set; }
     }
 }

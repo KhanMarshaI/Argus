@@ -62,3 +62,11 @@ ADD CONSTRAINT DF__URLAnalysis__CreatedAT
 DEFAULT GETDATE() FOR CreatedAT;
 
 SELECT * FROM URLAnalysis u JOIN Analysis a ON u.AnalysisID = a.AnalysisID ORDER BY u.CreatedAT DESC;
+
+
+ALTER TABLE authorized_users ADD authLevel varchar(15);
+select * from authorized_users;
+UPDATE authorized_users SET authLevel = 'User'
+UPDATE authorized_users SET authLevel = 'Administrator' where username = 'marshal'
+
+DELETE FROM authorized_users WHERE authUserID = 8
