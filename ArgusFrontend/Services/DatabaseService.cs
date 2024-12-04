@@ -35,45 +35,93 @@ namespace ArgusFrontend.Services
 
             // Determine the hash type (column) to query based on hash length
             string hashType = DetermineHashType(filehash);
-            string query = "SELECT * FROM FileReports fr " +
-                           "LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID " +
-                           $"WHERE fs.{hashType} = @FileHash";
+
+            string query = @"
+        SELECT fr.*, fs.*, si.*, ar.EngineName, ar.Category, ar.Result
+        FROM FileReports fr
+        LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID
+        LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
+        LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID
+        WHERE fs." + hashType + @" = @FileHash";
 
             using var command = new SqlCommand(query, conn);
             command.Parameters.AddWithValue("@FileHash", filehash);
 
+            var lastAnalysisResults = new Dictionary<string, LastAnalysisResult>();
+            Hash? hash = null;
+
             using var reader = await command.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
+            while (await reader.ReadAsync())
             {
-                return new Hash
+                if (hash == null)
                 {
-                    Data = new Data
+                    hash = new Hash
                     {
-                        Id = reader["FileHashSHA"].ToString(),
-                        Type = reader["FileType"].ToString(),
-                        Attributes = new Attributes
+                        Data = new Data
                         {
-                            TypeExtension = reader["FileExtension"].ToString(),
-                            Magic = reader["Magic"].ToString(),
-                            Reputation = Convert.ToInt32(reader["Reputation"]),
-                            LastAnalysisStats = new LastAnalysisStats
+                            Id = reader["FileHashSHA"].ToString(),
+                            Type = reader["FileType"].ToString(),
+                            Attributes = new Attributes
                             {
-                                Malicious = Convert.ToInt32(reader["Malicious"]),
-                                Suspicious = Convert.ToInt32(reader["Suspicious"]),
-                                Harmless = Convert.ToInt32(reader["Harmless"]),
-                                Undetected = Convert.ToInt32(reader["Undetected"])
-                            },
-                            Md5 = reader["MD5"].ToString(),
-                            Sha1 = reader["SHA1"].ToString(),
-                            Sha256 = reader["SHA256"].ToString(),
-                            Tlsh = reader["TLSH"].ToString(),
-                            Vhash = reader["VHASH"].ToString(),
-                            Names = reader["AnalyzedNames"].ToString().Split(',')
+                                TypeExtension = reader["FileExtension"].ToString(),
+                                Magic = reader["Magic"].ToString(),
+                                Reputation = Convert.ToInt32(reader["Reputation"]),
+                                LastAnalysisStats = new LastAnalysisStats
+                                {
+                                    Malicious = Convert.ToInt32(reader["Malicious"]),
+                                    Suspicious = Convert.ToInt32(reader["Suspicious"]),
+                                    Harmless = Convert.ToInt32(reader["Harmless"]),
+                                    Undetected = Convert.ToInt32(reader["Undetected"])
+                                },
+                                Md5 = reader["MD5"].ToString(),
+                                Sha1 = reader["SHA1"].ToString(),
+                                Sha256 = reader["SHA256"].ToString(),
+                                Tlsh = reader["TLSH"].ToString(),
+                                Vhash = reader["VHASH"].ToString(),
+                                Names = reader["AnalyzedNames"].ToString().Split(','),
+                                LastModificationDate = reader["LastModificationDate"] == DBNull.Value
+                                    ? 0
+                                    : (long)((DateTime)reader["LastModificationDate"])
+                                        .ToUniversalTime()
+                                        .Subtract(new DateTime(1970, 1, 1))
+                                        .TotalSeconds,
+                                SignatureInfo = new SignatureInfo
+                                {
+                                    Description = reader["Description"].ToString(),
+                                    FileVersion = reader["FileVersion"].ToString(),
+                                    OriginalName = reader["OriginalName"].ToString(),
+                                    Product = reader["Product"].ToString(),
+                                    InternalName = reader["InternalName"].ToString(),
+                                    Copyright = reader["Copyright"].ToString()
+                                }
+                            }
                         }
+                    };
+                }
+
+                // Populate LastAnalysisResults
+                if (!reader.IsDBNull(reader.GetOrdinal("EngineName")))
+                {
+                    string engineName = reader["EngineName"].ToString();
+                    if (!lastAnalysisResults.ContainsKey(engineName))
+                    {
+                        lastAnalysisResults[engineName] = new LastAnalysisResult
+                        {
+                            EngineName = engineName,
+                            Category = reader["Category"].ToString(),
+                            Result = reader["Result"].ToString()
+                        };
                     }
-                };
+                }
             }
-            return null;
+
+            // Assign collected LastAnalysisResults to the hash object
+            if (hash != null && lastAnalysisResults.Count > 0)
+            {
+                hash.Data.Attributes.LastAnalysisResults = lastAnalysisResults;
+            }
+
+            return hash;
         }
 
         public async Task StoreHashReportAsync(Hash report)
@@ -110,11 +158,11 @@ namespace ArgusFrontend.Services
                     try
                     {
                         string query = "INSERT INTO FileReports " +
-                                       "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
-                                       "Harmless, Undetected, AnalyzedNames) " +
-                                       "OUTPUT INSERTED.ID " +
-                                       "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
-                                       "@Suspicious, @Harmless, @Undetected, @AnalyzedNames)";
+                               "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
+                               "Harmless, Undetected, AnalyzedNames, LastModificationDate) " +
+                               "OUTPUT INSERTED.ID " +
+                               "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
+                               "@Suspicious, @Harmless, @Undetected, @AnalyzedNames, @LastModificationDate)";
 
                         using var command = new SqlCommand(query, connection, transaction);
                         command.Parameters.AddWithValue("@FileHash", fileHash);
@@ -129,6 +177,9 @@ namespace ArgusFrontend.Services
                         command.Parameters.AddWithValue("@Undetected", report.Data.Attributes.LastAnalysisStats.Undetected);
                         command.Parameters.AddWithValue("@AnalyzedNames",
                             string.Join(", ", report.Data.Attributes.Names ?? Array.Empty<string>()));
+                        command.Parameters.AddWithValue("@LastModificationDate", report.Data.Attributes.LastModificationDate == 0
+                        ? (object)DBNull.Value
+                        : DateTimeOffset.FromUnixTimeSeconds(report.Data.Attributes.LastModificationDate).UtcDateTime);
 
                         int reportID = (int)await command.ExecuteScalarAsync();
 
@@ -145,6 +196,38 @@ namespace ArgusFrontend.Services
                         sigCommand.Parameters.AddWithValue("@VHASH", report.Data.Attributes.Vhash ?? (object)DBNull.Value);
 
                         await sigCommand.ExecuteNonQueryAsync();
+
+                        if (report.Data.Attributes.LastAnalysisResults != null)
+                        {
+                            foreach (var result in report.Data.Attributes.LastAnalysisResults)
+                            {
+                                string resultQuery = "INSERT INTO AnalysisResults " +
+                                                     "(FileReportID, EngineName, Category, Result) " +
+                                                     "VALUES (@FileReportID, @EngineName, @Category, @Result)";
+
+                                using var resultCommand = new SqlCommand(resultQuery, connection, transaction);
+                                resultCommand.Parameters.AddWithValue("@FileReportID", reportID);
+                                resultCommand.Parameters.AddWithValue("@EngineName", result.Value.EngineName ?? (object)DBNull.Value);
+                                resultCommand.Parameters.AddWithValue("@Category", result.Value.Category ?? (object)DBNull.Value);
+                                resultCommand.Parameters.AddWithValue("@Result", result.Value.Result ?? (object)DBNull.Value);
+
+                                await resultCommand.ExecuteNonQueryAsync();
+                            }
+                        }
+
+                        string infoQuery = "INSERT INTO SignatureInfo VALUES(@reportId, @desc, @FileVer, @Original, @Prod, @Internal" +
+                            ",@Copyright)";
+                        using var infoCmd = new SqlCommand(@infoQuery, connection, transaction);
+                        infoCmd.Parameters.AddWithValue("@reportId", reportID);
+                        infoCmd.Parameters.AddWithValue("@desc", report.Data.Attributes.SignatureInfo.Description);
+                        infoCmd.Parameters.AddWithValue("@FileVer", report.Data.Attributes.SignatureInfo.FileVersion);
+                        infoCmd.Parameters.AddWithValue("@Original", report.Data.Attributes.SignatureInfo.OriginalName);
+                        infoCmd.Parameters.AddWithValue("@Prod", report.Data.Attributes.SignatureInfo.Product);
+                        infoCmd.Parameters.AddWithValue("@Internal", report.Data.Attributes.SignatureInfo.InternalName);
+                        infoCmd.Parameters.AddWithValue("@Copyright", report.Data.Attributes.SignatureInfo.Copyright);
+
+                        await infoCmd.ExecuteNonQueryAsync();
+
                         transaction.Commit();
                     }
 

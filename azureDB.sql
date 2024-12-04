@@ -27,10 +27,56 @@ VHASH NVARCHAR(55),
 FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE
 );
 
+CREATE TABLE SignatureInfo (
+    SignatureID INT PRIMARY KEY IDENTITY(2001, 1),
+    FileReportID INT NOT NULL, -- Foreign Key
+    Description NVARCHAR(255),
+    FileVersion NVARCHAR(100),
+    OriginalName NVARCHAR(100),
+    Product NVARCHAR(100),
+    InternalName NVARCHAR(100),
+    Copyright NVARCHAR(255),
+    FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE AnalysisResults (
+    AnalysisResultID INT PRIMARY KEY IDENTITY(3001, 1),
+    FileReportID INT NOT NULL, -- Foreign Key
+    EngineName NVARCHAR(100),
+    Category NVARCHAR(50),
+    Result NVARCHAR(255),
+    FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE
+);	
+
+ALTER TABLE FileReports
+ADD LastModificationDate DATETIME NULL;
+
 SELECT * FROM FileReports;
+SELECT * FROM FileSignatures;
+SELECT * FROM SignatureInfo;
+SELECT * FROM AnalysisResults;
 
 SELECT * FROM FileReports fr
 JOIN FileSignatures fs ON fr.ID = fs.FileReportID ;
+
+SELECT fr.*, fs.*, si.*, ar.EngineName, ar.Category, ar.Result
+FROM FileReports fr
+LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID
+LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
+LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID
+
+ALTER TABLE FileSignatures DROP CONSTRAINT FK_FileSignatures_FileReports;
+ALTER TABLE SignatureInfo DROP CONSTRAINT FK_SignatureInfo_FileReports;
+ALTER TABLE AnalysisResults DROP CONSTRAINT FK_AnalysisResults_FileReports;
+
+truncate table FileReports
+truncate table FileSignatures
+truncate table AnalysisResults
+truncate table SignatureInfo;
+
+ALTER TABLE FileSignatures ADD CONSTRAINT FK_FileSignatures_FileReports FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE;
+ALTER TABLE SignatureInfo ADD CONSTRAINT FK_SignatureInfo_FileReports FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE;
+ALTER TABLE AnalysisResults ADD CONSTRAINT FK_AnalysisResults_FileReports FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE;
 
 SELECT * FROM authorized_users;
 DELETE FROM authorized_users WHERE authUserID = 5;

@@ -58,6 +58,12 @@
                             <li class="list-group-item">
                                 Magic: @(report?.Data?.Attributes.Magic ?? "N/A")
                             </li>
+                            <li class="list-group-item">
+                                Last Modification Date:
+                                @(report.Data.Attributes.LastModificationDate != null
+                                ? DateTimeOffset.FromUnixTimeSeconds((long)report.Data.Attributes.LastModificationDate).UtcDateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                                : "Not Available")
+                            </li>
                         </ul>
 
                         <hr class="mb-3">
@@ -86,6 +92,48 @@
 
                         <h5 class="card-title">Analyzed file names</h5>
                         <p>@(report?.Data?.Attributes?.Names != null ? string.Join(", ", report.Data.Attributes.Names) : "N/A")</p>
+
+                        <hr class="mb-3">
+
+                        <h5 class="card-title">Signature Info</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Description: @(report?.Data?.Attributes?.SignatureInfo?.Description ?? "N/A")</li>
+                            <li class="list-group-item">File Version: @(report?.Data?.Attributes?.SignatureInfo?.FileVersion ?? "N/A")</li>
+                            <li class="list-group-item">Original Name: @(report?.Data?.Attributes?.SignatureInfo?.OriginalName ?? "N/A")</li>
+                            <li class="list-group-item">Product: @(report?.Data?.Attributes?.SignatureInfo?.Product ?? "N/A")</li>
+                            <li class="list-group-item">Internal Name: @(report?.Data?.Attributes?.SignatureInfo?.InternalName ?? "N/A")</li>
+                            <li class="list-group-item">Copyright: @(report?.Data?.Attributes?.SignatureInfo?.Copyright ?? "N/A")</li>
+                        </ul>
+
+                        @if (report?.Data?.Attributes?.LastAnalysisResults != null)
+                        {
+                            <hr class="mb-3">
+                            <h5 class="card-title">Analysis Results</h5>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var result in report.Data.Attributes.LastAnalysisResults)
+                                {
+                                    var engineName = result.Value.EngineName ?? "N/A";
+                                    var category = result.Value.Category ?? "N/A";
+                                    var resultText = result.Value.Result ?? "N/A";
+
+                                    var categoryClass = category switch
+                                    {
+                                        "malicious" => "text-danger",
+                                        "suspicious" => "text-warning",
+                                        "harmless" => "text-success",
+                                        "undetected" => "text-secondary",
+                                        _ => "text-dark"
+                                    };
+
+                                    <li class="list-group-item">
+                                        <strong>Engine:</strong> @engineName<br />
+                                        <strong>Category:</strong> <span class="@categoryClass">@category</span><br />
+                                        <strong>Result:</strong> @resultText
+                                    </li>
+                                }
+                            </ul>
+                        }
+
                     </div>
                 </div>
             }
