@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using fileHash;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ArgusFrontend.Models
 {
@@ -38,5 +40,33 @@ namespace ArgusFrontend.Models
         public string TLSH { get; set; }
 
         public string VHASH { get; set; }
+
+        public Dictionary<string, AnalysisResult> LastAnalysisResults { get; set; }
+
+        public SignatureInfo SignatureInfo { get; set; } = new SignatureInfo();
+
+        public DateTime? LastModificationDate { get; set; }
+    }
+
+    public partial class AnalysisResult
+    {
+        [JsonPropertyName("method")]
+        public string Method { get; set; }
+
+        [JsonPropertyName("engine_name")]
+        public string EngineName { get; set; }
+
+        [JsonPropertyName("engine_version")]
+        public string EngineVersion { get; set; }
+
+        [JsonPropertyName("engine_update")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long EngineUpdate { get; set; }
+
+        [JsonPropertyName("category")]
+        public string Category { get; set; }
+
+        [JsonPropertyName("result")]
+        public string Result { get; set; }
     }
 }

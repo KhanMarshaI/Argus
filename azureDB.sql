@@ -65,6 +65,13 @@ LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID
 LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
 LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID
 
+SELECT fr.*, fs.*, si.*, ar.EngineName, ar.Category, ar.Result
+FROM FileReports fr
+LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID
+LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
+LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID
+WHERE fr.FileID = 2
+
 ALTER TABLE FileSignatures DROP CONSTRAINT FK_FileSignatures_FileReports;
 ALTER TABLE SignatureInfo DROP CONSTRAINT FK_SignatureInfo_FileReports;
 ALTER TABLE AnalysisResults DROP CONSTRAINT FK_AnalysisResults_FileReports;

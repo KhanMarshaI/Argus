@@ -267,51 +267,83 @@ namespace ArgusFrontend.Services
                 {
                     try
                     {
-                        // Insert into FileReports table
                         string query = "INSERT INTO FileReports " +
-                                       "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
-                                       "Harmless, Undetected, AnalyzedNames) " +
-                                       "OUTPUT INSERTED.ID " +
-                                       "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
-                                       "@Suspicious, @Harmless, @Undetected, @AnalyzedNames)";
+                               "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
+                               "Harmless, Undetected, AnalyzedNames, LastModificationDate) " +
+                               "OUTPUT INSERTED.ID " +
+                               "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
+                               "@Suspicious, @Harmless, @Undetected, @AnalyzedNames, @LastModificationDate)";
 
                         using var command = new SqlCommand(query, connection, transaction);
                         command.Parameters.AddWithValue("@FileHash", fileHash);
-                        command.Parameters.AddWithValue("@FileID", report.Id);
-                        command.Parameters.AddWithValue("@FileType", report.Type);
-                        command.Parameters.AddWithValue("@FileExtension", report.Extension);
-                        command.Parameters.AddWithValue("@Magic", report.Magic);
+                        command.Parameters.AddWithValue("@FileId", report.Id ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@FileType", report.Type ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@FileExtension", report.Extension ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@Magic", report.Magic ?? (object)DBNull.Value);
                         command.Parameters.AddWithValue("@Reputation", report.Reputation);
                         command.Parameters.AddWithValue("@Malicious", report.Malicious);
                         command.Parameters.AddWithValue("@Suspicious", report.Suspicious);
                         command.Parameters.AddWithValue("@Harmless", report.Harmless);
                         command.Parameters.AddWithValue("@Undetected", report.Undetected);
                         command.Parameters.AddWithValue("@AnalyzedNames", report.Names);
+                        command.Parameters.AddWithValue("@LastModificationDate", report.LastModificationDate);
 
                         int reportID = (int)await command.ExecuteScalarAsync();
 
-                        // Insert into FileSignatures table
                         string signatureQuery = "INSERT INTO FileSignatures " +
                                                 "(FileReportID, MD5, SHA1, SHA256, TLSH, VHASH) " +
                                                 "VALUES (@FileReportID, @MD5, @SHA1, @SHA256, @TLSH, @VHASH)";
 
                         using var sigCommand = new SqlCommand(signatureQuery, connection, transaction);
-                        sigCommand.Parameters.AddWithValue("@FileReportID", reportID);
-                        sigCommand.Parameters.AddWithValue("@MD5", report.MD5);
-                        sigCommand.Parameters.AddWithValue("@SHA1", report.SHA1);
-                        sigCommand.Parameters.AddWithValue("@SHA256", report.SHA256);
-                        sigCommand.Parameters.AddWithValue("@TLSH", report.TLSH);
-                        sigCommand.Parameters.AddWithValue("@VHASH", report.VHASH);
+                        sigCommand.Parameters.AddWithValue("@FileReportId", reportID);
+                        sigCommand.Parameters.AddWithValue("@MD5", report.MD5 ?? (object)DBNull.Value);
+                        sigCommand.Parameters.AddWithValue("@SHA1", report.SHA1 ?? (object)DBNull.Value);
+                        sigCommand.Parameters.AddWithValue("@SHA256", report.SHA256 ?? (object)DBNull.Value);
+                        sigCommand.Parameters.AddWithValue("@TLSH", report.TLSH ?? (object)DBNull.Value);
+                        sigCommand.Parameters.AddWithValue("@VHASH", report.VHASH ?? (object)DBNull.Value);
 
                         await sigCommand.ExecuteNonQueryAsync();
+
+                        if (report.LastAnalysisResults != null)
+                        {
+                            foreach (var result in report.LastAnalysisResults)
+                            {
+                                string resultQuery = "INSERT INTO AnalysisResults " +
+                                                     "(FileReportID, EngineName, Category, Result) " +
+                                                     "VALUES (@FileReportID, @EngineName, @Category, @Result)";
+
+                                using var resultCommand = new SqlCommand(resultQuery, connection, transaction);
+                                resultCommand.Parameters.AddWithValue("@FileReportID", reportID);
+                                resultCommand.Parameters.AddWithValue("@EngineName", result.Value.EngineName ?? (object)DBNull.Value);
+                                resultCommand.Parameters.AddWithValue("@Category", result.Value.Category ?? (object)DBNull.Value);
+                                resultCommand.Parameters.AddWithValue("@Result", result.Value.Result ?? (object)DBNull.Value);
+
+                                await resultCommand.ExecuteNonQueryAsync();
+                            }
+                        }
+
+                        string infoQuery = "INSERT INTO SignatureInfo VALUES(@reportId, @desc, @FileVer, @Original, @Prod, @Internal" +
+                            ",@Copyright)";
+                        using var infoCmd = new SqlCommand(@infoQuery, connection, transaction);
+                        infoCmd.Parameters.AddWithValue("@reportId", reportID);
+                        infoCmd.Parameters.AddWithValue("@desc", report.SignatureInfo.Description);
+                        infoCmd.Parameters.AddWithValue("@FileVer", report.SignatureInfo.FileVersion);
+                        infoCmd.Parameters.AddWithValue("@Original", report.SignatureInfo.OriginalName);
+                        infoCmd.Parameters.AddWithValue("@Prod", report.SignatureInfo.Product);
+                        infoCmd.Parameters.AddWithValue("@Internal", report.SignatureInfo.InternalName);
+                        infoCmd.Parameters.AddWithValue("@Copyright", report.SignatureInfo.Copyright);
+
+                        await infoCmd.ExecuteNonQueryAsync();
+
                         transaction.Commit();
                     }
+
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error storing Custom hash: {ex.Message}");
-                        throw;
+                        Console.WriteLine($"Error storing HASH: {ex.Message}");
                     }
+
                 }
             }
         }

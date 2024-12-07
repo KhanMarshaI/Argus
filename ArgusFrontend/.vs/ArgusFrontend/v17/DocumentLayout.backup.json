@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\customfilehash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\customfilehash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\essential\\filehashintel.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\essential\\filehashintel.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\filehash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\filehash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,11 +42,37 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "CustomFileHash.cs",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\CustomFileHash.cs",
+              "RelativeDocumentMoniker": "Models\\CustomFileHash.cs",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\CustomFileHash.cs",
+              "RelativeToolTip": "Models\\CustomFileHash.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-07T19:49:38.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FileHashIntel.razor",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHashIntel.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileHashIntel.razor",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHashIntel.razor",
+              "RelativeToolTip": "Components\\Pages\\Essential\\FileHashIntel.razor",
+              "ViewState": "AgIAAN0AAAAAAAAAAADwv0wAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-07T19:49:35.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "URL_DB_SRVC.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\URL_DB_SRVC.cs",
               "RelativeDocumentMoniker": "Services\\URL_DB_SRVC.cs",
@@ -46,12 +80,11 @@
               "RelativeToolTip": "Services\\URL_DB_SRVC.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T12:28:29.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T12:28:29.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "URLAnalysisModel.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\URLAnalysisModel.cs",
               "RelativeDocumentMoniker": "Models\\URLAnalysisModel.cs",
@@ -59,12 +92,11 @@
               "RelativeToolTip": "Models\\URLAnalysisModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T12:28:24.472Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T12:28:24.472Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "UrlAnalysis.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\UrlAnalysis.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\UrlAnalysis.razor",
@@ -72,8 +104,7 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\UrlAnalysis.razor",
               "ViewState": "AgIAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-04T12:28:06.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T12:28:06.559Z"
             },
             {
               "$type": "Document",
@@ -83,33 +114,33 @@
               "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\DatabaseService.cs",
               "RelativeToolTip": "Services\\DatabaseService.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAAQwOEAAAB4AAAAAAAAAA==",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAAwBgBAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T12:28:28.2Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "fileHash.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\fileHash.cs",
               "RelativeDocumentMoniker": "Models\\fileHash.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\fileHash.cs",
               "RelativeToolTip": "Models\\fileHash.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAArwIoAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAM0AAAAAAAAAAAArwNMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T12:28:23.114Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "FileHash.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHash.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileHash.razor",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHash.razor",
               "RelativeToolTip": "Components\\Pages\\Essential\\FileHash.razor",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAAwGEAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAwGEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-04T12:28:05.017Z",
               "EditorCaption": ""

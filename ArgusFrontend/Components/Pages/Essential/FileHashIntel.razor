@@ -1,6 +1,7 @@
 ﻿@page "/customintel/fileintel"
 @using ArgusFrontend.Services
 @using ArgusFrontend.Models
+@rendermode InteractiveServer
 
 <PageTitle>Store File Intel</PageTitle>
 <AuthorizeView>
@@ -29,6 +30,55 @@
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-text"></i></span>
                     <InputText type="text" class="form-control" placeholder="Extension" aria-label="FileExtension"
                                aria-describedby="basic-addon1" @bind-Value="filehash.Extension" />
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">Signature Information</div>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Description</span>
+                            <InputText type="text" class="form-control" placeholder="Description"
+                                        aria-label="Description"
+                                        @bind-Value="filehash.SignatureInfo.Description" />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">File Version</span>
+                            <InputText type="text" class="form-control" placeholder="File Version"
+                                        aria-label="FileVersion"
+                                        @bind-Value="filehash.SignatureInfo.FileVersion" />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Original Name</span>
+                            <InputText type="text" class="form-control" placeholder="Original Name"
+                                        aria-label="OriginalName"
+                                        @bind-Value="filehash.SignatureInfo.OriginalName" />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Product</span>
+                            <InputText type="text" class="form-control" placeholder="Product"
+                                        aria-label="Product"
+                                        @bind-Value="filehash.SignatureInfo.Product" />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Internal Name</span>
+                            <InputText type="text" class="form-control" placeholder="Internal Name"
+                                        aria-label="InternalName"
+                                        @bind-Value="filehash.SignatureInfo.InternalName" />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Copyright</span>
+                            <InputText type="text" class="form-control" placeholder="Copyright"
+                                        aria-label="Copyright"
+                                        @bind-Value="filehash.SignatureInfo.Copyright" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-calendar3"></i></span>
+                    <InputDate class="form-control" placeholder="Last Modification Date"
+                                aria-label="LastModificationDate"
+                                aria-describedby="basic-addon1" @bind-Value="filehash.LastModificationDate" />
                 </div>
 
                 <div class="input-group mb-3">
@@ -103,6 +153,46 @@
                                aria-describedby="basic-addon1" @bind-Value="filehash.VHASH" />
                 </div>
 
+                <div class="card mt-3">
+                    <div class="card-header d-flex justify-content-between">
+                        <span>Last Analysis Results</span>
+                        <button type="button" class="btn btn-sm btn-success" @onclick="AddNewAnalysis">+ Add Analysis</button>
+                    </div>
+                    <div class="card-body">
+                        @if (filehash.LastAnalysisResults?.Any() == true)
+                        {
+                            @foreach (var analysis in filehash.LastAnalysisResults)
+                            {
+                                <div class="border rounded p-3 mb-3">
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">Engine Name</span>
+                                        <InputText class="form-control" placeholder="Engine Name"
+                                                    @bind-Value="analysis.Value.EngineName" />
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">Category</span>
+                                        <InputText class="form-control" placeholder="Category"
+                                                    @bind-Value="analysis.Value.Category" />
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">Result</span>
+                                        <InputText class="form-control" placeholder="Result"
+                                                    @bind-Value="analysis.Value.Result" />
+                                    </div>
+                                    <button type="button" class="btn btn-danger btn-sm mt-2"
+                                            @onclick="() => RemoveAnalysis(analysis.Key)">
+                                        Remove
+                                    </button>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>No analysis results added. Click "+ Add Analysis" to begin.</p>
+                        }
+                    </div>
+                </div>
+
                 <div class="col-12 d-grid">
                     <button type="submit" class="btn btn-primary rounded-pill">Save</button>
                 </div>
@@ -145,11 +235,41 @@
 
 @code {
     [SupplyParameterFromForm]
-    private CustomFileHash? filehash { get; set; } = new();
+    private CustomFileHash filehash { get; set; } = new();
 
     private DatabaseService dbService = new DatabaseService();
     private string? fileErrorMessage;
     private string? fileSuccessMessage;
+
+    // Ensure LastAnalysisResults is always initialized.
+    protected override void OnInitialized()
+    {
+        if (filehash.LastAnalysisResults == null)
+        {
+            filehash.LastAnalysisResults = new Dictionary<string, AnalysisResult>();
+        }
+    }
+
+    private void AddNewAnalysis()
+    {
+        if (filehash.LastAnalysisResults == null)
+        {
+            filehash.LastAnalysisResults = new Dictionary<string, AnalysisResult>();
+        }
+
+        string newKey = Guid.NewGuid().ToString(); // Unique key for the dictionary
+        filehash.LastAnalysisResults[newKey] = new AnalysisResult();
+        StateHasChanged();
+    }
+
+    private void RemoveAnalysis(string key)
+    {
+        if (filehash.LastAnalysisResults.ContainsKey(key))
+        {
+            filehash.LastAnalysisResults.Remove(key);
+            StateHasChanged();
+        }
+    }
 
     private async Task FileHashSubmit()
     {
@@ -165,7 +285,11 @@
         {
             await dbService.StoreHashReportAsync(filehash);
             fileSuccessMessage = "File report created!";
-            return;
+
+            filehash = new CustomFileHash();
+            fileErrorMessage = null;
+            fileSuccessMessage = null;
+            StateHasChanged();
         }
         catch (Exception ex)
         {
