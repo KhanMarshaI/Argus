@@ -1,8 +1,10 @@
 ﻿using ArgusBackend.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Xml;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace ArgusBackend.Controllers
@@ -16,6 +18,23 @@ namespace ArgusBackend.Controllers
         public VirusTotalController(IVirusTotalService virusTotalController)
         {
             _virusTotalService = virusTotalController;
+        }
+
+        [HttpPost("fileUpload")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded or file is empty.");
+            }
+            await using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            var fileBytes = memoryStream.ToArray();
+
+            var response = await _virusTotalService.UploadFileAsync(fileBytes, file.FileName);
+            var jsonReport = JsonConvert.DeserializeObject(response);
+            var formatJson = JsonConvert.SerializeObject(jsonReport, Newtonsoft.Json.Formatting.Indented);
+            return Content(formatJson, "application/json");
         }
 
         [HttpGet("file/{hash}")]

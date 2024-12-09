@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "ArgusBackend.Controllers.VirusTotalController",
+    "Method": "UploadFile",
+    "RelativePath": "api/VirusTotal/fileUpload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ArgusBackend.Controllers.VirusTotalController",
     "Method": "GetIPAddressReportAsync",
     "RelativePath": "api/VirusTotal/ip_addresses/{ipAddress}",
     "HttpMethod": "GET",

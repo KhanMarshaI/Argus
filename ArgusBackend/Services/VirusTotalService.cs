@@ -67,5 +67,18 @@ namespace ArgusBackend.Services
 
             return response.Content;
         }
+
+        public async Task<string> UploadFileAsync(byte[] fileBytes, string fileName)
+        {
+            var client = new RestClient("https://www.virustotal.com/api/v3/files");
+            var request = new RestRequest("", Method.Post);
+            request.AddHeader("x-apikey", _apiKey);
+            request.AddHeader("accept", "application/json");
+            request.AlwaysMultipartFormData = true;
+            request.AddFile("file", fileBytes, fileName);
+
+            var response = await client.ExecuteAsync(request);
+            return response.Content;
+        }
     }
 }
