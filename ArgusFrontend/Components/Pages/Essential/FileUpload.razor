@@ -1,0 +1,54 @@
+﻿@page "/fileupload"
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using FileAnalysis
+@using ArgusFrontend.Services
+@rendermode InteractiveServer
+@inject VirusTotalService VirusTotalService
+
+<h3>Upload File to VirusTotal</h3>
+
+<InputFile OnChange="OnFileSelected"></InputFile>
+<button @onclick="UploadFile" disabled="@(!IsFileSelected)">Upload</button>
+
+<p>@Message</p>
+
+<h4>Upload Response</h4>
+<pre>@ApiResponse</pre>
+
+
+@code {
+    private IBrowserFile? SelectedFile;
+    private bool IsFileSelected => SelectedFile != null;
+    private string? Message;
+    private FileUploadAnalysis? report;
+    private string? ApiResponse;
+
+    private void OnFileSelected(InputFileChangeEventArgs e)
+    {
+        SelectedFile = e.File;
+        Message = SelectedFile != null ? $"File selected: {SelectedFile.Name}" : "No file selected.";
+    }
+
+    private async Task UploadFile()
+    {
+        if (SelectedFile == null)
+        {
+            Message = "Please select a file.";
+            return;
+        }
+
+        try
+        {
+            await using var stream = SelectedFile.OpenReadStream(32*1024*1024);
+            report = await VirusTotalService.UploadFileAsync(stream, SelectedFile.Name);
+            ApiResponse = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
+            Message = "File uploaded successfully.";
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Message = $"Error uploading file: {ex.Message}";
+        }
+    }
+}

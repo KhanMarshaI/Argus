@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using fileHash;
 using URLAnalysis;
 using _Analysis;
+using FileAnalysis;
 
 namespace ArgusFrontend.Services
 {
@@ -47,7 +48,29 @@ namespace ArgusFrontend.Services
             }
         }
 
-        public async Task<URLRep> GetURLReport(string url)
+		public async Task<FileUploadAnalysis> UploadFileAsync(Stream fileStream, string fileName)
+		{
+			try
+			{
+				using var content = new MultipartFormDataContent();
+				content.Add(new StreamContent(fileStream), "file", fileName);
+
+				var response = await _httpClient.PostAsync("api/VirusTotal/fileUpload", content);
+				response.EnsureSuccessStatusCode();
+
+				var responseBody = await response.Content.ReadAsStringAsync();
+
+                var report = await response.Content.ReadFromJsonAsync<FileUploadAnalysis>(_jsonOptions);
+                return report;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error uploading file: {ex.Message}");
+				return null;
+			}
+		}
+
+		public async Task<URLRep> GetURLReport(string url)
         {
             try
             {
