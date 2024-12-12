@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\essential\\fileupload.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\essential\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\essential\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\services\\virustotalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\virustotalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\essential\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\essential\\filehash.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\fileuploadanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,13 +34,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "VirusTotalService.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs",
               "RelativeDocumentMoniker": "Services\\VirusTotalService.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs",
               "RelativeToolTip": "Services\\VirusTotalService.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAD8AAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T20:18:25.804Z",
               "EditorCaption": ""
@@ -51,16 +51,16 @@
               "Title": "FileUpload.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileUpload.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileUpload.razor",
-              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileUpload.razor",
-              "RelativeToolTip": "Components\\Pages\\Essential\\FileUpload.razor",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAC4AAAAeAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileUpload.razor*",
+              "RelativeToolTip": "Components\\Pages\\Essential\\FileUpload.razor*",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-10T20:15:11.107Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FileHash.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHash.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileHash.razor",
@@ -68,8 +68,7 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\FileHash.razor",
               "ViewState": "AgIAAKMAAAAAAAAAAADwv7EAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-10T20:15:33.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T20:15:33.886Z"
             },
             {
               "$type": "Document",
@@ -81,8 +80,7 @@
               "RelativeToolTip": "Models\\FileUploadAnalysis.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T20:13:53.554Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T20:13:53.554Z"
             },
             {
               "$type": "Document",
@@ -94,8 +92,7 @@
               "RelativeToolTip": "Models\\URLAnalysisModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T20:11:16.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T20:11:16.039Z"
             }
           ]
         }

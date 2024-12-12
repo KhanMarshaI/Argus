@@ -48,7 +48,7 @@ namespace ArgusFrontend.Services
             }
         }
 
-		public async Task<FileUploadAnalysis> UploadFileAsync(Stream fileStream, string fileName)
+		public async Task<URLRep> UploadFileAsync(Stream fileStream, string fileName)
 		{
 			try
 			{
@@ -60,7 +60,7 @@ namespace ArgusFrontend.Services
 
 				var responseBody = await response.Content.ReadAsStringAsync();
 
-                var report = await response.Content.ReadFromJsonAsync<FileUploadAnalysis>(_jsonOptions);
+                var report = await response.Content.ReadFromJsonAsync<URLRep>(_jsonOptions);
                 return report;
 			}
 			catch (Exception ex)
