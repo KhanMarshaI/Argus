@@ -60,7 +60,7 @@ using System.Globalization;
     public partial class Result
     {
         [JsonPropertyName("method")]
-        public Method Method { get; set; }
+        public string Method { get; set; }
 
         [JsonPropertyName("engine_name")]
         public string EngineName { get; set; }
@@ -73,7 +73,7 @@ using System.Globalization;
         public long EngineUpdate { get; set; }
 
         [JsonPropertyName("category")]
-        public Category Category { get; set; }
+        public string Category { get; set; }
 
         [JsonPropertyName("result")]
         public object ResultResult { get; set; }

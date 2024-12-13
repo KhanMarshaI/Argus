@@ -35,7 +35,89 @@
                         <h4 class="card-title mb-0">Upload Response</h4>
                     </div>
                     <div class="card-body">
-                        <pre class="bg-light p-3 rounded">@ApiResponse</pre>
+                        <h5 class="card-title">Information</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Type: @(report?.Data?.Type ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                AnalysisID: @(report?.Data?.Id ?? "N/A")
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow">
+                    <div class="card-header text-white bg-secondary">
+                        <h4 class="card-title mb-0">Analysis Response</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Analysis</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                ID: @(analysis?.Data?.Id ?? "N/A")
+                            </li>
+                            <li class="list-group-item">
+                                Status: @(analysis?.Data?.Attributes?.Status ?? "N/A")
+                            </li>
+                        </ul>
+
+                        <hr class="mb-3">
+                        <h5 class="card-title">Stats</h5>
+                        <ul>
+                            <li class="list-group-item">
+                                Malicious: @(analysis?.Data?.Attributes?.Stats?.Malicious ?? 0)
+                            </li>
+                            <li class="list-group-item">
+                                Suspicious: @(analysis?.Data?.Attributes?.Stats?.Suspicious ?? 0)
+                            </li>
+                            <li class="list-group-item">
+                                Undetected: @(analysis?.Data?.Attributes?.Stats?.Undetected ?? 0)
+                            </li>
+                            <li class="list-group-item">
+                                Harmless: @(analysis?.Data?.Attributes?.Stats?.Harmless ?? 0)
+                            </li>
+                        </ul>
+
+                        <hr class="mb-3">
+                        <h5 class="card-title">Signatures</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">MD5: @(analysis?.Meta?.FileInfo?.Md5 ?? "N/A")</li>
+                            <li class="list-group-item">SHA1: @(analysis?.Meta?.FileInfo?.Sha1 ?? "N/A")</li>
+                            <li class="list-group-item">SHA256: @(analysis?.Meta?.FileInfo?.Sha256 ?? "N/A")</li>
+                            <li class="list-group-item">File Size: @(analysis?.Meta?.FileInfo?.Size ?? 0)</li>
+                        </ul>
+
+                        @if (analysis?.Data?.Attributes?.Results != null)
+                        {
+                            <hr class="mb-3">
+                            <h5 class="card-title">Analysis Results</h5>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var result in analysis.Data.Attributes.Results)
+                                {
+                                    var engineName = result.Value.EngineName ?? "N/A";
+                                    var category = result.Value.Category ?? "N/A";
+                                    var resultText = result.Value.ResultResult ?? "N/A";
+
+                                    var categoryClass = category switch
+                                    {
+                                        "malicious" => "text-danger",
+                                        "suspicious" => "text-warning",
+                                        "harmless" => "text-success",
+                                        "undetected" => "text-secondary",
+                                        _ => "text-dark"
+                                    };
+
+                                    <li class="list-group-item">
+                                        <strong>Engine:</strong> @engineName<br />
+                                        <strong>Category:</strong> <span class="@categoryClass">@category</span><br />
+                                        <strong>Result:</strong> @resultText
+                                    </li>
+                                }
+                            </ul>
+                        }
+
                     </div>
                 </div>
             }
@@ -48,7 +130,9 @@
     private bool IsFileSelected => SelectedFile != null;
     private string? Message;
     private URLRep? report;
+    private FileUploadAnalysis? analysis;
     private string? ApiResponse;
+    private string? analysisID;
 
     private void OnFileSelected(InputFileChangeEventArgs e)
     {
@@ -70,7 +154,12 @@
             report = await VirusTotalService.UploadFileAsync(stream, SelectedFile.Name);
             ApiResponse = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
             Message = "File uploaded successfully.";
-            StateHasChanged();
+            if (report != null)
+            {
+                analysisID = report.Data.Id;
+                analysis = await VirusTotalService.GetFileAnalysisAsync(analysisID);
+                StateHasChanged();
+            }
         }
         catch (Exception ex)
         {
