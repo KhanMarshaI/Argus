@@ -15,6 +15,7 @@ builder.Services.AddScoped<VirusTotalService>();
 builder.Services.AddScoped<DatabaseService>();
 builder.Services.AddScoped<URL_DB_SRVC>();
 builder.Services.AddScoped<Dash_DB_SRVC>();
+builder.Services.AddScoped<FUP_DB_SRVC>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {

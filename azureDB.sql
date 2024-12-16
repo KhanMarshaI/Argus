@@ -48,6 +48,17 @@ CREATE TABLE AnalysisResults (
     FOREIGN KEY (FileReportID) REFERENCES FileReports(ID) ON DELETE CASCADE
 );	
 
+CREATE TABLE FileData (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    FileReportID INT NOT NULL,
+    FileContent VARBINARY(MAX),
+    FileSize BIGINT NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_FileData_FileReports FOREIGN KEY (FileReportID) 
+    REFERENCES FileReports(ID) 
+    ON DELETE CASCADE
+);
+
 ALTER TABLE FileReports
 ADD LastModificationDate DATETIME NULL;
 
@@ -71,6 +82,34 @@ LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID
 LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
 LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID
 WHERE fr.FileID = 2
+
+SELECT 
+    FR.ID AS FileReportID,
+    FR.FileHashSHA,
+    FR.FileID,
+    FR.Malicious,
+    FR.Suspicious,
+    FR.Harmless,
+    FR.Undetected,
+    FS.MD5,
+    FS.SHA1,
+    FS.SHA256,
+    FD.FileContent,
+    FD.FileSize,
+    FD.CreatedAt AS FileDataCreatedAt,
+    AR.EngineName,
+    AR.Category,
+    AR.Result AS AnalysisResult
+FROM 
+    FileReports FR
+LEFT JOIN 
+    FileSignatures FS ON FR.ID = FS.FileReportID
+LEFT JOIN 
+    FileData FD ON FR.ID = FD.FileReportID
+LEFT JOIN 
+    AnalysisResults AR ON FR.ID = AR.FileReportID
+ORDER BY 
+    FR.ID;
 
 ALTER TABLE FileSignatures DROP CONSTRAINT FK_FileSignatures_FileReports;
 ALTER TABLE SignatureInfo DROP CONSTRAINT FK_SignatureInfo_FileReports;

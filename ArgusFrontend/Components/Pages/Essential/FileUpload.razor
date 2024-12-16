@@ -6,6 +6,7 @@
 @using ArgusFrontend.Services
 @rendermode InteractiveServer
 @inject VirusTotalService VirusTotalService
+@inject FUP_DB_SRVC DB_SRVC
 
 <AuthorizeView>
     <Authorized>
@@ -159,6 +160,14 @@
                 analysisID = report.Data.Id;
                 analysis = await VirusTotalService.GetFileAnalysisAsync(analysisID);
                 StateHasChanged();
+                try
+                {
+                    await DB_SRVC.StoreHashReportAsync(analysis, stream, stream.Length);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error storing file upload db: {ex.Message}");
+                }
             }
         }
         catch (Exception ex)
