@@ -46,6 +46,8 @@ namespace ArgusFrontend.Models
         public SignatureInfo SignatureInfo { get; set; } = new SignatureInfo();
 
         public DateTime? LastModificationDate { get; set; }
+
+        public DateTime? CreatedAT { get; set; }
     }
 
     public partial class AnalysisResult

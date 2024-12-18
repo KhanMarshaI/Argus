@@ -80,7 +80,7 @@ namespace ArgusFrontend.Services
         }
 
         // Fetch recent activity for Files
-        public async Task<List<(string FileHashSHA, string FileType, DateTime CreatedAt)>> GetRecentFileActivityAsync()
+        public async Task<List<(string FileHashSHA, string? FileType, DateTime CreatedAt)>> GetRecentFileActivityAsync()
         {
             string query = @"
                 SELECT 
@@ -92,7 +92,7 @@ namespace ArgusFrontend.Services
                 OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
             ";
 
-            var recentFiles = new List<(string FileHashSHA, string FileType, DateTime CreatedAt)>();
+            var recentFiles = new List<(string FileHashSHA, string? FileType, DateTime CreatedAt)>();
 
             using (var conn = new SqlConnection(_connectionString))
             {
@@ -103,9 +103,11 @@ namespace ArgusFrontend.Services
                 {
                     while (await reader.ReadAsync())
                     {
+                        string? fileType = reader.IsDBNull(1) ? "unknown" : reader.GetString(1);
+
                         recentFiles.Add((
                             reader.GetString(0), // FileHashSHA
-                            reader.GetString(1), // FileType
+                            fileType,            // FileType (could be null)
                             reader.GetDateTime(2) // CreatedAt
                         ));
                     }
@@ -113,6 +115,7 @@ namespace ArgusFrontend.Services
             }
             return recentFiles;
         }
+
     }
 
 }

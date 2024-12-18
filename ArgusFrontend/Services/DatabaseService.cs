@@ -481,6 +481,102 @@ namespace ArgusFrontend.Services
             }
         }
 
+        public async Task<List<Hash>> GetAllHashReportsAsync()
+        {
+            var hashList = new List<Hash>();
+
+            using var conn = new SqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            string query = @"
+                SELECT fr.*, fs.*, si.*, ar.EngineName, ar.Category, ar.Result
+                FROM FileReports fr
+                LEFT JOIN FileSignatures fs ON fr.ID = fs.FileReportID
+                LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
+                LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID";
+
+            using var command = new SqlCommand(query, conn);
+
+            var hashDictionary = new Dictionary<string, Hash>();
+
+            using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                string fileHashSHA = reader["FileHashSHA"]?.ToString() ?? "N/A";
+
+                // Check if the current hash record already exists in the dictionary
+                if (!hashDictionary.ContainsKey(fileHashSHA))
+                {
+                    var hash = new Hash
+                    {
+                        Data = new Data
+                        {
+                            Id = fileHashSHA,
+                            Type = reader["FileType"]?.ToString() ?? "N/A",
+                            Attributes = new Attributes
+                            {
+                                TypeExtension = reader["FileExtension"]?.ToString() ?? "N/A",
+                                Magic = reader["Magic"]?.ToString() ?? "N/A",
+                                Reputation = reader["Reputation"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Reputation"]),
+                                LastAnalysisStats = new LastAnalysisStats
+                                {
+                                    Malicious = reader["Malicious"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Malicious"]),
+                                    Suspicious = reader["Suspicious"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Suspicious"]),
+                                    Harmless = reader["Harmless"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Harmless"]),
+                                    Undetected = reader["Undetected"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Undetected"])
+                                },
+                                Md5 = reader["MD5"]?.ToString() ?? "N/A",
+                                Sha1 = reader["SHA1"]?.ToString() ?? "N/A",
+                                Sha256 = reader["SHA256"]?.ToString() ?? "N/A",
+                                Tlsh = reader["TLSH"]?.ToString() ?? "N/A",
+                                Vhash = reader["VHASH"]?.ToString() ?? "N/A",
+                                Names = reader["AnalyzedNames"] == DBNull.Value ? new string[] { "N/A" } : reader["AnalyzedNames"].ToString().Split(','),
+                                LastModificationDate = reader["LastModificationDate"] == DBNull.Value
+                                    ? 0
+                                    : (long)((DateTime)reader["LastModificationDate"])
+                                        .ToUniversalTime()
+                                        .Subtract(new DateTime(1970, 1, 1))
+                                        .TotalSeconds,
+                                SignatureInfo = new SignatureInfo
+                                {
+                                    Description = reader["Description"]?.ToString() ?? "N/A",
+                                    FileVersion = reader["FileVersion"]?.ToString() ?? "N/A",
+                                    OriginalName = reader["OriginalName"]?.ToString() ?? "N/A",
+                                    Product = reader["Product"]?.ToString() ?? "N/A",
+                                    InternalName = reader["InternalName"]?.ToString() ?? "N/A",
+                                    Copyright = reader["Copyright"]?.ToString() ?? "N/A"
+                                },
+                                LastAnalysisResults = new Dictionary<string, LastAnalysisResult>()
+                            }
+                        }
+                    };
+
+                    hashDictionary[fileHashSHA] = hash;
+                }
+
+                // Add Analysis Results to the existing hash object
+                var currentHash = hashDictionary[fileHashSHA];
+                if (!reader.IsDBNull(reader.GetOrdinal("EngineName")))
+                {
+                    string engineName = reader["EngineName"]?.ToString() ?? "N/A";
+                    if (!currentHash.Data.Attributes.LastAnalysisResults.ContainsKey(engineName))
+                    {
+                        currentHash.Data.Attributes.LastAnalysisResults[engineName] = new LastAnalysisResult
+                        {
+                            EngineName = engineName,
+                            Category = reader["Category"]?.ToString() ?? "N/A",
+                            Result = reader["Result"]?.ToString() ?? "N/A"
+                        };
+                    }
+                }
+            }
+
+            // Convert dictionary values to a list
+            hashList = hashDictionary.Values.ToList();
+            return hashList;
+        }
+
+
 
     }
 }

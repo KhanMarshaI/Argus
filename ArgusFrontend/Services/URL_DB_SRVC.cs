@@ -246,5 +246,61 @@ namespace ArgusFrontend.Services
             return await cmd.ExecuteScalarAsync() != null;
         }
 
+        public async Task<List<Analysis>> GetAllAnalysesAsync()
+        {
+            var analysisList = new List<Analysis>();
+
+            using var con = new SqlConnection(connectionString);
+            await con.OpenAsync();
+
+            string query = @"
+                SELECT a.AnalysisID, a.Type, a.Status, a.Malicious, a.Harmless, a.Suspicious, a.Undetected, 
+                       u.URL
+                FROM Analysis a
+                LEFT JOIN URLAnalysis u ON a.AnalysisID = u.AnalysisID
+            ";
+
+            using var command = new SqlCommand(query, con);
+            using var reader = await command.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                var analysis = new Analysis
+                {
+                    Data = new AnalysisData
+                    {
+                        Id = reader["AnalysisID"]?.ToString() ?? "N/A",
+                        Type = reader["Type"]?.ToString() ?? "N/A",
+                        Attributes = new Attributes
+                        {
+                            Status = reader["Status"]?.ToString() ?? "N/A",
+                            Stats = new Stats
+                            {
+                                Malicious = reader["Malicious"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Malicious"]),
+                                Harmless = reader["Harmless"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Harmless"]),
+                                Suspicious = reader["Suspicious"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Suspicious"]),
+                                Undetected = reader["Undetected"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Undetected"])
+                            }
+                        }
+                    },
+                    Meta = new Meta
+                    {
+                        UrlInfo = new UrlInfo
+                        {
+                            Url = reader["URL"] != DBNull.Value
+                            ? (Uri.TryCreate(reader["URL"].ToString(), UriKind.Absolute, out var uri) ? uri : null)
+                            : null
+                        }
+                    }
+                };
+
+                // Add the analysis object to the list
+                analysisList.Add(analysis);
+            }
+
+            return analysisList;
+        }
+
+
     }
 }

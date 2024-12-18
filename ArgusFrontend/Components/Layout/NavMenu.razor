@@ -20,6 +20,13 @@
         <AuthorizeView Roles="Administrator, User">
             <Authorized>
                 <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="overview">
+                        <i class="bi bi-eye-fill"></i>
+                        <span></span> Overview
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
                     <NavLink class="nav-link" href="filehash">
                         <i class="bi bi-hash"></i>
                         <span></span> File Hash
@@ -35,7 +42,7 @@
 
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="fileupload">
-                        <i class="bi bi-link"></i>
+                        <i class="bi bi-cloud-arrow-up"></i>
                         <span></span> File Upload
                     </NavLink>
                 </div>

@@ -1,0 +1,92 @@
+﻿@page "/overview"
+@using fileHash
+@using _Analysis
+@using ArgusFrontend.Services
+@inject DatabaseService DatabaseService
+@inject URL_DB_SRVC urlSrvc
+
+<PageTitle>Overview</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <h1>Scan Overview</h1>
+        
+        <h3>File Scans</h3>
+        <div class="row">
+            @if (fileScans != null && fileScans.Any())
+            {
+                @foreach (var file in fileScans)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm h-100" style="cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s;">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">File Hash: @file.Data.Id</h5>
+                                <p class="card-text">
+                                    <strong>File Type:</strong> @(file.Data.Type ?? "Unknown")<br />
+                                    <strong>Stats:</strong>
+                                    <ul class="list-unstyled">
+                                        <li><strong> Malicious: </strong> @file.Data.Attributes.LastAnalysisStats.Malicious</li>
+                                        <li><strong>Suspicious: </strong> @file.Data.Attributes.LastAnalysisStats.Suspicious</li>
+                                        <li><strong> Undetected: </strong> @file.Data.Attributes.LastAnalysisStats.Undetected</li>
+                                        <li><strong> Harmless: </strong>  @file.Data.Attributes.LastAnalysisStats.Harmless</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No file scans available.</p>
+            }
+        </div>
+
+        <h3>URL Scans</h3>
+        <div class="row">
+            @if (urlScans != null && urlScans.Any())
+            {
+                @foreach (var url in urlScans)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm h-100" style="cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s;">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">URL: @url.Meta.UrlInfo.Url</h5>
+                                <p class="card-text">
+                                    <strong>Type:</strong> @url.Data.Type <br />
+                                    <strong>Status:</strong> @url.Data.Attributes.Status <br />
+                                    <strong>Stats:</strong>
+                                    <ul class="list-unstyled">
+                                        <li> <strong> Malicious: </strong> @url.Data.Attributes.Stats.Malicious</li>
+                                        <li> <strong>Suspicious: </strong> @url.Data.Attributes.Stats.Suspicious</li>
+                                        <li> <strong> Undetected: </strong> @url.Data.Attributes.Stats.Undetected</li>
+                                        <li> <strong> Harmless: </strong>  @url.Data.Attributes.Stats.Harmless</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No URL scans available.</p>
+            }
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <p>You are not authorized to view this page. Please log in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private List<Hash> fileScans;
+    private List<Analysis> urlScans;
+
+    protected override async Task OnInitializedAsync()
+    {
+        fileScans = await DatabaseService.GetAllHashReportsAsync();
+        urlScans = await urlSrvc.GetAllAnalysesAsync();
+    }
+}
