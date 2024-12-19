@@ -7,6 +7,7 @@
 @rendermode InteractiveServer
 @inject VirusTotalService VirusTotalService
 @inject FUP_DB_SRVC DB_SRVC
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
 
 <AuthorizeView>
     <Authorized>
@@ -134,6 +135,14 @@
     private FileUploadAnalysis? analysis;
     private string? ApiResponse;
     private string? analysisID;
+    private string? name;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authstate.User;
+        name = user.Identity.Name;
+    }
 
     private void OnFileSelected(InputFileChangeEventArgs e)
     {
@@ -162,7 +171,7 @@
                 StateHasChanged();
                 try
                 {
-                    await DB_SRVC.StoreHashReportAsync(analysis, stream, stream.Length);
+                    await DB_SRVC.StoreHashReportAsync(analysis, name, stream, stream.Length);
                 }
                 catch (Exception ex)
                 {

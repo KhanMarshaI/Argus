@@ -2,6 +2,7 @@
 @using ArgusFrontend.Services
 @using ArgusFrontend.Models
 @rendermode InteractiveServer
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
 
 <PageTitle>Store File Intel</PageTitle>
 <AuthorizeView>
@@ -240,6 +241,14 @@
     private DatabaseService dbService = new DatabaseService();
     private string? fileErrorMessage;
     private string? fileSuccessMessage;
+    private string? name;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authstate.User;
+        name = user.Identity.Name;
+    }
 
     // Ensure LastAnalysisResults is always initialized.
     protected override void OnInitialized()
@@ -283,7 +292,7 @@
         }
         try
         {
-            await dbService.StoreHashReportAsync(filehash);
+            await dbService.StoreHashReportAsync(filehash, name);
             fileSuccessMessage = "File report created!";
 
             filehash = new CustomFileHash();

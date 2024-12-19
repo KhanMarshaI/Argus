@@ -162,3 +162,103 @@ UPDATE authorized_users SET authLevel = 'User'
 UPDATE authorized_users SET authLevel = 'Administrator' where username = 'marshal'
 
 DELETE FROM authorized_users WHERE authUserID = 8
+
+--Logs
+
+CREATE TABLE URLLogging (
+    LogID INT PRIMARY KEY IDENTITY(1,1),
+    AnalysisID VARCHAR(100) NOT NULL,
+    Action NVARCHAR(10) NOT NULL,
+    [User] NVARCHAR(50) NOT NULL,
+    [Time] DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE FileScanLogging (
+    LogID INT PRIMARY KEY IDENTITY(1,1),
+    FileID NVARCHAR(64) NOT NULL,
+    Action NVARCHAR(10) NOT NULL, 
+    [User] NVARCHAR(50) NOT NULL, 
+    [Time] DATETIME DEFAULT GETDATE()
+);
+
+-- Triggers
+
+CREATE TRIGGER trg_Insert_URLAnalysis
+ON Analysis
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    INSERT INTO URLLogging (AnalysisID, Action, [User], [Time])
+    SELECT i.AnalysisID, 'Insert', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
+CREATE TRIGGER trg_Update_URLAnalysis
+ON Analysis
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    INSERT INTO URLLogging (AnalysisID, Action, [User], [Time])
+    SELECT i.AnalysisID, 'Update', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
+CREATE TRIGGER trg_Delete_URLAnalysis
+ON Analysis
+AFTER DELETE
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    INSERT INTO URLLogging (AnalysisID, Action, [User], [Time])
+    SELECT d.AnalysisID, 'Delete', @User, GETDATE()
+    FROM deleted d;
+END;
+GO
+
+CREATE TRIGGER trg_Insert_FileReports
+ON FileReports
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    INSERT INTO FileLogging (FileID, Action, [User], [Time])
+    SELECT i.FileID, 'Insert', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
+CREATE TRIGGER trg_Update_FileReports
+ON FileReports
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    INSERT INTO FileLogging (FileID, Action, [User], [Time])
+    SELECT i.FileID, 'Update', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
+CREATE TRIGGER trg_Delete_FileReports
+ON FileReports
+AFTER DELETE
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    INSERT INTO FileLogging (FileID, Action, [User], [Time])
+    SELECT d.FileID, 'Delete', @User, GETDATE()
+    FROM deleted d;
+END;
+GO
+
+SELECT * FROM URLLogging;

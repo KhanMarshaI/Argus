@@ -4,6 +4,7 @@ using fileHash;
 using BCrypt.Net;
 using Dapper;
 using ArgusFrontend.Models;
+using System.Text;
 
 namespace ArgusFrontend.Services
 {
@@ -124,7 +125,7 @@ namespace ArgusFrontend.Services
             return hash;
         }
 
-        public async Task StoreHashReportAsync(Hash report)
+        public async Task StoreHashReportAsync(Hash report, string username)
         {
             string? fileHash;
             try
@@ -153,6 +154,16 @@ namespace ArgusFrontend.Services
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
+                string setContextQuery = "SET CONTEXT_INFO @User";
+                using var cmd = new SqlCommand(setContextQuery, connection);
+                cmd.Parameters.Add(new SqlParameter("@User", username)
+                {
+                    Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+                });
+
+                await cmd.ExecuteNonQueryAsync();
+
                 using (var transaction = connection.BeginTransaction())
                 {
                     try
@@ -241,7 +252,7 @@ namespace ArgusFrontend.Services
             }
         }
 
-        public async Task StoreHashReportAsync(CustomFileHash report)
+        public async Task StoreHashReportAsync(CustomFileHash report, string username)
         {
             // Validate the file hash (this validation could also happen at the UI level or before calling this method)
             if (string.IsNullOrEmpty(report.SHA256) && string.IsNullOrEmpty(report.SHA1) && string.IsNullOrEmpty(report.MD5))
@@ -263,6 +274,16 @@ namespace ArgusFrontend.Services
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
+                string setContextQuery = "SET CONTEXT_INFO @User";
+                using var cmd = new SqlCommand(setContextQuery, connection);
+                cmd.Parameters.Add(new SqlParameter("@User", username)
+                {
+                    Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+                });
+
+                await cmd.ExecuteNonQueryAsync();
+
                 using (var transaction = connection.BeginTransaction())
                 {
                     try
@@ -495,7 +516,8 @@ namespace ArgusFrontend.Services
                 LEFT JOIN SignatureInfo si ON fr.ID = si.FileReportID
                 LEFT JOIN AnalysisResults ar ON fr.ID = ar.FileReportID";
 
-            using var command = new SqlCommand(query, conn);
+            using var command = new 
+                SqlCommand(query, conn);
 
             var hashDictionary = new Dictionary<string, Hash>();
 

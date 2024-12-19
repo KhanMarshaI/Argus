@@ -1,5 +1,6 @@
 ﻿using FileAnalysis;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace ArgusFrontend.Services
 {
@@ -40,7 +41,7 @@ namespace ArgusFrontend.Services
             };
         }
 
-        public async Task StoreHashReportAsync(FileUploadAnalysis report, Stream? fileStream = null, long? fileSize = null)
+        public async Task StoreHashReportAsync(FileUploadAnalysis report, string username ,Stream? fileStream = null, long? fileSize = null)
         {
             string? fileHash;
             try
@@ -68,7 +69,7 @@ namespace ArgusFrontend.Services
                     // If the hash exists and the status is "completed", update the existing data
                     if (reportStatus == "completed")
                     {
-                        await UpdateHashReportAsync(fileHash, report, fileStream, fileSize);
+                        await UpdateHashReportAsync(fileHash, report, fileStream, fileSize, username);
                     }
                     else
                     {
@@ -170,11 +171,21 @@ namespace ArgusFrontend.Services
 
         }
 
-        private async Task UpdateHashReportAsync(string fileHash, FileUploadAnalysis report, Stream? fileStream, long? fileSize)
+        private async Task UpdateHashReportAsync(string fileHash, FileUploadAnalysis report, Stream? fileStream, long? fileSize, string username)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
+                string setContextQuery = "SET CONTEXT_INFO @User";
+                using var command = new SqlCommand(setContextQuery, connection);
+                command.Parameters.Add(new SqlParameter("@User", username)
+                {
+                    Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+                });
+
+                await command.ExecuteNonQueryAsync();
+
                 using (var transaction = connection.BeginTransaction())
                 {
                     try

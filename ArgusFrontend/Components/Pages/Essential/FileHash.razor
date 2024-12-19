@@ -6,6 +6,7 @@
 @rendermode InteractiveServer
 @inject VirusTotalService VirusTotalService
 @inject DatabaseService DatabaseService
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
 
 <PageTitle>File Hash Intelligence</PageTitle>
 
@@ -169,6 +170,14 @@
     private Hash? report;
     private bool showJson = false;
     private string? jsonOutput;
+    private string? name;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authstate.User;
+        name = user.Identity.Name;
+    }
 
     private async Task GetReport()
     {
@@ -180,7 +189,7 @@
 
             try
             {
-                await DatabaseService.StoreHashReportAsync(report);
+                await DatabaseService.StoreHashReportAsync(report,name);
             }
             catch (Exception ex)
             {

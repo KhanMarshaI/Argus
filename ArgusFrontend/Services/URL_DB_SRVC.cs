@@ -3,6 +3,10 @@ using System.Text.Json;
 using URLAnalysis;
 using _Analysis;
 using ArgusFrontend.Models;
+using System.Data;
+using System.Text;
+using System;
+
 
 namespace ArgusFrontend.Services
 {
@@ -77,10 +81,19 @@ namespace ArgusFrontend.Services
             return null;
         }
 
-        public async Task StoreURLReportAsync(URLRep url, Analysis analysis)
+        public async Task StoreURLReportAsync(URLRep url, Analysis analysis, string username)
         {
             using var conn = new SqlConnection(connectionString);
             await conn.OpenAsync();
+
+            string setContextQuery = "SET CONTEXT_INFO @User";
+            using var command = new SqlCommand(setContextQuery, conn);
+            command.Parameters.Add(new SqlParameter("@User", username)
+            {
+                Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+            });
+
+            await command.ExecuteNonQueryAsync();
 
             string existingStatusQuery = "SELECT Status FROM Analysis WHERE AnalysisID = @anid";
             using var checkCmd = new SqlCommand(existingStatusQuery, conn);
@@ -155,10 +168,19 @@ namespace ArgusFrontend.Services
             }
         }
 
-        public async Task<string> StoreURLReportAsync(CustomURLAnalysis analysis)
+        public async Task<string> StoreURLReportAsync(CustomURLAnalysis analysis, string username)
         {
             using var conn = new SqlConnection(connectionString);
             await conn.OpenAsync();
+
+            string setContextQuery = "SET CONTEXT_INFO @User";
+            using var command = new SqlCommand(setContextQuery, conn);
+            command.Parameters.Add(new SqlParameter("@User", username)
+            {
+                Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+            });
+
+            await command.ExecuteNonQueryAsync();
 
             string existingStatusQuery = "SELECT Status FROM Analysis WHERE AnalysisID = @anid";
             using var checkCmd = new SqlCommand(existingStatusQuery, conn);

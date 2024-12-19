@@ -7,6 +7,7 @@
 @rendermode InteractiveServer
 @inject VirusTotalService VirusTotalService
 @inject URL_DB_SRVC DBSrvc
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
 
 <PageTitle>URL Analysis</PageTitle>
 
@@ -111,6 +112,14 @@
     private Analysis? analysis;
     private string? url;
     private string? analysisID;
+    private string? name;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authstate.User;
+        name = user.Identity.Name;
+    }
 
     private async Task GetReport()
     {
@@ -128,7 +137,7 @@
 
             try
             {
-                await DBSrvc.StoreURLReportAsync(report, analysis);
+                await DBSrvc.StoreURLReportAsync(report, analysis, name);
             }
             catch (Exception ex)
             {
