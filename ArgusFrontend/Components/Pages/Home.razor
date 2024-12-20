@@ -4,20 +4,31 @@
 
 <PageTitle>Home</PageTitle>
 
+@page "/"
+@using ArgusFrontend.Services
+@inject Dash_DB_SRVC DashDbService
+
+<PageTitle>Home</PageTitle>
+
+@page "/"
+@using ArgusFrontend.Services
+@inject Dash_DB_SRVC DashDbService
+
+<PageTitle>Home</PageTitle>
+
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
     <Authorized>
         <div class="container">
             <!-- Header -->
             <header class="d-flex justify-content-between align-items-center py-3">
-                <h1 class="text-primary">Argus</h1>
+                <h1 class="text-success">Argus</h1>
             </header>
 
             <!-- Stats Section -->
             <div class="row mt-4">
                 <!-- URL Analysis Stats -->
                 <div class="col-md-6">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-header">URL Analysis Stats</div>
+                    <div class="card text-white bg-success mb-3">
                         <div class="card-body">
                             <h4 class="card-title">Total URLs Analyzed: <span>@TotalUrls</span></h4>
                             <p class="card-text">
@@ -32,8 +43,7 @@
 
                 <!-- File Analysis Stats -->
                 <div class="col-md-6">
-                    <div class="card text-white bg-success mb-3">
-                        <div class="card-header">File Analysis Stats</div>
+                    <div class="card text-white bg-warning mb-3">
                         <div class="card-body">
                             <h4 class="card-title">Total Files Analyzed: <span>@TotalFiles</span></h4>
                             <p class="card-text">
@@ -51,9 +61,9 @@
             <div class="row mt-4">
                 <!-- Recent URLs -->
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Recent URLs Analyzed</div>
+                    <div class="card text-white bg-dark mb-3">
                         <div class="card-body">
+                            <h4 class="card-title">Recent URLs Analyzed</h4>
                             <ul>
                                 @if (RecentUrls.Count == 0)
                                 {
@@ -73,9 +83,9 @@
 
                 <!-- Recent Files -->
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Recent Files Analyzed</div>
+                    <div class="card text-white bg-dark mb-3">
                         <div class="card-body">
+                            <h4 class="card-title">Recent Files Analyzed</h4>
                             <ul>
                                 @if (RecentFiles.Count == 0)
                                 {
@@ -112,6 +122,55 @@
         </div>
     </NotAuthorized>
 </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+
+
+<style>
+    .app-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #4CAF50;
+    }
+
+    .stats-card {
+        border-radius: 15px;
+        color: white;
+    }
+
+    .bg-muted-green {
+        background-color: #2d6a4f;
+    }
+
+    .bg-muted-orange {
+        background-color: #ffba08;
+    }
+
+    .recent-card {
+        border-radius: 15px;
+        background-color: #1b1b2f;
+        color: white;
+    }
+
+    .card-header {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #ffffff;
+        background-color: #4CAF50;
+        border-bottom: none;
+    }
+
+    .btn {
+        border-radius: 20px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+</style>
+
 
 @code {
 

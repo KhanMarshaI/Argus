@@ -17,20 +17,20 @@
             {
                 @foreach (var file in fileScans)
                 {
-                    <div class="col-md-4 mb-3">
-                        <div class="card shadow-sm h-100" style="cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s;">
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm h-100 border-0" style="cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s;">
                             <div class="card-body">
-                                <h5 class="card-title text-dark">File Hash: @file.Data.Id</h5>
-                                <p class="card-text">
-                                    <strong>File Type:</strong> @(file.Data.Type ?? "Unknown")<br />
-                                    <strong>Stats:</strong>
-                                    <ul class="list-unstyled">
-                                        <li><strong> Malicious: </strong> @file.Data.Attributes.LastAnalysisStats.Malicious</li>
-                                        <li><strong>Suspicious: </strong> @file.Data.Attributes.LastAnalysisStats.Suspicious</li>
-                                        <li><strong> Undetected: </strong> @file.Data.Attributes.LastAnalysisStats.Undetected</li>
-                                        <li><strong> Harmless: </strong>  @file.Data.Attributes.LastAnalysisStats.Harmless</li>
-                                    </ul>
+                                <h5 class="card-title text-primary">File Hash: @file.Data.Id</h5>
+                                <p class="card-text mb-2">
+                                    <strong>File Type:</strong> @(file.Data.Type ?? "Unknown")
                                 </p>
+                                <strong>Stats:</strong>
+                                <ul class="list-group list-group-flush small">
+                                    <li class="list-group-item"> <strong>Malicious:</strong> @file.Data.Attributes.LastAnalysisStats.Malicious</li>
+                                    <li class="list-group-item"> <strong>Suspicious:</strong> @file.Data.Attributes.LastAnalysisStats.Suspicious</li>
+                                    <li class="list-group-item"> <strong>Undetected:</strong> @file.Data.Attributes.LastAnalysisStats.Undetected</li>
+                                    <li class="list-group-item"> <strong>Harmless:</strong> @file.Data.Attributes.LastAnalysisStats.Harmless</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -38,32 +38,32 @@
             }
             else
             {
-                <p>No file scans available.</p>
+                <p class="text-muted">No file scans available.</p>
             }
         </div>
 
-        <h3>URL Scans</h3>
+        <h3 class="mt-5">URL Scans</h3>
         <div class="row">
             @if (urlScans != null && urlScans.Any())
             {
                 @foreach (var url in urlScans)
                 {
-                    <div class="col-md-4 mb-3">
-                        <div class="card shadow-sm h-100" style="cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s;">
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm h-100 border-0" style="cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s;">
                             <div class="card-body">
-                                <h5 class="card-title text-dark">URL: @url.Meta.UrlInfo.Url</h5>
-                                <p class="card-text">
-                                    <strong>ID:</strong> <br />@url.Data.Id <br />
+                                <h5 class="card-title text-success">URL: @url.Meta.UrlInfo.Url</h5>
+                                <p class="card-text mb-2">
+                                    <strong>ID:</strong> @url.Data.Id <br />
                                     <strong>Type:</strong> @url.Data.Type <br />
-                                    <strong>Status:</strong> @url.Data.Attributes.Status <br />
-                                    <strong>Stats:</strong>
-                                    <ul class="list-unstyled">
-                                        <li> <strong> Malicious: </strong> @url.Data.Attributes.Stats.Malicious</li>
-                                        <li> <strong>Suspicious: </strong> @url.Data.Attributes.Stats.Suspicious</li>
-                                        <li> <strong> Undetected: </strong> @url.Data.Attributes.Stats.Undetected</li>
-                                        <li> <strong> Harmless: </strong>  @url.Data.Attributes.Stats.Harmless</li>
-                                    </ul>
+                                    <strong>Status:</strong> @url.Data.Attributes.Status
                                 </p>
+                                <strong>Stats:</strong>
+                                <ul class="list-group list-group-flush small">
+                                    <li class="list-group-item"> <strong>Malicious:</strong> @url.Data.Attributes.Stats.Malicious</li>
+                                    <li class="list-group-item"> <strong>Suspicious:</strong> @url.Data.Attributes.Stats.Suspicious</li>
+                                    <li class="list-group-item"> <strong>Undetected:</strong> @url.Data.Attributes.Stats.Undetected</li>
+                                    <li class="list-group-item"> <strong>Harmless:</strong> @url.Data.Attributes.Stats.Harmless</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -71,9 +71,16 @@
             }
             else
             {
-                <p>No URL scans available.</p>
+                <p class="text-muted">No URL scans available.</p>
             }
         </div>
+
+        <style>
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            }
+        </style>
     </Authorized>
     <NotAuthorized>
         <p>You are not authorized to view this page. Please log in.</p>

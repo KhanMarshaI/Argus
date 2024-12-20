@@ -3,12 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\essential\\custom.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\essential\\custom.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\layout\\mainlayout.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\layout\\mainlayout.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\overview.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\overview.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\essential\\customurl.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -43,20 +71,12 @@
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\analysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:models\\analysismodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74DF8E93-A862-4284-B84B-17BEB153975D}|ArgusFrontend.csproj|c:\\users\\hadia\\onedrive\\desktop\\argus\\argus\\argusfrontend\\models\\fileuploadanalysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,7 +102,72 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "Custom.razor",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\Custom.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Essential\\Custom.razor",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\Custom.razor",
+              "RelativeToolTip": "Components\\Pages\\Essential\\Custom.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-20T18:40:31.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
+              "RelativeDocumentMoniker": "wwwroot\\app.css",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\wwwroot\\app.css",
+              "RelativeToolTip": "wwwroot\\app.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-20T18:41:17.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\App.razor",
+              "RelativeDocumentMoniker": "Components\\App.razor",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\App.razor",
+              "RelativeToolTip": "Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-20T18:40:47.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NavMenu.razor.css",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Layout\\NavMenu.razor.css",
+              "RelativeDocumentMoniker": "Components\\Layout\\NavMenu.razor.css",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Layout\\NavMenu.razor.css",
+              "RelativeToolTip": "Components\\Layout\\NavMenu.razor.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-20T18:37:42.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainLayout.razor.css",
+              "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Layout\\MainLayout.razor.css",
+              "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor.css",
+              "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Layout\\MainLayout.razor.css",
+              "RelativeToolTip": "Components\\Layout\\MainLayout.razor.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-20T18:27:52.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "FileHashIntel.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHashIntel.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileHashIntel.razor",
@@ -90,12 +175,11 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\FileHashIntel.razor",
               "ViewState": "AgIAAAQBAAAAAAAAAAAcwCYBAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-19T19:26:47.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T19:26:47.397Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "CustomURL.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\CustomURL.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\CustomURL.razor",
@@ -103,12 +187,11 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\CustomURL.razor",
               "ViewState": "AgIAAKYAAAAAAAAAAAAqwLYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-19T19:03:39.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T19:03:39.526Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor",
@@ -116,12 +199,11 @@
               "RelativeToolTip": "Components\\Layout\\MainLayout.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-19T18:57:44.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T18:57:44.408Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "URL_DB_SRVC.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\URL_DB_SRVC.cs",
               "RelativeDocumentMoniker": "Services\\URL_DB_SRVC.cs",
@@ -129,25 +211,24 @@
               "RelativeToolTip": "Services\\URL_DB_SRVC.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAAAqwLAAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T18:00:13.737Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-18T18:00:13.737Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "Overview.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Overview.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Overview.razor",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Overview.razor",
               "RelativeToolTip": "Components\\Pages\\Overview.razor",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFkAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAiwFIAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-18T17:40:06.096Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "AnalysisModel.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\AnalysisModel.cs",
               "RelativeDocumentMoniker": "Models\\AnalysisModel.cs",
@@ -155,25 +236,24 @@
               "RelativeToolTip": "Models\\AnalysisModel.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T18:17:03.668Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T18:17:03.668Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 0,
               "Title": "Home.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Home.razor",
               "RelativeToolTip": "Components\\Pages\\Home.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAIwBcAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-18T17:41:07.658Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "Dash_DB_SRVC.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\Dash_DB_SRVC.cs",
               "RelativeDocumentMoniker": "Services\\Dash_DB_SRVC.cs",
@@ -185,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -193,12 +273,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAABBwBEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T19:19:05.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-16T19:19:05.216Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "FUP_DB_SRVC.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\FUP_DB_SRVC.cs",
               "RelativeDocumentMoniker": "Services\\FUP_DB_SRVC.cs",
@@ -206,12 +285,11 @@
               "RelativeToolTip": "Services\\FUP_DB_SRVC.cs",
               "ViewState": "AgIAALgAAAAAAAAAAAAqwEMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T19:00:36.167Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-16T19:00:36.167Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "FileUpload.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileUpload.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileUpload.razor",
@@ -219,25 +297,24 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\FileUpload.razor",
               "ViewState": "AgIAAIQAAAAAAAAAAAAcwIkAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-10T20:15:11.107Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T20:15:11.107Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "DatabaseService.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\DatabaseService.cs",
               "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
               "ToolTip": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\DatabaseService.cs",
               "RelativeToolTip": "Services\\DatabaseService.cs",
-              "ViewState": "AgIAAEICAAAAAAAAAAAcwPgBAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAOgBAAAAAAAAAAAcwPgBAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-16T18:58:41.619Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\NavMenu.razor",
@@ -250,7 +327,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "VirusTotalService.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Services\\VirusTotalService.cs",
               "RelativeDocumentMoniker": "Services\\VirusTotalService.cs",
@@ -262,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "FileHash.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\FileHash.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\FileHash.razor",
@@ -270,12 +347,11 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\FileHash.razor",
               "ViewState": "AgIAAKkAAAAAAAAAAAAvwL8AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-13T18:30:57.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T18:30:57.098Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "UrlAnalysis.razor",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Components\\Pages\\Essential\\UrlAnalysis.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Essential\\UrlAnalysis.razor",
@@ -283,12 +359,11 @@
               "RelativeToolTip": "Components\\Pages\\Essential\\UrlAnalysis.razor",
               "ViewState": "AgIAAAgAAAAAAAAAAAAqwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-13T18:13:19.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T18:13:19.259Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "FileUploadAnalysis.cs",
               "DocumentMoniker": "C:\\Users\\hadia\\OneDrive\\Desktop\\argus\\Argus\\ArgusFrontend\\Models\\FileUploadAnalysis.cs",
               "RelativeDocumentMoniker": "Models\\FileUploadAnalysis.cs",
