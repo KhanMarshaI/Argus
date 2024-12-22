@@ -229,7 +229,21 @@ AS
 BEGIN
     DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
 
-    INSERT INTO FileLogging (FileID, Action, [User], [Time])
+    INSERT INTO FileScanLogging (FileID, Action, [User], [Time])
+    SELECT i.FileID, 'Insert', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
+ALTER TRIGGER trg_Insert_FileReports
+ON FileReports
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    -- Modify the target table to FileScanLogging
+    INSERT INTO FileScanLogging (FileID, Action, [User], [Time]) 
     SELECT i.FileID, 'Insert', @User, GETDATE()
     FROM inserted i;
 END;
@@ -242,7 +256,21 @@ AS
 BEGIN
     DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
 
-    INSERT INTO FileLogging (FileID, Action, [User], [Time])
+    INSERT INTO FileScanLogging (FileID, Action, [User], [Time])
+    SELECT i.FileID, 'Update', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
+ALTER TRIGGER trg_Update_FileReports
+ON FileReports
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    -- Modify the target table to FileScanLogging
+    INSERT INTO FileScanLogging (FileID, Action, [User], [Time]) 
     SELECT i.FileID, 'Update', @User, GETDATE()
     FROM inserted i;
 END;
@@ -255,10 +283,45 @@ AS
 BEGIN
     DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
 
-    INSERT INTO FileLogging (FileID, Action, [User], [Time])
+    INSERT INTO FileScanLogging (FileID, Action, [User], [Time])
     SELECT d.FileID, 'Delete', @User, GETDATE()
     FROM deleted d;
 END;
 GO
 
+ALTER TRIGGER trg_Update_FileReports
+ON FileReports
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @User NVARCHAR(50) = CAST(CONTEXT_INFO() AS NVARCHAR(50));
+
+    -- Modify the target table to FileScanLogging
+    INSERT INTO FileScanLogging (FileID, Action, [User], [Time]) 
+    SELECT i.FileID, 'Update', @User, GETDATE()
+    FROM inserted i;
+END;
+GO
+
 SELECT * FROM URLLogging;
+SELECT * FROM FileScanLogging;
+
+CREATE PROCEDURE GetURLLogging
+AS
+BEGIN
+    SELECT LogID, AnalysisID, Action, [User], [Time]
+    FROM URLLogging
+    ORDER BY [Time] DESC;
+END;
+GO
+
+CREATE PROCEDURE GetFileScanLogging
+AS
+BEGIN
+    SELECT LogID, FileID, Action, [User], [Time]
+    FROM FileScanLogging
+    ORDER BY [Time] DESC;
+END;
+GO
+
+drop procedure GetFileScanLogging;

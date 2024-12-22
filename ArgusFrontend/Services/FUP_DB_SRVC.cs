@@ -1,4 +1,5 @@
 ﻿using FileAnalysis;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -41,7 +42,7 @@ namespace ArgusFrontend.Services
             };
         }
 
-        public async Task StoreHashReportAsync(FileUploadAnalysis report, string username ,Stream? fileStream = null, long? fileSize = null)
+        public async Task StoreHashReportAsync(FileUploadAnalysis report, string username, Stream? fileStream = null, long? fileSize = null)
         {
             string? fileHash;
             try
@@ -87,16 +88,31 @@ namespace ArgusFrontend.Services
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
+                // Set context for the current user
+                string setContextQuery = "SET CONTEXT_INFO @User";
+                using var contextCmd = new SqlCommand(setContextQuery, connection);
+                contextCmd.Parameters.Add(new SqlParameter("@User", SqlDbType.VarBinary)
+                {
+                    Value = Encoding.UTF8.GetBytes(username.PadRight(128)) // Ensure exactly 128 bytes
+                });
+
+                await contextCmd.ExecuteNonQueryAsync();
+
                 using (var transaction = connection.BeginTransaction())
                 {
                     try
                     {
-                        string query = "INSERT INTO FileReports " +
-                               "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
-                               "Harmless, Undetected, AnalyzedNames, LastModificationDate) " +
-                               "OUTPUT INSERTED.ID " +
-                               "VALUES (@FileHash, @FileID, NULL, NULL, NULL, NULL, @Malicious, " +
-                               "@Suspicious, @Harmless, @Undetected, NULL, NULL)";
+                        // Insert into FileReports and retrieve the inserted ID
+                        string query = @"
+                    DECLARE @InsertedID INT;
+                    INSERT INTO FileReports 
+                    (FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, 
+                    Harmless, Undetected, AnalyzedNames, LastModificationDate) 
+                    VALUES (@FileHash, @FileID, NULL, NULL, NULL, NULL, @Malicious, 
+                    @Suspicious, @Harmless, @Undetected, NULL, NULL); 
+                    SET @InsertedID = SCOPE_IDENTITY(); 
+                    SELECT @InsertedID;";
 
                         using var command = new SqlCommand(query, connection, transaction);
                         command.Parameters.AddWithValue("@FileHash", fileHash);
@@ -108,9 +124,11 @@ namespace ArgusFrontend.Services
 
                         int reportID = (int)await command.ExecuteScalarAsync();
 
-                        string signatureQuery = "INSERT INTO FileSignatures " +
-                                                "(FileReportID, MD5, SHA1, SHA256, TLSH, VHASH) " +
-                                                "VALUES (@FileReportID, @MD5, @SHA1, @SHA256, NULL, NULL)";
+                        // Insert into FileSignatures
+                        string signatureQuery = @"
+                    INSERT INTO FileSignatures 
+                    (FileReportID, MD5, SHA1, SHA256, TLSH, VHASH) 
+                    VALUES (@FileReportID, @MD5, @SHA1, @SHA256, NULL, NULL)";
 
                         using var sigCommand = new SqlCommand(signatureQuery, connection, transaction);
                         sigCommand.Parameters.AddWithValue("@FileReportId", reportID);
@@ -120,13 +138,15 @@ namespace ArgusFrontend.Services
 
                         await sigCommand.ExecuteNonQueryAsync();
 
+                        // Insert into AnalysisResults
                         if (report.Data.Attributes.Results != null)
                         {
                             foreach (var result in report.Data.Attributes.Results)
                             {
-                                string resultQuery = "INSERT INTO AnalysisResults " +
-                                                     "(FileReportID, EngineName, Category, Result) " +
-                                                     "VALUES (@FileReportID, @EngineName, @Category, @Result)";
+                                string resultQuery = @"
+                            INSERT INTO AnalysisResults 
+                            (FileReportID, EngineName, Category, Result) 
+                            VALUES (@FileReportID, @EngineName, @Category, @Result)";
 
                                 using var resultCommand = new SqlCommand(resultQuery, connection, transaction);
                                 resultCommand.Parameters.AddWithValue("@FileReportID", reportID);
@@ -138,6 +158,7 @@ namespace ArgusFrontend.Services
                             }
                         }
 
+                        // Insert file content if provided
                         if (fileStream != null && fileSize != null)
                         {
                             byte[] fileBytes;
@@ -147,9 +168,10 @@ namespace ArgusFrontend.Services
                                 fileBytes = memoryStream.ToArray();
                             }
 
-                            string fileDataQuery = @"INSERT INTO FileData 
-                                     (FileReportID, FileContent, FileSize, CreatedAt) 
-                                     VALUES (@FileReportID, @FileContent, @FileSize, GETDATE())";
+                            string fileDataQuery = @"
+                        INSERT INTO FileData 
+                        (FileReportID, FileContent, FileSize, CreatedAt) 
+                        VALUES (@FileReportID, @FileContent, @FileSize, GETDATE())";
 
                             using var fileDataCommand = new SqlCommand(fileDataQuery, connection, transaction);
                             fileDataCommand.Parameters.AddWithValue("@FileReportID", reportID);
@@ -168,7 +190,6 @@ namespace ArgusFrontend.Services
                     }
                 }
             }
-
         }
 
         private async Task UpdateHashReportAsync(string fileHash, FileUploadAnalysis report, Stream? fileStream, long? fileSize, string username)
@@ -179,9 +200,9 @@ namespace ArgusFrontend.Services
 
                 string setContextQuery = "SET CONTEXT_INFO @User";
                 using var command = new SqlCommand(setContextQuery, connection);
-                command.Parameters.Add(new SqlParameter("@User", username)
+                command.Parameters.Add(new SqlParameter("@User", SqlDbType.VarBinary)
                 {
-                    Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+                    Value = Encoding.UTF8.GetBytes(username.PadRight(128)) // Ensure exactly 128 bytes
                 });
 
                 await command.ExecuteNonQueryAsync();

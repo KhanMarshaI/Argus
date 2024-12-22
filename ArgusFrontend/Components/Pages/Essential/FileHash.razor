@@ -183,9 +183,17 @@
     {
         if (!string.IsNullOrWhiteSpace(hash))
         {
-            report = await VirusTotalService.GetFileHashReportAsync(hash);
-            jsonOutput = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
-            StateHasChanged();
+            try
+            {
+                report = await VirusTotalService.GetFileHashReportAsync(hash);
+                jsonOutput = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving file hash data: {ex.Message}");
+                return;
+            }
 
             try
             {

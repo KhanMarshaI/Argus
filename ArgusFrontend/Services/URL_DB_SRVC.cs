@@ -88,9 +88,9 @@ namespace ArgusFrontend.Services
 
             string setContextQuery = "SET CONTEXT_INFO @User";
             using var command = new SqlCommand(setContextQuery, conn);
-            command.Parameters.Add(new SqlParameter("@User", username)
+            command.Parameters.Add(new SqlParameter("@User", SqlDbType.VarBinary)
             {
-                Value = Encoding.UTF8.GetBytes(username.PadRight(128))
+                Value = Encoding.UTF8.GetBytes(username.PadRight(128)) // Ensure exactly 128 bytes
             });
 
             await command.ExecuteNonQueryAsync();
@@ -175,10 +175,8 @@ namespace ArgusFrontend.Services
 
             string setContextQuery = "SET CONTEXT_INFO @User";
             using var command = new SqlCommand(setContextQuery, conn);
-            command.Parameters.Add(new SqlParameter("@User", username)
-            {
-                Value = Encoding.UTF8.GetBytes(username.PadRight(128))
-            });
+            byte[] userBytes = Encoding.UTF8.GetBytes(username.PadRight(128).Substring(0, 128));
+            command.Parameters.Add("@User", SqlDbType.VarBinary, 128).Value = userBytes;
 
             await command.ExecuteNonQueryAsync();
 

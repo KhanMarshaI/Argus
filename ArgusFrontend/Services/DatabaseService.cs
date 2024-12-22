@@ -60,40 +60,40 @@ namespace ArgusFrontend.Services
                     {
                         Data = new Data
                         {
-                            Id = reader["FileHashSHA"].ToString(),
-                            Type = reader["FileType"].ToString(),
+                            Id = reader["FileHashSHA"] != DBNull.Value ? reader["FileHashSHA"].ToString() : null,  // Handle DBNull
+                            Type = reader["FileType"] != DBNull.Value ? reader["FileType"].ToString() : null,  // Handle DBNull
                             Attributes = new Attributes
                             {
-                                TypeExtension = reader["FileExtension"].ToString(),
-                                Magic = reader["Magic"].ToString(),
-                                Reputation = Convert.ToInt32(reader["Reputation"]),
+                                TypeExtension = reader["FileExtension"] != DBNull.Value ? reader["FileExtension"].ToString() : null,  // Handle DBNull
+                                Magic = reader["Magic"] != DBNull.Value ? reader["Magic"].ToString() : null,  // Handle DBNull
+                                Reputation = reader["Reputation"] != DBNull.Value ? Convert.ToInt32(reader["Reputation"]) : 0,
                                 LastAnalysisStats = new LastAnalysisStats
                                 {
-                                    Malicious = Convert.ToInt32(reader["Malicious"]),
-                                    Suspicious = Convert.ToInt32(reader["Suspicious"]),
-                                    Harmless = Convert.ToInt32(reader["Harmless"]),
-                                    Undetected = Convert.ToInt32(reader["Undetected"])
+                                    Malicious = reader["Malicious"] != DBNull.Value ? Convert.ToInt32(reader["Malicious"]) : 0,
+                                    Suspicious = reader["Suspicious"] != DBNull.Value ? Convert.ToInt32(reader["Suspicious"]) : 0,
+                                    Harmless = reader["Harmless"] != DBNull.Value ? Convert.ToInt32(reader["Harmless"]) : 0,
+                                    Undetected = reader["Undetected"] != DBNull.Value ? Convert.ToInt32(reader["Undetected"]) : 0
                                 },
-                                Md5 = reader["MD5"].ToString(),
-                                Sha1 = reader["SHA1"].ToString(),
-                                Sha256 = reader["SHA256"].ToString(),
-                                Tlsh = reader["TLSH"].ToString(),
-                                Vhash = reader["VHASH"].ToString(),
-                                Names = reader["AnalyzedNames"].ToString().Split(','),
-                                LastModificationDate = reader["LastModificationDate"] == DBNull.Value
-                                    ? 0
-                                    : (long)((DateTime)reader["LastModificationDate"])
-                                        .ToUniversalTime()
-                                        .Subtract(new DateTime(1970, 1, 1))
-                                        .TotalSeconds,
+                                Md5 = reader["MD5"] != DBNull.Value ? reader["MD5"].ToString() : null,  // Handle DBNull
+                                Sha1 = reader["SHA1"] != DBNull.Value ? reader["SHA1"].ToString() : null,  // Handle DBNull
+                                Sha256 = reader["SHA256"] != DBNull.Value ? reader["SHA256"].ToString() : null,  // Handle DBNull
+                                Tlsh = reader["TLSH"] != DBNull.Value ? reader["TLSH"].ToString() : null,  // Handle DBNull
+                                Vhash = reader["VHASH"] != DBNull.Value ? reader["VHASH"].ToString() : null,  // Handle DBNull
+                                Names = reader["AnalyzedNames"] != DBNull.Value ? reader["AnalyzedNames"].ToString().Split(',') : new string[0],
+                                LastModificationDate = reader["LastModificationDate"] != DBNull.Value
+                            ? (long)((DateTime)reader["LastModificationDate"])
+                                .ToUniversalTime()
+                                .Subtract(new DateTime(1970, 1, 1))
+                                .TotalSeconds
+                            : 0,
                                 SignatureInfo = new SignatureInfo
                                 {
-                                    Description = reader["Description"].ToString(),
-                                    FileVersion = reader["FileVersion"].ToString(),
-                                    OriginalName = reader["OriginalName"].ToString(),
-                                    Product = reader["Product"].ToString(),
-                                    InternalName = reader["InternalName"].ToString(),
-                                    Copyright = reader["Copyright"].ToString()
+                                    Description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : null,  // Handle DBNull
+                                    FileVersion = reader["FileVersion"] != DBNull.Value ? reader["FileVersion"].ToString() : null,  // Handle DBNull
+                                    OriginalName = reader["OriginalName"] != DBNull.Value ? reader["OriginalName"].ToString() : null,  // Handle DBNull
+                                    Product = reader["Product"] != DBNull.Value ? reader["Product"].ToString() : null,  // Handle DBNull
+                                    InternalName = reader["InternalName"] != DBNull.Value ? reader["InternalName"].ToString() : null,  // Handle DBNull
+                                    Copyright = reader["Copyright"] != DBNull.Value ? reader["Copyright"].ToString() : null  // Handle DBNull
                                 }
                             }
                         }
@@ -168,12 +168,15 @@ namespace ArgusFrontend.Services
                 {
                     try
                     {
-                        string query = "INSERT INTO FileReports " +
-                               "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
-                               "Harmless, Undetected, AnalyzedNames, LastModificationDate) " +
-                               "OUTPUT INSERTED.ID " +
-                               "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
-                               "@Suspicious, @Harmless, @Undetected, @AnalyzedNames, @LastModificationDate)";
+                        string query = @"
+                    DECLARE @InsertedID INT;
+                    INSERT INTO FileReports 
+                    (FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, 
+                    Harmless, Undetected, AnalyzedNames, LastModificationDate) 
+                    VALUES (@FileHash, @FileID, NULL, NULL, NULL, NULL, @Malicious, 
+                    @Suspicious, @Harmless, @Undetected, NULL, NULL); 
+                    SET @InsertedID = SCOPE_IDENTITY(); 
+                    SELECT @InsertedID;";
 
                         using var command = new SqlCommand(query, connection, transaction);
                         command.Parameters.AddWithValue("@FileHash", fileHash);
@@ -288,12 +291,15 @@ namespace ArgusFrontend.Services
                 {
                     try
                     {
-                        string query = "INSERT INTO FileReports " +
-                               "(FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, " +
-                               "Harmless, Undetected, AnalyzedNames, LastModificationDate) " +
-                               "OUTPUT INSERTED.ID " +
-                               "VALUES (@FileHash, @FileID, @FileType, @FileExtension, @Magic, @Reputation, @Malicious, " +
-                               "@Suspicious, @Harmless, @Undetected, @AnalyzedNames, @LastModificationDate)";
+                        string query = @"
+                    DECLARE @InsertedID INT;
+                    INSERT INTO FileReports 
+                    (FileHashSHA, FileID, FileType, FileExtension, Magic, Reputation, Malicious, Suspicious, 
+                    Harmless, Undetected, AnalyzedNames, LastModificationDate) 
+                    VALUES (@FileHash, @FileID, NULL, NULL, NULL, NULL, @Malicious, 
+                    @Suspicious, @Harmless, @Undetected, NULL, NULL); 
+                    SET @InsertedID = SCOPE_IDENTITY(); 
+                    SELECT @InsertedID;";
 
                         using var command = new SqlCommand(query, connection, transaction);
                         command.Parameters.AddWithValue("@FileHash", fileHash);

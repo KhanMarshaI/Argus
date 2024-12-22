@@ -1,0 +1,117 @@
+﻿@page "/customintel/logging"
+@using ArgusFrontend.Services
+@inject LoggingService LoggingService
+@rendermode InteractiveServer
+
+<h3>Admin Panel: Logging Tables</h3>
+
+<div>
+    <h4>URL Logging</h4>
+    <button class="btn btn-primary" @onclick="LoadURLLogging" disabled="@IsURLLoading">Load URL Logging</button>
+    @if (IsURLLoading)
+    {
+        <p>Loading...</p>
+    }
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>Analysis ID</th>
+                <th>Action</th>
+                <th>User</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (URLLogs == null || !URLLogs.Any())
+            {
+                <tr><td colspan="5">No data available.</td></tr>
+            }
+            else
+            {
+                @foreach (var log in URLLogs)
+                {
+                    <tr>
+                        <td>@log.LogID</td>
+                        <td>@log.ReferenceID</td>
+                        <td>@log.Action</td>
+                        <td>@log.User</td>
+                        <td>@log.Time</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h4>File Scan Logging</h4>
+    <button class="btn btn-primary" @onclick="LoadFileScanLogging" disabled="@IsFileScanLoading">Load File Scan Logging</button>
+    @if (IsFileScanLoading)
+    {
+        <p>Loading...</p>
+    }
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>File ID</th>
+                <th>Action</th>
+                <th>User</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (FileScanLogs == null || !FileScanLogs.Any())
+            {
+                <tr><td colspan="5">No data available.</td></tr>
+            }
+            else
+            {
+                @foreach (var log in FileScanLogs)
+                {
+                    <tr>
+                        <td>@log.LogID</td>
+                        <td>@log.ReferenceID</td>
+                        <td>@log.Action</td>
+                        <td>@log.User</td>
+                        <td>@log.Time</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private List<LoggingService.LogEntry> URLLogs;
+    private List<LoggingService.LogEntry> FileScanLogs;
+    private bool IsURLLoading = false;
+    private bool IsFileScanLoading = false;
+
+    private async Task LoadURLLogging()
+    {
+        IsURLLoading = true;
+        try
+        {
+            URLLogs = await LoggingService.GetURLLogging();
+        }
+        finally
+        {
+            IsURLLoading = false;
+        }
+    }
+
+    private async Task LoadFileScanLogging()
+    {
+        IsFileScanLoading = true;
+        try
+        {
+            FileScanLogs = await LoggingService.GetFileScanLogging();
+        }
+        finally
+        {
+            IsFileScanLoading = false;
+        }
+    }
+}
