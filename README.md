@@ -7,9 +7,11 @@ Argus is a comprehensive threat intelligence tool designed to analyze and manage
 ### 🔍 **Dashboard**  
 - Displays the 10 most recent URL and file scans.  
 - Provides a quick summary of total URLs and files analyzed.  
+![image](https://github.com/user-attachments/assets/5f7a6844-f062-4ce0-ba24-ae044e39f88f)
 
 ### 📊 **Overview**  
 - Access a complete list of all file and URL scan entries stored in the database.  
+![image](https://github.com/user-attachments/assets/f0b77b69-9982-4902-a2f9-71de8c205569)
 
 ### 🖼️ **File Hash Scanner**  
 - Perform file hash scans using:  
@@ -17,16 +19,22 @@ Argus is a comprehensive threat intelligence tool designed to analyze and manage
   - **Local Database**: Retrieve results locally for efficiency.  
 - Toggleable JSON response for detailed insights.  
 - Automatically saves scan results to the database.  
+![image](https://github.com/user-attachments/assets/2559babe-7964-429a-afdc-5777bb5a3b70)
+
 
 ### 🌐 **URL Analysis**  
 - Analyze URLs via:  
   - **VirusTotal API**: Query URL threat data.  
   - **Local Database**: Store and retrieve scan results.  
 - Provides streamlined analysis without JSON output.  
+![image](https://github.com/user-attachments/assets/7af62d28-8619-465d-9471-865c30a21d81)
+
 
 ### 📂 **File Upload**  
 - Upload files directly to VirusTotal for analysis.  
 - Automatically stores scan results in the database.  
+![image](https://github.com/user-attachments/assets/373912dd-fc5b-407d-9c1e-b7effff618c2)
+
 
 ### ⚙️ **Administrative Actions**  
 - **Custom File Hash Reports**:  
@@ -37,6 +45,8 @@ Argus is a comprehensive threat intelligence tool designed to analyze and manage
   - Register and manage users and administrators.  
 - **Logging Tables**:  
   - Maintain logs for all key activities for auditing and troubleshooting.  
+![image](https://github.com/user-attachments/assets/7dfeb220-be57-46b5-a258-a9f8fa8eb9a6)
+
 
 ---
 
